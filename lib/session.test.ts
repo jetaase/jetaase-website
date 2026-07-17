@@ -25,4 +25,11 @@ describe("session tokens", () => {
     expect(verifySession(SECRET, undefined)).toBe(false);
     expect(verifySession(SECRET, "nonsense")).toBe(false);
   });
+  it("rejects a valid token when the secret is empty", () => {
+    const t = signSession("realsecret", 60_000);
+    expect(verifySession("", t)).toBe(false);
+  });
+  it("throws when signing with an empty secret", () => {
+    expect(() => signSession("", 60_000)).toThrow();
+  });
 });

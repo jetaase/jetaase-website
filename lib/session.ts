@@ -5,11 +5,13 @@ function sign(secret: string, payload: string): string {
 }
 
 export function signSession(secret: string, ttlMs: number): string {
+  if (!secret) throw new Error("SESSION_SECRET is not set");
   const exp = Date.now() + ttlMs;
   return `${exp}.${sign(secret, String(exp))}`;
 }
 
 export function verifySession(secret: string, token: string | undefined): boolean {
+  if (!secret) return false;
   if (!token) return false;
   const dot = token.indexOf(".");
   if (dot < 0) return false;
