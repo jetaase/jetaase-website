@@ -1,0 +1,199 @@
+.pageRoot {
+  width: 100%;
+}
+
+/* BANNER */
+.banner {
+  max-width: var(--maxw);
+  margin: 0 auto;
+  padding: 12px 40px 24px;
+}
+.bannerFrame {
+  height: 420px;
+  border-radius: 20px;
+  overflow: hidden;
+}
+.bannerImg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 30%;
+  display: block;
+}
+
+/* WELCOME PROSE */
+.welcome {
+  max-width: var(--maxw);
+  margin: 0 auto;
+  padding: 48px 40px;
+}
+.welcomeGrid {
+  display: grid;
+  grid-template-columns: 280px 1fr;
+  gap: 60px;
+  align-items: start;
+}
+@media (max-width: 768px) {
+  .welcomeGrid {
+    grid-template-columns: 1fr;
+  }
+}
+.welcomeHeading {
+  font-family: var(--font-serif);
+  font-weight: 500;
+  font-size: 34px;
+  line-height: 1.1;
+  margin: 0;
+  position: sticky;
+  top: 110px;
+}
+.welcomeHighlight {
+  border-bottom: 5px solid var(--blue);
+  padding-bottom: 2px;
+}
+.welcomeBody {
+  max-width: 640px;
+}
+.welcomeParagraph {
+  font-size: 18px;
+  line-height: 1.75;
+  color: #3a352d;
+  margin: 0 0 22px;
+}
+.welcomeParagraphLast {
+  font-size: 18px;
+  line-height: 1.75;
+  color: #3a352d;
+  margin: 0;
+}
+.welcomeLink {
+  font-weight: 600;
+}
+
+/* OFFICERS */
+.officers {
+  max-width: var(--maxw);
+  margin: 0 auto;
+  padding: 24px 40px 48px;
+}
+.officersHeader {
+  max-width: 600px;
+  margin-bottom: 34px;
+}
+.officersEyebrow {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--red);
+  margin-bottom: 14px;
+}
+.officersTitle {
+  font-family: var(--font-serif);
+  font-weight: 500;
+  font-size: 40px;
+  margin: 0 0 12px;
+  letter-spacing: -0.01em;
+}
+.officersIntro {
+  font-size: 17px;
+  line-height: 1.6;
+  color: #6a6252;
+  margin: 0;
+}
+
+/* SUBCHAPTER REPRESENTATIVES */
+.subchapterTitle {
+  font-family: var(--font-serif);
+  font-weight: 500;
+  font-size: 28px;
+  margin: 48px 0 20px;
+}
+.subchapterGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px;
+}
+@media (max-width: 768px) {
+  .subchapterGrid {
+    grid-template-columns: 1fr;
+  }
+}
+.subchapterCard {
+  background: #fff;
+  border: 1px solid #e6ddca;
+  border-radius: 14px;
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+.subchapterAvatar {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  background: repeating-linear-gradient(
+    135deg,
+    #efe7d6,
+    #efe7d6 9px,
+    #e8dfcb 9px,
+    #e8dfcb 18px
+  );
+}
+.subchapterRegion {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+  color: var(--red);
+}
+.subchapterName {
+  font-weight: 700;
+  font-size: 15px;
+}
+.subchapterEmail {
+  font-size: 12px;
+  font-weight: 600;
+}
+
+/* CTA */
+.cta {
+  background: var(--blue);
+  color: #17233f;
+}
+.ctaInner {
+  max-width: var(--maxw);
+  margin: 0 auto;
+  padding: 64px 40px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 40px;
+  flex-wrap: wrap;
+}
+.ctaCopy {
+  max-width: 560px;
+}
+.ctaTitle {
+  font-family: var(--font-serif);
+  font-weight: 500;
+  font-size: 40px;
+  margin: 0 0 10px;
+  letter-spacing: -0.01em;
+}
+.ctaText {
+  opacity: 0.82;
+  font-size: 18px;
+  line-height: 1.55;
+  margin: 0;
+}
+.ctaBtn {
+  background: #17233f;
+  color: #fff;
+  font-weight: 800;
+  font-size: 18px;
+  padding: 18px 40px;
+  border-radius: 999px;
+  white-space: nowrap;
+}

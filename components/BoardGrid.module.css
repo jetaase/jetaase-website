@@ -1,0 +1,62 @@
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 28px;
+}
+
+.card {
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 26px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.photo {
+  width: 92px;
+  height: 92px;
+  border-radius: 50%;
+  object-fit: cover;
+  display: block;
+  margin-bottom: 16px;
+  background: repeating-linear-gradient(
+    135deg,
+    #efe7d6,
+    #efe7d6 9px,
+    #e8dfcb 9px,
+    #e8dfcb 18px
+  );
+}
+
+.name {
+  font-family: var(--font-serif);
+  font-weight: 500;
+  font-size: 22px;
+  line-height: 1.15;
+  margin: 0 0 8px;
+}
+
+.role {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+  color: var(--red);
+  margin-bottom: 14px;
+}
+
+.bio {
+  font-size: 14px;
+  line-height: 1.5;
+  color: #6a6252;
+  margin: 0;
+}
+
+@media (max-width: 768px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+}

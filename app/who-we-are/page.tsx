@@ -1,0 +1,172 @@
+import Header from "@/components/Header";
+import Footer from "@/components/Footer";
+import Hero from "@/components/Hero";
+import BoardGrid from "@/components/BoardGrid";
+import { readBoard } from "@/lib/content";
+import styles from "./page.module.css";
+
+export default function WhoWeArePage() {
+  const board = readBoard();
+  return (
+    <div className={styles.pageRoot}>
+      <Header />
+
+      {/* PAGE HERO */}
+      <Hero
+        eyebrow="About JETAASE"
+        title="Who we are"
+        subtitle="An active, volunteer-run community keeping the JET experience alive across the American Southeast, and welcoming anyone curious about Japan."
+      />
+
+      {/* BANNER */}
+      <section className={styles.banner}>
+        <div className={styles.bannerFrame}>
+          <img
+            src="/images/c73dcaa0-6fc4-4039-a893-ed67663c1377.jpg"
+            alt="JETAASE members at the Consulate General of Japan in Atlanta"
+            className={styles.bannerImg}
+          />
+        </div>
+      </section>
+
+      {/* WELCOME PROSE */}
+      <section className={styles.welcome}>
+        <div className={styles.welcomeGrid}>
+          <h2 className={styles.welcomeHeading}>
+            Welcome to
+            <br />
+            <span className={styles.welcomeHighlight}>JETAASE</span>
+          </h2>
+          <div className={styles.welcomeBody}>
+            <p className={styles.welcomeParagraph}>
+              Welcome to the official home of the{" "}
+              <strong>
+                Japan Exchange and Teaching Program Alumni Association of the
+                Southeast (JETAASE)
+              </strong>
+              . We are the membership organization for JET alumni in Alabama,
+              Georgia, North Carolina, and South Carolina.
+            </p>
+            <p className={styles.welcomeParagraph}>
+              We are the 4th chapter in the 19-chapter organization that forms{" "}
+              <strong>JETAA USA</strong>. Founded in the early 1990s, our
+              organization celebrated its 20th anniversary in 2011.
+            </p>
+            <p className={styles.welcomeParagraphLast}>
+              We&apos;re an active group run entirely by volunteers, and
+              we&apos;re always looking to share our JET experience with
+              anyone, especially those interested in applying to the{" "}
+              <a
+                href="http://www.jetprogramme.org/"
+                className={styles.welcomeLink}
+              >
+                JET Program
+              </a>
+              .
+            </p>
+          </div>
+        </div>
+      </section>
+
+      {/* OFFICERS */}
+      <section id="officers" className={styles.officers}>
+        <div className={styles.officersHeader}>
+          <div className={styles.officersEyebrow}>Meet the team</div>
+          <h2 className={styles.officersTitle}>Officers</h2>
+          <p className={styles.officersIntro}>
+            JETAASE is led by a volunteer board of alumni from across the
+            Southeast. Reach any of us directly by email.
+          </p>
+        </div>
+        <BoardGrid members={board} />
+
+        <h3 className={styles.subchapterTitle}>Subchapter representatives</h3>
+        <div className={styles.subchapterGrid}>
+          <div className={styles.subchapterCard}>
+            <div className={styles.subchapterAvatar} />
+            <div>
+              <div className={styles.subchapterRegion}>Alabama</div>
+              <div className={styles.subchapterName}>Ingrid Galinat</div>
+              <a
+                href="mailto:alabama@jetaase.org"
+                className={styles.subchapterEmail}
+              >
+                alabama@jetaase.org
+              </a>
+            </div>
+          </div>
+          <div className={styles.subchapterCard}>
+            <div className={styles.subchapterAvatar} />
+            <div>
+              <div className={styles.subchapterRegion}>Charlotte, NC</div>
+              <div className={styles.subchapterName}>Kathryn Huff</div>
+              <a
+                href="mailto:northcarolina@jetaase.org"
+                className={styles.subchapterEmail}
+              >
+                northcarolina@jetaase.org
+              </a>
+            </div>
+          </div>
+          <div className={styles.subchapterCard}>
+            <div className={styles.subchapterAvatar} />
+            <div>
+              <div className={styles.subchapterRegion}>Charlotte, NC</div>
+              <div className={styles.subchapterName}>Oscar Garcia</div>
+              <a
+                href="mailto:northcarolina@jetaase.org"
+                className={styles.subchapterEmail}
+              >
+                northcarolina@jetaase.org
+              </a>
+            </div>
+          </div>
+          <div className={styles.subchapterCard}>
+            <div className={styles.subchapterAvatar} />
+            <div>
+              <div className={styles.subchapterRegion}>South Carolina</div>
+              <div className={styles.subchapterName}>Sarah Lum</div>
+              <a
+                href="mailto:southcarolina@jetaase.org"
+                className={styles.subchapterEmail}
+              >
+                southcarolina@jetaase.org
+              </a>
+            </div>
+          </div>
+          <div className={styles.subchapterCard}>
+            <div className={styles.subchapterAvatar} />
+            <div>
+              <div className={styles.subchapterRegion}>Charleston, SC</div>
+              <div className={styles.subchapterName}>Gordon Rooney</div>
+              <a
+                href="mailto:southcarolina@jetaase.org"
+                className={styles.subchapterEmail}
+              >
+                southcarolina@jetaase.org
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* CTA */}
+      <section className={styles.cta}>
+        <div className={styles.ctaInner}>
+          <div className={styles.ctaCopy}>
+            <h2 className={styles.ctaTitle}>Become part of the story</h2>
+            <p className={styles.ctaText}>
+              Membership is free and open to all JET alumni and friends of
+              Japan across the Southeast.
+            </p>
+          </div>
+          <a href="/join" className={styles.ctaBtn}>
+            Join JETAASE →
+          </a>
+        </div>
+      </section>
+
+      <Footer />
+    </div>
+  );
+}
