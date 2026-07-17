@@ -1,0 +1,5 @@
+[
+  { "id": "m1", "name": "Aiko Tanaka", "role": "President", "chapter": "GA", "bio": "JET alum, Fukushima 2016–2019.", "photo": "/images/board-placeholder.png", "order": 1 },
+  { "id": "m2", "name": "Marcus Lee", "role": "Events Chair", "chapter": "NC", "bio": "JET alum, Nagano 2015–2017.", "photo": "/images/board-placeholder.png", "order": 2 },
+  { "id": "m3", "name": "Priya Nair", "role": "Treasurer", "chapter": "AL", "bio": "JET alum, Okinawa 2018–2020.", "photo": "/images/board-placeholder.png", "order": 3 }
+]
