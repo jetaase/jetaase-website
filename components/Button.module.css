@@ -1,0 +1,15 @@
+.btn {
+  display: inline-block;
+  padding: 12px 26px;
+  border-radius: 999px;
+  font-weight: 600;
+  font-size: 15px;
+}
+.solid {
+  background: var(--red);
+  color: #fff;
+}
+.ghost {
+  border: 1px solid var(--border);
+  color: var(--ink);
+}
