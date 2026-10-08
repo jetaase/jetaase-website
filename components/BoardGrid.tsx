@@ -11,7 +11,12 @@ export default function BoardGrid({ members }: { members: BoardMember[] }) {
           <div className={styles.role}>
             {m.role} · {m.chapter}
           </div>
-          <p className={styles.bio}>{m.bio}</p>
+          {m.bio && <p className={styles.bio}>{m.bio}</p>}
+          {m.email && (
+            <a href={`mailto:${m.email}`} className={styles.email}>
+              {m.email}
+            </a>
+          )}
         </article>
       ))}
     </div>

@@ -2,11 +2,12 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import Hero from "@/components/Hero";
 import BoardGrid from "@/components/BoardGrid";
-import { readBoard } from "@/lib/content";
+import { readBoard, readReps } from "@/lib/content";
 import styles from "./page.module.css";
 
 export default function WhoWeArePage() {
   const board = readBoard();
+  const reps = readReps();
   return (
     <div className={styles.pageRoot}>
       <Header />
@@ -82,71 +83,24 @@ export default function WhoWeArePage() {
 
         <h3 className={styles.subchapterTitle}>Subchapter representatives</h3>
         <div className={styles.subchapterGrid}>
-          <div className={styles.subchapterCard}>
-            <div className={styles.subchapterAvatar} />
-            <div>
-              <div className={styles.subchapterRegion}>Alabama</div>
-              <div className={styles.subchapterName}>Ingrid Galinat</div>
-              <a
-                href="mailto:alabama@jetaase.org"
-                className={styles.subchapterEmail}
-              >
-                alabama@jetaase.org
-              </a>
+          {reps.map((rep) => (
+            <div key={rep.id} className={styles.subchapterCard}>
+              <img src={rep.photo} alt={rep.name} className={styles.subchapterAvatar} />
+              <div>
+                <div className={styles.subchapterRegion}>{rep.state}</div>
+                <div className={styles.subchapterName}>{rep.name}</div>
+                {rep.city && (
+                  <div className={styles.subchapterCity}>{rep.city} area</div>
+                )}
+                {rep.placement && (
+                  <div className={styles.subchapterPlacement}>{rep.placement}</div>
+                )}
+                <a href={`mailto:${rep.email}`} className={styles.subchapterEmail}>
+                  {rep.email}
+                </a>
+              </div>
             </div>
-          </div>
-          <div className={styles.subchapterCard}>
-            <div className={styles.subchapterAvatar} />
-            <div>
-              <div className={styles.subchapterRegion}>Charlotte, NC</div>
-              <div className={styles.subchapterName}>Kathryn Huff</div>
-              <a
-                href="mailto:northcarolina@jetaase.org"
-                className={styles.subchapterEmail}
-              >
-                northcarolina@jetaase.org
-              </a>
-            </div>
-          </div>
-          <div className={styles.subchapterCard}>
-            <div className={styles.subchapterAvatar} />
-            <div>
-              <div className={styles.subchapterRegion}>Charlotte, NC</div>
-              <div className={styles.subchapterName}>Oscar Garcia</div>
-              <a
-                href="mailto:northcarolina@jetaase.org"
-                className={styles.subchapterEmail}
-              >
-                northcarolina@jetaase.org
-              </a>
-            </div>
-          </div>
-          <div className={styles.subchapterCard}>
-            <div className={styles.subchapterAvatar} />
-            <div>
-              <div className={styles.subchapterRegion}>South Carolina</div>
-              <div className={styles.subchapterName}>Sarah Lum</div>
-              <a
-                href="mailto:southcarolina@jetaase.org"
-                className={styles.subchapterEmail}
-              >
-                southcarolina@jetaase.org
-              </a>
-            </div>
-          </div>
-          <div className={styles.subchapterCard}>
-            <div className={styles.subchapterAvatar} />
-            <div>
-              <div className={styles.subchapterRegion}>Charleston, SC</div>
-              <div className={styles.subchapterName}>Gordon Rooney</div>
-              <a
-                href="mailto:southcarolina@jetaase.org"
-                className={styles.subchapterEmail}
-              >
-                southcarolina@jetaase.org
-              </a>
-            </div>
-          </div>
+          ))}
         </div>
       </section>
 

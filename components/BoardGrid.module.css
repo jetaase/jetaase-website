@@ -16,8 +16,8 @@
 }
 
 .photo {
-  width: 92px;
-  height: 92px;
+  width: 120px;
+  height: 120px;
   border-radius: 50%;
   object-fit: cover;
   display: block;
@@ -46,6 +46,7 @@
   text-transform: uppercase;
   color: var(--red);
   margin-bottom: 14px;
+  text-wrap: balance;
 }
 
 .bio {
@@ -53,6 +54,15 @@
   line-height: 1.5;
   color: #6a6252;
   margin: 0;
+  text-wrap: balance;
+}
+
+.email {
+  margin-top: auto;
+  padding-top: 14px;
+  font-size: 13px;
+  font-weight: 600;
+  overflow-wrap: anywhere;
 }
 
 @media (max-width: 768px) {

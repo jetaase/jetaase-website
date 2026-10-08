@@ -1,0 +1,52 @@
+[
+  {
+    "id": "r1",
+    "name": "Ingrid Galinat",
+    "state": "Alabama",
+    "city": "",
+    "placement": "Toyama Prefecture, 2000–2001",
+    "email": "alabama@jetaase.org",
+    "photo": "/images/board/ingrid-galinat.jpg",
+    "order": 1
+  },
+  {
+    "id": "r2",
+    "name": "Kathryn Huff",
+    "state": "North Carolina",
+    "city": "Charlotte",
+    "placement": "Shimane Prefecture, 2010–2013",
+    "email": "nc.charlotte@jetaase.org",
+    "photo": "/images/board/kathryn-huff.jpg",
+    "order": 2
+  },
+  {
+    "id": "r3",
+    "name": "Oscar Garcia",
+    "state": "North Carolina",
+    "city": "Charlotte",
+    "placement": "Nara Prefecture",
+    "email": "nc.charlotte@jetaase.org",
+    "photo": "/images/board/oscar-garcia.jpg",
+    "order": 3
+  },
+  {
+    "id": "r4",
+    "name": "Sarah Lum",
+    "state": "South Carolina",
+    "city": "",
+    "placement": "Kyoto Prefecture, 2022–2024",
+    "email": "southcarolina@jetaase.org",
+    "photo": "/images/board/sarah-lum.jpg",
+    "order": 4
+  },
+  {
+    "id": "r5",
+    "name": "Gordon Rooney",
+    "state": "South Carolina",
+    "city": "Charleston",
+    "placement": "Chiba Prefecture, 2011–2013",
+    "email": "southcarolina@jetaase.org",
+    "photo": "/images/board/gordon-rooney.jpg",
+    "order": 5
+  }
+]
