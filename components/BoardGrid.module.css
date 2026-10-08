@@ -4,15 +4,20 @@
   gap: 28px;
 }
 
+/* Each card spans 5 rows (photo, name, role, bio, email) of the parent grid
+   via subgrid, so the same row lines up across every card in a grid row even
+   when one card's role or placement wraps. */
 .card {
   background: #fff;
   border: 1px solid var(--border);
   border-radius: 16px;
   padding: 26px;
   text-align: center;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  display: grid;
+  grid-row: span 5;
+  grid-template-rows: subgrid;
+  row-gap: 0;
+  justify-items: center;
 }
 
 .photo {
@@ -46,6 +51,7 @@
   text-transform: uppercase;
   color: var(--red);
   margin-bottom: 14px;
+  align-self: start;
   text-wrap: balance;
 }
 
@@ -58,16 +64,9 @@
 }
 
 .email {
-  margin-top: auto;
+  align-self: end;
   padding-top: 14px;
   font-size: 13px;
-  font-weight: 600;
-  color: var(--red);
-  overflow-wrap: anywhere;
-}
-
-.email:hover {
-  text-decoration: underline;
 }
 
 @media (max-width: 768px) {

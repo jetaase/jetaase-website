@@ -1,0 +1,13 @@
+.link {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 6px;
+  font-weight: 600;
+  color: var(--red);
+}
+.address {
+  overflow-wrap: anywhere;
+}
+.link:hover .address {
+  text-decoration: underline;
+}

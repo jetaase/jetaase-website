@@ -1,6 +1,7 @@
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import Hero from "@/components/Hero";
+import EmailLink from "@/components/EmailLink";
 import { readReps, type State, type SubchapterRep } from "@/lib/content";
 import styles from "./page.module.css";
 
@@ -108,9 +109,7 @@ export default function SubchaptersPage() {
                 </div>
                 <div className={styles.cardBody}>
                   <h2 className={styles.cardTitle}>{sc.state}</h2>
-                  <a href={`mailto:${sc.email}`} className={styles.cardEmail}>
-                    ✉ {sc.email}
-                  </a>
+                  <EmailLink email={sc.email} className={styles.cardEmail} />
                   {leaders.length > 0 ? (
                     <div className={styles.leaderBlock}>
                       {leaders

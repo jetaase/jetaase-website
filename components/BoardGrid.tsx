@@ -1,4 +1,5 @@
 import type { BoardMember } from "@/lib/content";
+import EmailLink from "./EmailLink";
 import styles from "./BoardGrid.module.css";
 
 export default function BoardGrid({ members }: { members: BoardMember[] }) {
@@ -11,11 +12,12 @@ export default function BoardGrid({ members }: { members: BoardMember[] }) {
           <div className={styles.role}>
             {m.role} · {m.chapter}
           </div>
-          {m.bio && <p className={styles.bio}>{m.bio}</p>}
-          {m.email && (
-            <a href={`mailto:${m.email}`} className={styles.email}>
-              {m.email}
-            </a>
+          {/* Always render these slots so each card keeps the same rows. */}
+          <p className={styles.bio}>{m.bio}</p>
+          {m.email ? (
+            <EmailLink email={m.email} className={styles.email} />
+          ) : (
+            <span />
           )}
         </article>
       ))}

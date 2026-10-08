@@ -2,6 +2,7 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import Hero from "@/components/Hero";
 import BoardGrid from "@/components/BoardGrid";
+import EmailLink from "@/components/EmailLink";
 import { readBoard, readReps } from "@/lib/content";
 import styles from "./page.module.css";
 
@@ -95,9 +96,7 @@ export default function WhoWeArePage() {
                 {rep.placement && (
                   <div className={styles.subchapterPlacement}>{rep.placement}</div>
                 )}
-                <a href={`mailto:${rep.email}`} className={styles.subchapterEmail}>
-                  {rep.email}
-                </a>
+                <EmailLink email={rep.email} className={styles.subchapterEmail} />
               </div>
             </div>
           ))}

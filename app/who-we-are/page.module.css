@@ -167,11 +167,6 @@
 }
 .subchapterEmail {
   font-size: 12px;
-  font-weight: 600;
-  color: var(--red);
-}
-.subchapterEmail:hover {
-  text-decoration: underline;
 }
 
 /* CTA */

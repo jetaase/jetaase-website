@@ -77,12 +77,8 @@
   margin: 0 0 4px;
 }
 .cardEmail {
-  display: inline-flex;
-  align-items: center;
-  gap: 7px;
+  align-self: flex-start;
   font-size: 14px;
-  font-weight: 600;
-  color: var(--red);
   margin-bottom: 20px;
 }
 .cardDetails {
