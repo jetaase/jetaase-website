@@ -86,3 +86,13 @@ export function prepareItems<T extends Record<string, unknown>>(
   if (opts.byDate) out.sort((a, b) => String(a.date ?? "").localeCompare(String(b.date ?? "")));
   return out;
 }
+
+// A card's heading: its name by default, or (e.g. officers by role) the
+// `titleKey` field with the person under it, so a role outlasts whoever holds it.
+export function cardHeading(
+  it: Record<string, unknown>, itemLabel: string, titleKey?: string,
+): { title: string; subtitle?: string } {
+  const name = String(it.name || it.title || "");
+  if (!titleKey) return { title: name || `New ${itemLabel}` };
+  return { title: String(it[titleKey] || "") || `New ${itemLabel}`, subtitle: name || "(vacant)" };
+}

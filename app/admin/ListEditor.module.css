@@ -152,3 +152,7 @@
   font-weight: 600;
   color: var(--ink-muted);
 }
+
+.subtitle {
+  color: var(--ink-muted);
+}

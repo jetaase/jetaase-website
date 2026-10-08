@@ -3,7 +3,7 @@ import { useEffect, useRef, useState } from "react";
 import PhotoField, { type PhotoView } from "./PhotoField";
 import { blobToBase64 } from "@/lib/image";
 import {
-  buildSavePayload, prepareItems, saveErrorMessage, uploadErrorMessage, validate, type PendingPhoto,
+  buildSavePayload, cardHeading, prepareItems, saveErrorMessage, uploadErrorMessage, validate, type PendingPhoto,
 } from "@/lib/editor-save";
 import { todayInEastern } from "@/lib/events";
 import { isUploadPath, toPublicUrl, toRepoPath, type UploadFolder } from "@/lib/uploads";
@@ -35,6 +35,7 @@ type Props<T extends Item> = {
   uploadFolder: UploadFolder;
   byDate?: boolean; // sort by `date` and fold past items into a collapsed group
   slugs?: boolean; // give new items a permanent `slug` on save
+  titleKey?: string; // field that titles each card (default: name/title)
 };
 
 const HEADSHOT_PLACEHOLDER = "/images/board-placeholder.png";
@@ -51,8 +52,17 @@ function pastIdsOf(items: Item[]): string[] {
   return items.filter((it) => String(it.date ?? "") < today).map((it) => it.id);
 }
 
+function CardHeading({ title, subtitle }: { title: string; subtitle?: string }) {
+  return (
+    <span>
+      <strong>{title}</strong>
+      {subtitle && <span className={styles.subtitle}> · {subtitle}</span>}
+    </span>
+  );
+}
+
 export default function ListEditor<T extends Item>({
-  title, path, commitMessage, itemLabel, idPrefix, fields, blank, initial, base, uploadFolder, byDate, slugs,
+  title, path, commitMessage, itemLabel, idPrefix, fields, blank, initial, base, uploadFolder, byDate, slugs, titleKey,
 }: Props<T>) {
   const [items, setItems] = useState<T[]>(() => (byDate ? prepareItems(initial, { byDate }) : initial));
   const [pastIds, setPastIds] = useState<string[]>(() => (byDate ? pastIdsOf(initial) : []));
@@ -256,7 +266,7 @@ export default function ListEditor<T extends Item>({
     return (
       <li key={it.id} id={`card-${it.id}`} className={`${styles.card} ${errorId === it.id ? styles.cardError : ""}`}>
         <div className={styles.cardHeader}>
-          <strong>{nameOf(it) || `New ${itemLabel}`}</strong>
+          <CardHeading {...cardHeading(it, itemLabel, titleKey)} />
           <div className={styles.actions}>
             {!byDate && (
               <>

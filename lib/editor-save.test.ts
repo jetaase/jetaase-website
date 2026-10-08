@@ -1,6 +1,6 @@
 import { describe, it, expect } from "vitest";
 import {
-  buildSavePayload, uploadErrorMessage, saveErrorMessage, validate, prepareItems, type PendingPhoto,
+  buildSavePayload, uploadErrorMessage, saveErrorMessage, validate, prepareItems, cardHeading, type PendingPhoto,
 } from "./editor-save";
 
 const blob = new Blob(["x"]);
@@ -141,5 +141,20 @@ describe("prepareItems", () => {
     const out = prepareItems(items, { byDate: true, slugs: true });
     expect(out.map((i) => i.slug)).toEqual(["early-2026-01", "middle-2026-06", "late-2026-12"]);
     expect(prepareItems(items, { byDate: true })[0]).not.toHaveProperty("slug");
+  });
+});
+
+describe("cardHeading", () => {
+  it("titles a card by name by default", () => {
+    expect(cardHeading({ name: "Ann" }, "representative")).toEqual({ title: "Ann" });
+    expect(cardHeading({ title: "Fall Welcome" }, "event")).toEqual({ title: "Fall Welcome" });
+    expect(cardHeading({ name: "" }, "representative")).toEqual({ title: "New representative" });
+  });
+  it("titles a card by the given field, with the person under it", () => {
+    expect(cardHeading({ role: "President", name: "Lindsay Jenkins" }, "role", "role"))
+      .toEqual({ title: "President", subtitle: "Lindsay Jenkins" });
+  });
+  it("marks an empty role as new and an empty name as vacant", () => {
+    expect(cardHeading({ role: "", name: "" }, "role", "role")).toEqual({ title: "New role", subtitle: "(vacant)" });
   });
 });

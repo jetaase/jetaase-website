@@ -7,8 +7,8 @@ import { gitBlobSha } from "@/lib/git-sha";
 import ListEditor, { type Field } from "../ListEditor";
 
 const BOARD_FIELDS: Field[] = [
-  { key: "name", label: "Name" },
   { key: "role", label: "Role", placeholder: "e.g. Treasurer" },
+  { key: "name", label: "Name" },
   { key: "chapter", label: "State", options: ["AL", "GA", "NC", "SC"] },
   { key: "bio", label: "JET placement", placeholder: "e.g. Nagano Prefecture, 2017–2022" },
   { key: "email", label: "Email", placeholder: "e.g. treasurer@jetaase.org" },
@@ -40,7 +40,7 @@ export default async function PeopleAdminPage() {
   return (
     <>
       <ListEditor
-        title="Officers" itemLabel="officer" idPrefix="m"
+        title="Officers" itemLabel="role" idPrefix="m" titleKey="role"
         base={{ [BOARD_PATH]: gitBlobSha(readRaw("board.json")) }} uploadFolder="board"
         path={BOARD_PATH} commitMessage="chore(admin): update board members"
         fields={BOARD_FIELDS} blank={BLANK_MEMBER} initial={readBoard()}
