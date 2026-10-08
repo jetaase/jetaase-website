@@ -62,7 +62,12 @@
   padding-top: 14px;
   font-size: 13px;
   font-weight: 600;
+  color: var(--red);
   overflow-wrap: anywhere;
+}
+
+.email:hover {
+  text-decoration: underline;
 }
 
 @media (max-width: 768px) {
