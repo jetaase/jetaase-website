@@ -1,0 +1,17 @@
+.tabs {
+  display: flex;
+  gap: 0.25rem;
+  border-bottom: 1px solid var(--border);
+  margin: 0 0 2rem;
+}
+.tab {
+  padding: 0.6rem 1.1rem;
+  font-weight: 600;
+  color: var(--ink-muted);
+  border-bottom: 3px solid transparent;
+  margin-bottom: -1px;
+}
+.tab[aria-current="page"] {
+  color: var(--ink);
+  border-bottom-color: var(--red);
+}

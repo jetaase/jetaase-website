@@ -201,48 +201,6 @@
     gap: 28px;
   }
 }
-.eventCard {
-  border: 1px solid #e6ddca;
-  border-radius: 14px;
-  overflow: hidden;
-  background: #fff;
-}
-.eventPhoto {
-  height: 160px;
-  background: repeating-linear-gradient(
-    135deg,
-    #f0e8d7,
-    #f0e8d7 11px,
-    #e9dfca 11px,
-    #e9dfca 22px
-  );
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-.eventPhotoLabel {
-  font-family: var(--font-mono);
-  font-size: 11px;
-  color: #9a9078;
-}
-.eventBody {
-  padding: 22px;
-}
-.eventDate {
-  font-family: var(--font-mono);
-  font-size: 12px;
-  color: var(--red);
-  margin-bottom: 8px;
-}
-.eventTitle {
-  font-weight: 700;
-  font-size: 18px;
-  margin-bottom: 6px;
-}
-.eventDesc {
-  font-size: 14px;
-  color: #7a715e;
-}
 
 /* RESOURCES */
 .resourcesSection {

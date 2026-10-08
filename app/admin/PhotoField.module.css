@@ -4,17 +4,29 @@
   gap: 12px;
   grid-column: 1 / -1;
 }
-.thumb,
-.thumbRound {
+.thumb {
   width: 64px;
-  height: 64px;
-  object-fit: cover;
+  height: 80px;
+  object-fit: contain;
   border-radius: 8px;
   background: #efe7d6;
   flex-shrink: 0;
 }
 .thumbRound {
+  width: 64px;
+  height: 64px;
+  object-fit: cover;
   border-radius: 50%;
+  background: #efe7d6;
+  flex-shrink: 0;
+}
+.empty {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  font-size: 0.7rem;
+  color: var(--ink-muted);
 }
 .faded {
   opacity: 0.35;

@@ -1,0 +1,31 @@
+.frame {
+  aspect-ratio: 4 / 5;
+  background: #f4ede0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+.img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+}
+.blank {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: #a48365;
+}
+.month {
+  font-family: var(--font-mono);
+  font-size: 14px;
+  letter-spacing: 0.2em;
+}
+.day {
+  font-family: var(--font-serif);
+  font-size: 64px;
+  line-height: 1;
+  color: var(--ink);
+}

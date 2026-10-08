@@ -1,5 +1,6 @@
 // Builds the /api/github save request from the admin editor's state.
 import { toPublicUrl } from "./uploads";
+import { assignSlugs, isValidDate } from "./events";
 
 export type PendingPhoto = {
   status: "uploading" | "uploaded" | "failed";
@@ -47,4 +48,41 @@ export function uploadErrorMessage(status: number | null, serverError?: string):
 export function saveErrorMessage(status: number | null, serverError?: string): string {
   if (status === 401) return "Your login expired. Sign in again in a new tab, then click Save again.";
   return serverError || "Save failed — try again";
+}
+
+export type CheckedField = { key: string; label: string; type?: "date" | "url" | "textarea"; required?: boolean };
+
+// "RSVP link (optional)" → "RSVP link"; "Event name" → "event name".
+function noun(label: string): string {
+  const base = label.replace(/\s*\(optional\)$/i, "");
+  return /^[A-Z][a-z]/.test(base) ? base[0].toLowerCase() + base.slice(1) : base;
+}
+
+// The first thing stopping a save, as a sentence for the status line, or null.
+export function validate(
+  fields: CheckedField[], items: Record<string, unknown>[], itemLabel: string,
+): { id: string; message: string } | null {
+  for (const [i, it] of items.entries()) {
+    const name = String(it.title ?? it.name ?? "").trim();
+    const who = name ? `"${name}"` : `${itemLabel[0].toUpperCase()}${itemLabel.slice(1)} ${i + 1}`;
+    for (const f of fields) {
+      const v = String(it[f.key] ?? "").trim();
+      let problem = "";
+      if (!v && f.required) problem = `add the ${noun(f.label)}.`;
+      else if (v && f.type === "url" && !/^https?:\/\//i.test(v)) problem = `the ${noun(f.label)} should start with https://`;
+      else if (v && f.type === "date" && !isValidDate(v)) problem = "pick a valid date.";
+      if (problem) return { id: String(it.id), message: `${who}: ${problem}` };
+    }
+  }
+  return null;
+}
+
+// Final touches before saving: date order (stable) and slugs for new items.
+export function prepareItems<T extends Record<string, unknown>>(
+  items: T[], opts: { byDate?: boolean; slugs?: boolean },
+): T[] {
+  let out = items.slice();
+  if (opts.slugs) out = assignSlugs(out);
+  if (opts.byDate) out.sort((a, b) => String(a.date ?? "").localeCompare(String(b.date ?? "")));
+  return out;
 }

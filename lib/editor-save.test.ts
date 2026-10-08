@@ -1,5 +1,7 @@
 import { describe, it, expect } from "vitest";
-import { buildSavePayload, uploadErrorMessage, saveErrorMessage, type PendingPhoto } from "./editor-save";
+import {
+  buildSavePayload, uploadErrorMessage, saveErrorMessage, validate, prepareItems, type PendingPhoto,
+} from "./editor-save";
 
 const blob = new Blob(["x"]);
 const up = (path: string, sha: string): PendingPhoto =>
@@ -76,5 +78,68 @@ describe("saveErrorMessage", () => {
   it("falls back to generic copy when the response had no message", () => {
     expect(saveErrorMessage(504)).toBe("Save failed — try again");
     expect(saveErrorMessage(null)).toBe("Save failed — try again");
+  });
+});
+
+describe("validate", () => {
+  const fields = [
+    { key: "title", label: "Event name", required: true },
+    { key: "date", label: "Date", type: "date" as const, required: true },
+    { key: "rsvpUrl", label: "RSVP link (optional)", type: "url" as const },
+    { key: "link", label: "Event link (optional)", type: "url" as const },
+  ];
+  const good = { id: "e1", title: "Fall Welcome", date: "2026-10-03", rsvpUrl: "https://forms.gle/x", link: "" };
+
+  it("passes complete items", () => {
+    expect(validate(fields, [good], "event")).toBeNull();
+  });
+  it("names the event by title when a required field is empty", () => {
+    expect(validate(fields, [good, { ...good, id: "e2", date: "" }], "event"))
+      .toEqual({ id: "e2", message: '"Fall Welcome": add the date.' });
+  });
+  it("names the event by position when it has no title", () => {
+    expect(validate(fields, [good, { ...good, id: "e2", title: " " }], "event"))
+      .toEqual({ id: "e2", message: "Event 2: add the event name." });
+  });
+  it("uses the item label for position names", () => {
+    expect(validate(fields, [{ ...good, title: "" }], "partner event")?.message)
+      .toBe("Partner event 1: add the event name.");
+  });
+  it("rejects a link that doesn't start with http, keeping acronyms", () => {
+    expect(validate(fields, [{ ...good, rsvpUrl: "forms.gle/x" }], "event")?.message)
+      .toBe('"Fall Welcome": the RSVP link should start with https://');
+    expect(validate(fields, [{ ...good, link: "www.jetaa.org" }], "event")?.message)
+      .toBe('"Fall Welcome": the event link should start with https://');
+  });
+  it("accepts http and https links and empty optional links", () => {
+    expect(validate(fields, [{ ...good, rsvpUrl: "http://x.org", link: "" }], "event")).toBeNull();
+  });
+  it("rejects an impossible date", () => {
+    expect(validate(fields, [{ ...good, date: "2026-02-30" }], "event")?.message)
+      .toBe('"Fall Welcome": pick a valid date.');
+  });
+  it("uses the name field when there is no title (people editors)", () => {
+    const people = [{ key: "name", label: "Name", required: true }, { key: "email", label: "Email", required: true }];
+    expect(validate(people, [{ id: "m1", name: "Ann", email: "" }], "officer")?.message)
+      .toBe('"Ann": add the email.');
+  });
+});
+
+describe("prepareItems", () => {
+  const items = [
+    { id: "a", title: "Late", date: "2026-12-01", slug: "late-2026-12" },
+    { id: "b", title: "Early", date: "2026-01-05" },
+    { id: "c", title: "Middle", date: "2026-06-01", slug: "" },
+  ];
+  it("returns items unchanged without options", () => {
+    expect(prepareItems(items, {})).toEqual(items);
+  });
+  it("sorts by date, soonest first, when byDate is set", () => {
+    expect(prepareItems(items, { byDate: true }).map((i) => i.id)).toEqual(["b", "c", "a"]);
+  });
+  it("fills missing slugs only when slugs is set", () => {
+    const out = prepareItems(items, { byDate: true, slugs: true });
+    expect(out.map((i) => i.slug)).toEqual(["early-2026-01", "middle-2026-06", "late-2026-12"]);
+    expect(prepareItems(items, { byDate: true })[0]).not.toHaveProperty("slug");
   });
 });

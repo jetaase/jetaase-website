@@ -1,5 +1,6 @@
 import { describe, it, expect } from "vitest";
-import { readBoard, readReps } from "./content";
+import { readBoard, readReps, readEvents, readPartnerEvents, EDITABLE_PATHS } from "./content";
+import { isValidDate } from "./events";
 
 describe("readBoard", () => {
   it("returns board members sorted by order", () => {
@@ -26,5 +27,35 @@ describe("readReps", () => {
     for (const r of readReps()) {
       expect(r.id && r.name && r.state && r.email).toBeTruthy();
     }
+  });
+});
+
+describe("readEvents", () => {
+  it("returns events with valid dates and unique slugs", () => {
+    const events = readEvents();
+    expect(events.length).toBeGreaterThanOrEqual(1);
+    for (const e of events) {
+      expect(e.id && e.title && e.slug).toBeTruthy();
+      expect(isValidDate(e.date)).toBe(true);
+      expect(typeof e.poster).toBe("string");
+      expect(typeof e.rsvpUrl).toBe("string");
+    }
+    const slugs = events.map((e) => e.slug);
+    expect(new Set(slugs).size).toBe(slugs.length);
+  });
+});
+
+describe("readPartnerEvents", () => {
+  it("returns partner events with a host and a valid date", () => {
+    for (const p of readPartnerEvents()) {
+      expect(p.id && p.title && p.host).toBeTruthy();
+      expect(isValidDate(p.date)).toBe(true);
+    }
+  });
+});
+
+describe("EDITABLE_PATHS", () => {
+  it("lets the admin save both event files", () => {
+    expect(EDITABLE_PATHS).toEqual(expect.arrayContaining(["content/events.json", "content/partner-events.json"]));
   });
 });

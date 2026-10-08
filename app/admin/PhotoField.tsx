@@ -60,19 +60,23 @@ export default function PhotoField({
 
   return (
     <div className={styles.field}>
-      <img
-        src={view.src}
-        alt=""
-        className={`${kind === "headshot" ? styles.thumbRound : styles.thumb} ${view.pendingDelete ? styles.faded : ""}`}
-      />
+      {view.src ? (
+        <img
+          src={view.src}
+          alt=""
+          className={`${kind === "headshot" ? styles.thumbRound : styles.thumb} ${view.pendingDelete ? styles.faded : ""}`}
+        />
+      ) : (
+        <div className={`${styles.thumb} ${styles.empty}`}>No poster</div>
+      )}
       <div className={styles.side}>
         <div className={styles.buttons}>
           <button type="button" onClick={() => input.current?.click()} disabled={view.status === "uploading"}>
-            {view.status === "uploading" ? "Uploading…" : "Change photo"}
+            {view.status === "uploading" ? "Uploading…" : view.src ? "Change photo" : "Add photo"}
           </button>
           {view.pendingDelete || view.canUndo
             ? <button type="button" onClick={onUndoRemove}>Undo</button>
-            : <button type="button" onClick={onRemove} className={styles.danger}>Remove</button>}
+            : view.src && <button type="button" onClick={onRemove} className={styles.danger}>Remove</button>}
           {view.status === "failed" && <button type="button" onClick={onRetry}>Retry</button>}
         </div>
         {(view.status === "uploading" || view.status === "uploaded") && <span className={styles.badge}>Unsaved</span>}

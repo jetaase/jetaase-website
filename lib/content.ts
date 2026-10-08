@@ -1,5 +1,6 @@
 import { readFileSync } from "node:fs";
 import { join } from "node:path";
+import type { JetaaseEvent, PartnerEvent } from "./events";
 
 export type Chapter = "AL" | "GA" | "NC" | "SC";
 export type BoardMember = {
@@ -17,7 +18,9 @@ export type SubchapterRep = {
 // Files the admin is allowed to commit through /api/github.
 export const BOARD_PATH = "content/board.json";
 export const REPS_PATH = "content/subchapter-reps.json";
-export const EDITABLE_PATHS = [BOARD_PATH, REPS_PATH];
+export const EVENTS_PATH = "content/events.json";
+export const PARTNERS_PATH = "content/partner-events.json";
+export const EDITABLE_PATHS = [BOARD_PATH, REPS_PATH, EVENTS_PATH, PARTNERS_PATH];
 
 const CONTENT_DIR = join(process.cwd(), "content");
 
@@ -36,4 +39,13 @@ export function readBoard(): BoardMember[] {
 
 export function readReps(): SubchapterRep[] {
   return readSorted<SubchapterRep>("subchapter-reps.json");
+}
+
+// Unsorted: pages split and sort events by date (see lib/events.ts).
+export function readEvents(): JetaaseEvent[] {
+  return JSON.parse(readRaw("events.json")) as JetaaseEvent[];
+}
+
+export function readPartnerEvents(): PartnerEvent[] {
+  return JSON.parse(readRaw("partner-events.json")) as PartnerEvent[];
 }

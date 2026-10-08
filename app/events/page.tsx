@@ -3,149 +3,133 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import Hero from "@/components/Hero";
 import CultureBand from "@/components/CultureBand";
+import Poster from "@/components/Poster";
+import EventCard from "@/components/EventCard";
+import NewsletterPrompt from "@/components/NewsletterPrompt";
+import { readEvents, readPartnerEvents } from "@/lib/content";
+import { formatEventDate, splitEvents, todayInEastern, upcomingPartners } from "@/lib/events";
 import styles from "./page.module.css";
 
+// Re-render hourly so events move into "Looking back" without a deploy.
+export const revalidate = 3600;
+
 export default function EventsPage() {
+  const today = todayInEastern(new Date());
+  const { next, upcoming, past } = splitEvents(readEvents(), today);
+  const partners = upcomingPartners(readPartnerEvents(), today);
+
   return (
     <div className={styles.pageRoot}>
       <Header />
 
-      {/* PAGE HERO */}
       <Hero
         eyebrow="What's coming up"
         title="Events"
-        subtitle="Picnics, meetups, welcome dinners, and info nights across the Southeast. Tap any event for details and to RSVP."
+        subtitle="Picnics, meetups, welcome dinners, and info nights across the Southeast."
       />
 
-      {/* FEATURED / NEXT UP */}
+      {/* NEXT UP */}
       <section className={styles.featured}>
-        <div className={styles.featuredGrid}>
-          <div className={styles.featuredPhotoWrap}>
-            <img
-              src="/images/atlanta-skyline.jpg"
-              alt="Aerial view of downtown Atlanta lit up at night"
-              className={styles.featuredPhoto}
-            />
-            <span className={styles.featuredBadge}>NEXT UP</span>
-            <a
-              href="https://unsplash.com/photos/an-aerial-view-of-a-city-at-night-F2PrSHG2nEk"
-              target="_blank"
-              rel="noopener noreferrer"
-              className={styles.photoCredit}
-            >
-              Photo: Venti Views / Unsplash
-            </a>
-          </div>
-          <div className={styles.featuredBody}>
-            <div className={styles.featuredDate}>SAT · AUG 09 · 2:00 PM</div>
-            <h2 className={styles.featuredTitle}>
-              Natsumatsuri Summer Picnic
-            </h2>
-            <p className={styles.featuredDesc}>
-              Piedmont Park, Atlanta GA. Food, games, yukata welcome, and
-              reunions with the whole Southeast JET family.
-            </p>
-            <div className={styles.featuredActions}>
-              <Link href="/join" className={styles.rsvpBtn}>
-                RSVP
-              </Link>
-              <button type="button" className={styles.detailsBtn}>
-                Details →
-              </button>
+        {next ? (
+          <div className={styles.featuredGrid}>
+            <div className={styles.featuredPoster}>
+              <Poster event={next} priority />
+              <span className={styles.featuredBadge}>NEXT UP</span>
+            </div>
+            <div className={styles.featuredBody}>
+              <div className={styles.featuredDate}>
+                {[formatEventDate(next.date, "weekday"), next.time.toUpperCase()].filter(Boolean).join(" · ")}
+              </div>
+              <h2 className={styles.featuredTitle}>{next.title}</h2>
+              {next.location && <div className={styles.featuredLocation}>{next.location}</div>}
+              {next.summary && <p className={styles.featuredDesc}>{next.summary}</p>}
+              <div className={styles.featuredActions}>
+                {next.rsvpUrl && (
+                  <a href={next.rsvpUrl} target="_blank" rel="noopener noreferrer" className={styles.rsvpBtn}>
+                    RSVP
+                  </a>
+                )}
+                <Link href={`/events/${next.slug}`} className={styles.detailsBtn}>
+                  Details →
+                </Link>
+              </div>
             </div>
           </div>
-        </div>
+        ) : (
+          <NewsletterPrompt empty />
+        )}
       </section>
 
-      {/* UPCOMING GRID */}
-      <section className={styles.upcoming}>
-        <div className={styles.upcomingHeader}>
+      {/* MORE UPCOMING */}
+      {upcoming.length > 0 && (
+        <section className={styles.upcoming}>
           <h2 className={styles.sectionTitle}>More upcoming</h2>
-          <Link href="#" className={styles.subscribeLink}>
-            Subscribe to calendar →
-          </Link>
-        </div>
-        <div className={styles.upcomingGrid}>
-          <div className={styles.upcomingCard}>
-            <div className={styles.upcomingPhoto} />
-            <div className={styles.upcomingBody}>
-              <div className={styles.upcomingDate}>SEP 13 · CHARLOTTE, NC</div>
-              <div className={styles.upcomingTitle}>
-                Monthly Nihongo Meetup
-              </div>
-              <div className={styles.upcomingMeta}>All levels · 6:30 PM</div>
-              <button type="button" className={styles.upcomingDetailsBtn}>
-                Details →
-              </button>
-            </div>
+          <div className={styles.upcomingGrid}>
+            {upcoming.map((e) => <EventCard key={e.id} event={e} />)}
           </div>
-          <div className={styles.upcomingCard}>
-            <div className={styles.upcomingPhoto} />
-            <div className={styles.upcomingBody}>
-              <div className={styles.upcomingDate}>SEP 20 · RALEIGH, NC</div>
-              <div className={styles.upcomingTitle}>
-                Returnee Welcome Home Dinner
-              </div>
-              <div className={styles.upcomingMeta}>Izakaya night · 7:00 PM</div>
-              <button type="button" className={styles.upcomingDetailsBtn}>
-                Details →
-              </button>
-            </div>
-          </div>
-          <div className={styles.upcomingCard}>
-            <div className={styles.upcomingPhotoOnline}>online event</div>
-            <div className={styles.upcomingBody}>
-              <div className={styles.upcomingDate}>OCT 04 · ONLINE</div>
-              <div className={styles.upcomingTitle}>
-                Applying to JET: Info Night
-              </div>
-              <div className={styles.upcomingMeta}>For applicants · 8:00 PM</div>
-              <button type="button" className={styles.upcomingDetailsBtn}>
-                Details →
-              </button>
-            </div>
-          </div>
-        </div>
-      </section>
+        </section>
+      )}
 
-      {/* LOOKING BACK / PAST EVENTS */}
-      <section className={styles.lookingBackSection}>
-        <div className={styles.lookingBackInner}>
-          <div className={styles.lookingBackHeader}>
-            <div>
-              <div className={styles.lookingBackEyebrow}>Looking back</div>
-              <h2 className={styles.sectionTitle}>
-                A few recent get-togethers
-              </h2>
-            </div>
-            <a
-              href="https://instagram.com/jetaase"
-              className={styles.instagramLink}
-            >
-              See more on Instagram →
-            </a>
-          </div>
-          <div className={styles.pastGrid}>
-            <div>
-              <div className={styles.pastPhotoWrap} />
-              <div className={styles.pastDate}>JUN 2026 · SAVANNAH, GA</div>
-              <div className={styles.pastTitle}>Hanami Riverside Walk</div>
-            </div>
-            <div>
-              <div className={styles.pastPhotoWrap} />
-              <div className={styles.pastDate}>APR 2026 · GREENVILLE, SC</div>
-              <div className={styles.pastTitle}>Spring Ramen Crawl</div>
-            </div>
-            <div>
-              <div className={styles.pastPhotoWrap} />
-              <div className={styles.pastDate}>JAN 2026 · CHARLOTTE, NC</div>
-              <div className={styles.pastTitle}>New Year Mochitsuki</div>
-            </div>
-          </div>
-        </div>
-      </section>
+      {/* ALSO HAPPENING — partner events */}
+      {partners.length > 0 && (
+        <section className={styles.partners}>
+          <h2 className={styles.partnersTitle}>Also happening</h2>
+          <p className={styles.partnersIntro}>Events from our friends at JETAA USA, the consulate, and others.</p>
+          <ul className={styles.partnerList}>
+            {partners.map((p) => {
+              const row = (
+                <>
+                  <span className={styles.partnerDate}>{formatEventDate(p.date, "day")}</span>
+                  <span className={styles.partnerMain}>
+                    <span className={styles.partnerTitle}>{p.title}</span>
+                    <span className={styles.partnerMeta}>
+                      {[p.time, p.location].filter(Boolean).join(" · ")}
+                    </span>
+                  </span>
+                  <span className={styles.hostTag}>{p.host}</span>
+                </>
+              );
+              return (
+                <li key={p.id}>
+                  {p.link ? (
+                    <a href={p.link} target="_blank" rel="noopener noreferrer" className={styles.partnerRow}>{row}</a>
+                  ) : (
+                    <div className={styles.partnerRow}>{row}</div>
+                  )}
+                </li>
+              );
+            })}
+          </ul>
+        </section>
+      )}
 
-      {/* CULTURE NEAR YOU — Japan-America society calendars */}
+      {/* NEWSLETTER */}
+      {next && (
+        <section className={styles.newsletter}>
+          <NewsletterPrompt />
+        </section>
+      )}
+
+      {/* LOOKING BACK */}
+      {past.length > 0 && (
+        <section className={styles.lookingBackSection}>
+          <div className={styles.lookingBackInner}>
+            <div className={styles.lookingBackHeader}>
+              <div>
+                <div className={styles.lookingBackEyebrow}>Looking back</div>
+                <h2 className={styles.sectionTitle}>A few recent get-togethers</h2>
+              </div>
+              <a href="https://instagram.com/jetaase" className={styles.instagramLink}>
+                See more on Instagram →
+              </a>
+            </div>
+            <div className={styles.pastGrid}>
+              {past.slice(0, 6).map((e) => <EventCard key={e.id} event={e} size="small" />)}
+            </div>
+          </div>
+        </section>
+      )}
+
       <CultureBand />
 
       {/* SUGGEST AN EVENT */}
@@ -163,54 +147,6 @@ export default function EventsPage() {
           </a>
         </div>
       </section>
-
-      {/* DETAILS MODAL — static port, hidden by default (no open/close JS wired) */}
-      <div className={styles.modalOverlay}>
-        <div className={styles.modalCard}>
-          <div className={styles.modalAccent} />
-          <div className={styles.modalBody}>
-            <div className={styles.modalHeaderRow}>
-              <div className={styles.modalDate}>
-                Saturday, August 9 · 2:00–6:00 PM
-              </div>
-              <button type="button" className={styles.modalClose}>
-                ×
-              </button>
-            </div>
-            <h2 className={styles.modalTitle}>Natsumatsuri Summer Picnic</h2>
-            <div className={styles.modalLocation}>
-              Piedmont Park (Oak Hill), Atlanta, GA
-            </div>
-            <p className={styles.modalDesc}>
-              Our biggest reunion of the year. Grills going, games on the
-              lawn, and the whole Southeast JET family in one place. Bring
-              the family — kids and non-members welcome. We&apos;ll have a
-              shaded spot reserved near the Oak Hill entrance; look for the
-              JETAASE banner.
-            </p>
-            <div className={styles.modalBringLabel}>What to bring</div>
-            <ul className={styles.modalBringList}>
-              <li className={styles.modalBringItem}>
-                A dish or drink to share (optional)
-              </li>
-              <li className={styles.modalBringItem}>
-                A blanket and sunscreen
-              </li>
-              <li className={styles.modalBringItem}>
-                Yukata or happi if you&apos;ve got one!
-              </li>
-            </ul>
-            <div className={styles.modalActions}>
-              <Link href="/join" className={styles.modalRsvpBtn}>
-                RSVP
-              </Link>
-              <a href="#" className={styles.modalCalendarBtn}>
-                Add to calendar
-              </a>
-            </div>
-          </div>
-        </div>
-      </div>
 
       <Footer />
     </div>

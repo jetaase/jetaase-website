@@ -3,9 +3,19 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import Eyebrow from "@/components/Eyebrow";
 import Button from "@/components/Button";
+import EventCard from "@/components/EventCard";
+import NewsletterPrompt from "@/components/NewsletterPrompt";
+import { readEvents } from "@/lib/content";
+import { splitEvents, todayInEastern } from "@/lib/events";
 import styles from "./page.module.css";
 
+// Re-render hourly so past events drop off without a deploy.
+export const revalidate = 3600;
+
 export default function Home() {
+  const { next, upcoming } = splitEvents(readEvents(), todayInEastern(new Date()));
+  const shown = next ? [next, ...upcoming.slice(0, 2)] : [];
+
   return (
     <div className={styles.pageRoot}>
       <Header />
@@ -149,46 +159,13 @@ export default function Home() {
             See all events →
           </Link>
         </div>
-        <div className={styles.eventsGrid}>
-          <div className={styles.eventCard}>
-            <div className={styles.eventPhoto}>
-              <span className={styles.eventPhotoLabel}>event photo</span>
-            </div>
-            <div className={styles.eventBody}>
-              <div className={styles.eventDate}>AUG 09 · ATLANTA, GA</div>
-              <div className={styles.eventTitle}>Natsumatsuri Summer Picnic</div>
-              <div className={styles.eventDesc}>
-                Food, games, and reunions in the park.
-              </div>
-            </div>
+        {shown.length > 0 ? (
+          <div className={styles.eventsGrid}>
+            {shown.map((e) => <EventCard key={e.id} event={e} />)}
           </div>
-          <div className={styles.eventCard}>
-            <div className={styles.eventPhoto}>
-              <span className={styles.eventPhotoLabel}>event photo</span>
-            </div>
-            <div className={styles.eventBody}>
-              <div className={styles.eventDate}>SEP 20 · RALEIGH, NC</div>
-              <div className={styles.eventTitle}>
-                Returnee Welcome Home Dinner
-              </div>
-              <div className={styles.eventDesc}>
-                Greeting the Southeast&apos;s newest returnees.
-              </div>
-            </div>
-          </div>
-          <div className={styles.eventCard}>
-            <div className={styles.eventPhoto}>
-              <span className={styles.eventPhotoLabel}>event photo</span>
-            </div>
-            <div className={styles.eventBody}>
-              <div className={styles.eventDate}>OCT 04 · ONLINE</div>
-              <div className={styles.eventTitle}>Applying to JET: Info Night</div>
-              <div className={styles.eventDesc}>
-                For prospective applicants, from alumni.
-              </div>
-            </div>
-          </div>
-        </div>
+        ) : (
+          <NewsletterPrompt empty />
+        )}
       </section>
 
       {/* RESOURCES */}
