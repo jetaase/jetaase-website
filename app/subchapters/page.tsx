@@ -4,6 +4,7 @@ import Hero from "@/components/Hero";
 import EmailLink from "@/components/EmailLink";
 import { readReps, type State, type SubchapterRep } from "@/lib/content";
 import styles from "./page.module.css";
+import { headshotSrc } from "@/lib/uploads";
 
 type CityGroup = {
   city: string;
@@ -221,7 +222,7 @@ function groupFor(sc: Subchapter, rep: SubchapterRep) {
 function LeaderRow({ rep, location }: { rep: SubchapterRep; location?: string }) {
   return (
     <div className={styles.leaderRow}>
-      <img src={rep.photo} alt={rep.name} className={styles.leaderAvatar} />
+      <img src={headshotSrc(rep.photo)} alt={rep.name} className={styles.leaderAvatar} />
       <div>
         {location && <div className={styles.leaderLocation}>{location}</div>}
         <div className={styles.leaderName}>{rep.name}</div>

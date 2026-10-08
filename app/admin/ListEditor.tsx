@@ -38,11 +38,8 @@ type Props<T extends Item> = {
   titleKey?: string; // field that titles each card (default: name/title)
 };
 
-const HEADSHOT_PLACEHOLDER = "/images/board-placeholder.png";
 const SAVED = "Saved. New photos appear once the site finishes updating (about a minute).";
 
-// What a photo field holds when it has no photo.
-const emptyPhoto = (f: Field) => (f.kind === "headshot" ? HEADSHOT_PLACEHOLDER : "");
 const nameOf = (it: Item) => String(it.name || it.title || "");
 
 // Worked out on load and after each save, never while typing, so a card
@@ -172,7 +169,7 @@ export default function ListEditor<T extends Item>({
     rememberOriginal(it, f.key);
     markForDelete(original);
     dropPending(it.id);
-    setField(it.id, f.key, emptyPhoto(f));
+    setField(it.id, f.key, ""); // no photo: pages show the default
   }
   function undoRemove(it: T, key: string) {
     const original = originals[it.id];
@@ -283,7 +280,7 @@ export default function ListEditor<T extends Item>({
             const p = pending[it.id];
             const original = originals[it.id];
             const view: PhotoView = {
-              src: p?.previewUrl ?? String(it[f.key] || emptyPhoto(f)),
+              src: p?.previewUrl ?? String(it[f.key] ?? ""),
               status: p?.status ?? "saved",
               pendingDelete: !p && original !== undefined && deletes.includes(toRepoPath(original)),
               canUndo: !p && original !== undefined && String(it[f.key] ?? "") !== original,

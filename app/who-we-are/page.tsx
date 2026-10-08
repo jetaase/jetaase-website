@@ -5,6 +5,7 @@ import BoardGrid from "@/components/BoardGrid";
 import EmailLink from "@/components/EmailLink";
 import { readBoard, readReps } from "@/lib/content";
 import styles from "./page.module.css";
+import { headshotSrc } from "@/lib/uploads";
 
 export default function WhoWeArePage() {
   const board = readBoard();
@@ -86,7 +87,7 @@ export default function WhoWeArePage() {
         <div className={styles.subchapterGrid}>
           {reps.map((rep) => (
             <div key={rep.id} className={styles.subchapterCard}>
-              <img src={rep.photo} alt={rep.name} className={styles.subchapterAvatar} />
+              <img src={headshotSrc(rep.photo)} alt={rep.name} className={styles.subchapterAvatar} />
               <div>
                 <div className={styles.subchapterRegion}>{rep.state}</div>
                 <div className={styles.subchapterName}>{rep.name}</div>

@@ -2,6 +2,7 @@
 import { useRef, useState } from "react";
 import { canDecode, renderJpeg, UnsupportedImageError, type ImageKind, type PixelArea } from "@/lib/image";
 import CropDialog from "./CropDialog";
+import { headshotSrc } from "@/lib/uploads";
 import styles from "./PhotoField.module.css";
 
 export type PhotoStatus = "saved" | "uploading" | "uploaded" | "failed";
@@ -60,9 +61,9 @@ export default function PhotoField({
 
   return (
     <div className={styles.field}>
-      {view.src ? (
+      {view.src || kind === "headshot" ? (
         <img
-          src={view.src}
+          src={kind === "headshot" ? headshotSrc(view.src) : view.src}
           alt=""
           className={`${kind === "headshot" ? styles.thumbRound : styles.thumb} ${view.pendingDelete ? styles.faded : ""}`}
         />

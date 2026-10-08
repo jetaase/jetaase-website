@@ -25,13 +25,11 @@ const REP_FIELDS: Field[] = [
 ];
 
 const BLANK_MEMBER: Omit<BoardMember, "id" | "order"> = {
-  name: "", role: "", chapter: "GA", bio: "", email: "",
-  photo: "/images/board-placeholder.png",
+  name: "", role: "", chapter: "GA", bio: "", email: "", photo: "",
 };
 
 const BLANK_REP: Omit<SubchapterRep, "id" | "order"> = {
-  name: "", state: "Georgia", city: "", placement: "", email: "",
-  photo: "/images/board-placeholder.png",
+  name: "", state: "Georgia", city: "", placement: "", email: "", photo: "",
 };
 
 export default async function PeopleAdminPage() {

@@ -1,13 +1,14 @@
 import type { BoardMember } from "@/lib/content";
 import EmailLink from "./EmailLink";
 import styles from "./BoardGrid.module.css";
+import { headshotSrc } from "@/lib/uploads";
 
 export default function BoardGrid({ members }: { members: BoardMember[] }) {
   return (
     <div className={styles.grid}>
       {members.map((m) => (
         <article key={m.id} className={styles.card}>
-          <img src={m.photo} alt={m.name} className={styles.photo} />
+          <img src={headshotSrc(m.photo)} alt={m.name} className={styles.photo} />
           <h3 className={styles.name}>{m.name}</h3>
           <div className={styles.role}>
             {m.role} · {m.chapter}

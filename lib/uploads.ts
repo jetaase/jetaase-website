@@ -36,6 +36,13 @@ export function isUploadPath(path: string): boolean {
   return UPLOAD_PATH_RE.test(path);
 }
 
+// Shown wherever an officer or rep has no photo (stored as "").
+export const DEFAULT_HEADSHOT = "/images/board-placeholder.png";
+
+export function headshotSrc(photo: string | undefined): string {
+  return photo || DEFAULT_HEADSHOT;
+}
+
 export function toPublicUrl(repoPath: string): string {
   return repoPath.replace(/^public/, "");
 }

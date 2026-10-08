@@ -1,7 +1,7 @@
 import { describe, it, expect } from "vitest";
 import {
   UPLOAD_FOLDERS, MAX_UPLOAD_BYTES, isUploadFolder, isJpeg, slugify,
-  uploadPath, isUploadPath, toPublicUrl, toRepoPath,
+  uploadPath, isUploadPath, toPublicUrl, toRepoPath, headshotSrc, DEFAULT_HEADSHOT,
 } from "./uploads";
 import { gitBlobSha } from "./git-sha";
 
@@ -78,5 +78,16 @@ describe("gitBlobSha", () => {
   });
   it("hashes bytes the same as the equivalent string", () => {
     expect(gitBlobSha(new TextEncoder().encode("hello\n"))).toBe(gitBlobSha("hello\n"));
+  });
+});
+
+describe("headshotSrc", () => {
+  it("shows the default headshot when there's no photo", () => {
+    expect(headshotSrc("")).toBe(DEFAULT_HEADSHOT);
+    expect(headshotSrc(undefined)).toBe(DEFAULT_HEADSHOT);
+    expect(DEFAULT_HEADSHOT).toBe("/images/board-placeholder.png");
+  });
+  it("keeps a real photo", () => {
+    expect(headshotSrc("/images/board/lindsay-jenkins.jpg")).toBe("/images/board/lindsay-jenkins.jpg");
   });
 });
