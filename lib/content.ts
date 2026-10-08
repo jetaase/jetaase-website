@@ -15,6 +15,14 @@ export type SubchapterRep = {
   placement: string; email: string; photo: string; order: number;
 };
 
+// States that should have a subchapter rep. Georgia is run by the board directly.
+export const REP_STATES: State[] = ["Alabama", "North Carolina", "South Carolina"];
+
+// Rep states with nobody in the role right now, shown as "position open".
+export function vacantRepStates(reps: SubchapterRep[]): State[] {
+  return REP_STATES.filter((s) => !reps.some((r) => r.state === s));
+}
+
 // Files the admin is allowed to commit through /api/github.
 export const BOARD_PATH = "content/board.json";
 export const REPS_PATH = "content/subchapter-reps.json";

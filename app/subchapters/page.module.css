@@ -239,3 +239,9 @@
 .photoCredit:hover {
   text-decoration: underline;
 }
+
+.openSpotLink {
+  font-weight: 700;
+  color: var(--red);
+  white-space: nowrap;
+}

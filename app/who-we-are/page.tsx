@@ -3,9 +3,9 @@ import Footer from "@/components/Footer";
 import Hero from "@/components/Hero";
 import BoardGrid from "@/components/BoardGrid";
 import EmailLink from "@/components/EmailLink";
-import { readBoard, readReps } from "@/lib/content";
+import { readBoard, readReps, vacantRepStates } from "@/lib/content";
 import styles from "./page.module.css";
-import { headshotSrc } from "@/lib/uploads";
+import { DEFAULT_HEADSHOT, headshotSrc } from "@/lib/uploads";
 
 export default function WhoWeArePage() {
   const board = readBoard();
@@ -98,6 +98,18 @@ export default function WhoWeArePage() {
                   <div className={styles.subchapterPlacement}>{rep.placement}</div>
                 )}
                 <EmailLink email={rep.email} className={styles.subchapterEmail} />
+              </div>
+            </div>
+          ))}
+          {vacantRepStates(reps).map((state) => (
+            <div key={state} className={styles.subchapterCard}>
+              <img src={DEFAULT_HEADSHOT} alt="" className={styles.subchapterAvatar} />
+              <div>
+                <div className={styles.subchapterRegion}>{state}</div>
+                <div className={styles.subchapterName}>Position open</div>
+                <a href="mailto:info@jetaase.org" className={styles.subchapterOpenLink}>
+                  Interested? Get in touch →
+                </a>
               </div>
             </div>
           ))}

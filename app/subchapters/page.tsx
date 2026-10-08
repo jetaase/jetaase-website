@@ -31,6 +31,9 @@ type Subchapter = {
   noLeaders?: { label: string; text: string };
 };
 
+// Where volunteers for an open rep spot write in.
+const OPEN_SPOT_EMAIL = "info@jetaase.org";
+
 const SUBCHAPTERS: Subchapter[] = [
   {
     state: "Georgia",
@@ -173,13 +176,19 @@ export default function SubchaptersPage() {
                         );
                       })}
                     </div>
+                  ) : sc.noLeaders ? (
+                    <div className={styles.cardDetails}>
+                      <div className={styles.cardDetailsLabel}>{sc.noLeaders.label}</div>
+                      <div className={styles.cardDetailsText}>{sc.noLeaders.text}</div>
+                    </div>
                   ) : (
-                    sc.noLeaders && (
-                      <div className={styles.cardDetails}>
-                        <div className={styles.cardDetailsLabel}>{sc.noLeaders.label}</div>
-                        <div className={styles.cardDetailsText}>{sc.noLeaders.text}</div>
+                    <div className={styles.cardDetails}>
+                      <div className={styles.cardDetailsLabel}>Local rep · open</div>
+                      <div className={styles.cardDetailsText}>
+                        We&apos;re looking for {sc.state === "Alabama" ? "an" : "a"} {sc.state} rep. Interested?{" "}
+                        <a href={`mailto:${OPEN_SPOT_EMAIL}`} className={styles.openSpotLink}>Get in touch →</a>
                       </div>
-                    )
+                    </div>
                   )}
                   <a href={sc.facebook} className={styles.fbBtn} target="_blank" rel="noopener noreferrer">
                     {sc.facebookLabel ?? "Join the Facebook group →"}

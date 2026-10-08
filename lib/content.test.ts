@@ -1,5 +1,7 @@
 import { describe, it, expect } from "vitest";
-import { readBoard, readReps, readEvents, readPartnerEvents, EDITABLE_PATHS } from "./content";
+import {
+  readBoard, readReps, readEvents, readPartnerEvents, EDITABLE_PATHS, vacantRepStates, type SubchapterRep,
+} from "./content";
 import { isValidDate } from "./events";
 
 describe("readBoard", () => {
@@ -57,5 +59,18 @@ describe("readPartnerEvents", () => {
 describe("EDITABLE_PATHS", () => {
   it("lets the admin save both event files", () => {
     expect(EDITABLE_PATHS).toEqual(expect.arrayContaining(["content/events.json", "content/partner-events.json"]));
+  });
+});
+
+describe("vacantRepStates", () => {
+  const rep = (id: string, state: SubchapterRep["state"]): SubchapterRep =>
+    ({ id, name: id, state, placement: "", email: "", photo: "", order: 1 });
+
+  it("lists AL, NC, and SC states that have no rep, in that order", () => {
+    expect(vacantRepStates([rep("a", "North Carolina")])).toEqual(["Alabama", "South Carolina"]);
+    expect(vacantRepStates([])).toEqual(["Alabama", "North Carolina", "South Carolina"]);
+  });
+  it("never lists Georgia, which the board runs directly", () => {
+    expect(vacantRepStates([rep("a", "Alabama"), rep("b", "North Carolina"), rep("c", "South Carolina")])).toEqual([]);
   });
 });
