@@ -44,7 +44,9 @@
   flex-wrap: wrap;
 }
 .heroGhostBtn {
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   border: 1.5px solid #cfc6b4;
   color: var(--ink);
   font-weight: 600;

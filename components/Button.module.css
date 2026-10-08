@@ -1,15 +1,18 @@
 .btn {
-  display: inline-block;
-  padding: 12px 26px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 15px 30px;
+  border: 1.5px solid transparent;
   border-radius: 999px;
   font-weight: 600;
-  font-size: 15px;
+  font-size: 16px;
 }
 .solid {
   background: var(--red);
   color: #fff;
 }
 .ghost {
-  border: 1px solid var(--border);
+  border-color: var(--border);
   color: var(--ink);
 }
