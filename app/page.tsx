@@ -14,7 +14,7 @@ export default function Home() {
       <section id="top" className={styles.hero}>
         <div className={styles.heroGrid}>
           <div className={styles.heroCopy}>
-            <Eyebrow>JET Alumni · AL · GA · NC · SC</Eyebrow>
+            <Eyebrow>JET Alumni of AL · GA · NC · SC</Eyebrow>
             <h1 className={styles.heroTitle}>
               Connect.
               <br />

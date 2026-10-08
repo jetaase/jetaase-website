@@ -25,6 +25,22 @@
   border-radius: 50%;
   object-fit: contain;
 }
+.wordmark {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.15;
+}
+.wordmarkName {
+  font-family: var(--font-serif);
+  font-weight: 600;
+  font-size: 22px;
+  letter-spacing: 0.01em;
+}
+.wordmarkFull {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--ink-muted);
+}
 .nav {
   display: flex;
   gap: 32px;
@@ -44,6 +60,11 @@
   color: #fff;
   padding: 10px 22px;
   border-radius: 999px;
+}
+@media (max-width: 1024px) {
+  .wordmarkFull {
+    display: none;
+  }
 }
 @media (max-width: 768px) {
   .inner {
