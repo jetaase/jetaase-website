@@ -1,8 +1,9 @@
 import { requireSession } from "@/lib/auth-cookie";
 import {
-  readBoard, readReps, BOARD_PATH, REPS_PATH,
+  readBoard, readReps, readRaw, BOARD_PATH, REPS_PATH,
   type BoardMember, type SubchapterRep,
 } from "@/lib/content";
+import { gitBlobSha } from "@/lib/git-sha";
 import LoginForm from "./LoginForm";
 import ListEditor, { type Field } from "./ListEditor";
 import styles from "./page.module.css";
@@ -13,7 +14,7 @@ const BOARD_FIELDS: Field[] = [
   { key: "chapter", label: "State", options: ["AL", "GA", "NC", "SC"] },
   { key: "bio", label: "JET placement", placeholder: "e.g. Nagano Prefecture, 2017–2022" },
   { key: "email", label: "Email", placeholder: "e.g. treasurer@jetaase.org" },
-  { key: "photo", label: "Photo path", placeholder: "/images/board/name.jpg" },
+  { key: "photo", label: "Photo", kind: "headshot" },
 ];
 
 const REP_FIELDS: Field[] = [
@@ -22,7 +23,7 @@ const REP_FIELDS: Field[] = [
   { key: "city", label: "City (optional)", placeholder: "e.g. Charlotte" },
   { key: "placement", label: "JET placement", placeholder: "e.g. Kyoto Prefecture, 2022–2024" },
   { key: "email", label: "Email" },
-  { key: "photo", label: "Photo path", placeholder: "/images/board/name.jpg" },
+  { key: "photo", label: "Photo", kind: "headshot" },
 ];
 
 const BLANK_MEMBER: Omit<BoardMember, "id" | "order"> = {
@@ -53,11 +54,13 @@ export default async function AdminPage() {
       </p>
       <ListEditor
         title="Officers" itemLabel="officer" idPrefix="m"
+        base={{ [BOARD_PATH]: gitBlobSha(readRaw("board.json")) }} uploadFolder="board"
         path={BOARD_PATH} commitMessage="chore(admin): update board members"
         fields={BOARD_FIELDS} blank={BLANK_MEMBER} initial={readBoard()}
       />
       <ListEditor
         title="Subchapter representatives" itemLabel="representative" idPrefix="r"
+        base={{ [REPS_PATH]: gitBlobSha(readRaw("subchapter-reps.json")) }} uploadFolder="reps"
         path={REPS_PATH} commitMessage="chore(admin): update subchapter reps"
         fields={REP_FIELDS} blank={BLANK_REP} initial={readReps()}
       />

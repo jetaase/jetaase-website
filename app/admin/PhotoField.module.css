@@ -1,0 +1,43 @@
+.field {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  grid-column: 1 / -1;
+}
+.thumb,
+.thumbRound {
+  width: 64px;
+  height: 64px;
+  object-fit: cover;
+  border-radius: 8px;
+  background: #efe7d6;
+  flex-shrink: 0;
+}
+.thumbRound {
+  border-radius: 50%;
+}
+.faded {
+  opacity: 0.35;
+}
+.side {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.buttons {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+.danger {
+  color: var(--red);
+}
+.badge {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: #9a6a00;
+}
+.message {
+  font-size: 0.8rem;
+  color: var(--ink-muted);
+}
