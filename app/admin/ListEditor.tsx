@@ -5,7 +5,7 @@ import { blobToBase64 } from "@/lib/image";
 import {
   buildSavePayload, cardHeading, prepareItems, saveErrorMessage, uploadErrorMessage, validate, type PendingPhoto,
 } from "@/lib/editor-save";
-import { todayInEastern } from "@/lib/events";
+import { formatEventDate, todayInEastern } from "@/lib/events";
 import { sortReps } from "@/lib/reps";
 import { isUploadPath, toPublicUrl, toRepoPath, type UploadFolder } from "@/lib/uploads";
 import styles from "./ListEditor.module.css";
@@ -70,6 +70,10 @@ export default function ListEditor<T extends Item>({
   const [pastIds, setPastIds] = useState<string[]>(() => (byDate ? pastIdsOf(initial) : []));
   const [showPast, setShowPast] = useState(false);
   const [errorId, setErrorId] = useState<string | null>(null);
+  // Cards start collapsed to their header; these ids are open.
+  const [openIds, setOpenIds] = useState<string[]>([]);
+  const openCard = (id: string) => setOpenIds((o) => (o.includes(id) ? o : [...o, id]));
+  const toggleCard = (id: string) => setOpenIds((o) => (o.includes(id) ? o.filter((x) => x !== id) : [...o, id]));
   const [dirty, setDirty] = useState(false);
   const [saving, setSaving] = useState(false);
   const [status, setStatus] = useState("");
@@ -120,6 +124,7 @@ export default function ListEditor<T extends Item>({
     const fresh = { ...blank, id: `${idPrefix}${Date.now()}`, order: 0 } as T;
     if (byDate) Object.assign(fresh, { date: todayInEastern(new Date()) });
     update((prev) => [...prev, fresh]);
+    openCard(fresh.id);
   }
 
   // ── Photos ──
@@ -189,6 +194,7 @@ export default function ListEditor<T extends Item>({
     const problem = validate(fields, items, itemLabel);
     if (problem) {
       setErrorId(problem.id);
+      openCard(problem.id);
       if (pastIds.includes(problem.id)) setShowPast(true);
       setStatus(`Error: ${problem.message}`);
       requestAnimationFrame(() =>
@@ -265,10 +271,20 @@ export default function ListEditor<T extends Item>({
   }
 
   function renderCard(it: T, i: number) {
+    const open = openIds.includes(it.id);
+    const heading = cardHeading(it, itemLabel, titleKey);
+    // Event lists are ordered by date, so show it while collapsed.
+    if (byDate && !heading.subtitle) heading.subtitle = formatEventDate(String(it.date ?? ""), "long") || undefined;
     return (
       <li key={it.id} id={`card-${it.id}`} className={`${styles.card} ${errorId === it.id ? styles.cardError : ""}`}>
-        <div className={styles.cardHeader}>
-          <CardHeading {...cardHeading(it, itemLabel, titleKey)} />
+        <div className={`${styles.cardHeader} ${open ? styles.cardHeaderOpen : ""}`}>
+          <button
+            type="button" className={styles.toggle} onClick={() => toggleCard(it.id)}
+            aria-expanded={open} aria-controls={`fields-${it.id}`}
+          >
+            <span className={styles.chevron} aria-hidden="true">{open ? "▾" : "▸"}</span>
+            <CardHeading {...heading} />
+          </button>
           <div className={styles.actions}>
             {!byDate && !sortByState && (
               <>
@@ -279,7 +295,7 @@ export default function ListEditor<T extends Item>({
             <button onClick={() => remove(it)} className={styles.danger}>Remove</button>
           </div>
         </div>
-        <div className={styles.fields}>
+        <div id={`fields-${it.id}`} className={styles.fields} hidden={!open}>
           {fields.map((f) => {
             if (!f.kind) return renderInput(it, f);
             const p = pending[it.id];
