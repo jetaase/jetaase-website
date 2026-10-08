@@ -1,6 +1,7 @@
 import { readFileSync } from "node:fs";
 import { join } from "node:path";
 import type { JetaaseEvent, PartnerEvent } from "./events";
+import { sortReps } from "./reps";
 
 export type Chapter = "AL" | "GA" | "NC" | "SC";
 export type BoardMember = {
@@ -14,14 +15,6 @@ export type SubchapterRep = {
   id: string; name: string; state: State; city?: string;
   placement: string; email: string; photo: string; order: number;
 };
-
-// States that should have a subchapter rep. Georgia is run by the board directly.
-export const REP_STATES: State[] = ["Alabama", "North Carolina", "South Carolina"];
-
-// Rep states with nobody in the role right now, shown as "position open".
-export function vacantRepStates(reps: SubchapterRep[]): State[] {
-  return REP_STATES.filter((s) => !reps.some((r) => r.state === s));
-}
 
 // Files the admin is allowed to commit through /api/github.
 export const BOARD_PATH = "content/board.json";
@@ -45,8 +38,9 @@ export function readBoard(): BoardMember[] {
   return readSorted<BoardMember>("board.json");
 }
 
+// Sorted by state, not by `order` (see lib/reps.ts).
 export function readReps(): SubchapterRep[] {
-  return readSorted<SubchapterRep>("subchapter-reps.json");
+  return sortReps(JSON.parse(readRaw("subchapter-reps.json")) as SubchapterRep[]);
 }
 
 // Unsorted: pages split and sort events by date (see lib/events.ts).

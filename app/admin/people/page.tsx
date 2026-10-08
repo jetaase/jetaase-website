@@ -44,7 +44,7 @@ export default async function PeopleAdminPage() {
         fields={BOARD_FIELDS} blank={BLANK_MEMBER} initial={readBoard()}
       />
       <ListEditor
-        title="Subchapter representatives" itemLabel="representative" idPrefix="r"
+        title="Subchapter representatives" itemLabel="representative" idPrefix="r" sortByState
         base={{ [REPS_PATH]: gitBlobSha(readRaw("subchapter-reps.json")) }} uploadFolder="reps"
         path={REPS_PATH} commitMessage="chore(admin): update subchapter reps"
         fields={REP_FIELDS} blank={BLANK_REP} initial={readReps()}

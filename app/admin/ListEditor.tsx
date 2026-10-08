@@ -6,6 +6,7 @@ import {
   buildSavePayload, cardHeading, prepareItems, saveErrorMessage, uploadErrorMessage, validate, type PendingPhoto,
 } from "@/lib/editor-save";
 import { todayInEastern } from "@/lib/events";
+import { sortReps } from "@/lib/reps";
 import { isUploadPath, toPublicUrl, toRepoPath, type UploadFolder } from "@/lib/uploads";
 import styles from "./ListEditor.module.css";
 
@@ -36,6 +37,7 @@ type Props<T extends Item> = {
   byDate?: boolean; // sort by `date` and fold past items into a collapsed group
   slugs?: boolean; // give new items a permanent `slug` on save
   titleKey?: string; // field that titles each card (default: name/title)
+  sortByState?: boolean; // subchapter reps: keep in state order (lib/reps.ts) instead of manual arrows
 };
 
 const SAVED = "Saved. New photos appear once the site finishes updating (about a minute).";
@@ -59,9 +61,12 @@ function CardHeading({ title, subtitle }: { title: string; subtitle?: string }) 
 }
 
 export default function ListEditor<T extends Item>({
-  title, path, commitMessage, itemLabel, idPrefix, fields, blank, initial, base, uploadFolder, byDate, slugs, titleKey,
+  title, path, commitMessage, itemLabel, idPrefix, fields, blank, initial, base, uploadFolder, byDate, slugs, titleKey, sortByState,
 }: Props<T>) {
-  const [items, setItems] = useState<T[]>(() => (byDate ? prepareItems(initial, { byDate }) : initial));
+  // Sorted on load and on save, never while typing, so cards don't jump mid-edit.
+  const autoSort = (list: T[]) =>
+    sortByState ? sortReps(list) : prepareItems(list, { byDate });
+  const [items, setItems] = useState<T[]>(() => autoSort(initial));
   const [pastIds, setPastIds] = useState<string[]>(() => (byDate ? pastIdsOf(initial) : []));
   const [showPast, setShowPast] = useState(false);
   const [errorId, setErrorId] = useState<string | null>(null);
@@ -195,7 +200,7 @@ export default function ListEditor<T extends Item>({
     setSaving(true);
     setStatus("Saving…");
     try {
-      const ready = prepareItems(items, { byDate, slugs });
+      const ready = prepareItems(autoSort(items), { slugs });
       const payload = buildSavePayload({ path, message: commitMessage, items: ready, pending, deletes, base: baseShas });
       let res: Response;
       try {
@@ -265,7 +270,7 @@ export default function ListEditor<T extends Item>({
         <div className={styles.cardHeader}>
           <CardHeading {...cardHeading(it, itemLabel, titleKey)} />
           <div className={styles.actions}>
-            {!byDate && (
+            {!byDate && !sortByState && (
               <>
                 <button onClick={() => move(i, -1)} disabled={i === 0} aria-label="Move up">↑</button>
                 <button onClick={() => move(i, 1)} disabled={i === items.length - 1} aria-label="Move down">↓</button>

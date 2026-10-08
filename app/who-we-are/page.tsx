@@ -4,7 +4,8 @@ import Footer from "@/components/Footer";
 import Hero from "@/components/Hero";
 import BoardGrid from "@/components/BoardGrid";
 import EmailLink from "@/components/EmailLink";
-import { readBoard, readReps, vacantRepStates } from "@/lib/content";
+import { readBoard, readReps } from "@/lib/content";
+import { repSlots } from "@/lib/reps";
 import styles from "./page.module.css";
 import { DEFAULT_HEADSHOT, headshotSrc } from "@/lib/uploads";
 
@@ -88,7 +89,7 @@ export default function WhoWeArePage() {
 
         <h3 className={styles.subchapterTitle}>Subchapter representatives</h3>
         <div className={styles.subchapterGrid}>
-          {reps.map((rep) => (
+          {repSlots(reps).map(({ state, rep }) => rep ? (
             <div key={rep.id} className={styles.subchapterCard}>
               <img src={headshotSrc(rep.photo)} alt={rep.name} className={styles.subchapterAvatar} />
               <div>
@@ -103,8 +104,7 @@ export default function WhoWeArePage() {
                 <EmailLink email={rep.email} className={styles.subchapterEmail} />
               </div>
             </div>
-          ))}
-          {vacantRepStates(reps).map((state) => (
+          ) : (
             <div key={state} className={styles.subchapterCard}>
               <img src={DEFAULT_HEADSHOT} alt="" className={styles.subchapterAvatar} />
               <div>
