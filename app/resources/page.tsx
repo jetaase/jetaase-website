@@ -170,7 +170,21 @@ export default function ResourcesPage() {
               Japanese sharp, job hunting, or chasing a matsuri near home.
             </p>
           </div>
-          <div className={styles.heroImageWrap} />
+          <div className={styles.heroImageWrap}>
+            <img
+              src="/images/kyoto-bookshelf.jpg"
+              alt="Shelves of Japanese paperbacks in a Kyoto bookshop"
+              className={styles.heroImage}
+            />
+            <a
+              href="https://unsplash.com/photos/a-book-shelf-filled-with-lots-of-books-cB70SPAS0eo"
+              target="_blank"
+              rel="noopener noreferrer"
+              className={styles.photoCredit}
+            >
+              Photo: Hendrik Schuette / Unsplash
+            </a>
+          </div>
         </div>
       </section>
 
