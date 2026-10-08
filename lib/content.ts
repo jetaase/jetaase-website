@@ -21,9 +21,12 @@ export const EDITABLE_PATHS = [BOARD_PATH, REPS_PATH];
 
 const CONTENT_DIR = join(process.cwd(), "content");
 
+export function readRaw(file: string): string {
+  return readFileSync(join(CONTENT_DIR, file), "utf8");
+}
+
 function readSorted<T extends { order: number }>(file: string): T[] {
-  const raw = readFileSync(join(CONTENT_DIR, file), "utf8");
-  const items = JSON.parse(raw) as T[];
+  const items = JSON.parse(readRaw(file)) as T[];
   return items.slice().sort((a, b) => a.order - b.order);
 }
 

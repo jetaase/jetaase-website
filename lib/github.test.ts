@@ -1,49 +1,92 @@
 import { describe, it, expect, vi } from "vitest";
-import { buildPutBody, getFileSha, commitFile } from "./github";
+import { createBlob, getHeadSha, getFileAt, commitTree, updateRef } from "./github";
 
-describe("buildPutBody", () => {
-  it("base64-encodes content and omits sha when absent", () => {
-    const body = buildPutBody({ contentUtf8: "hi", message: "m", branch: "main" });
-    expect(body).toEqual({
-      message: "m", branch: "main",
-      content: Buffer.from("hi", "utf8").toString("base64"),
-    });
-    expect("sha" in body).toBe(false);
-  });
-  it("includes sha when provided", () => {
-    const body = buildPutBody({ contentUtf8: "hi", message: "m", branch: "main", sha: "abc" });
-    expect((body as any).sha).toBe("abc");
-  });
-});
+const R = { owner: "o", repo: "r", branch: "main", token: "t" };
+const json = (status: number, body: unknown) =>
+  ({ status, ok: status >= 200 && status < 300, json: async () => body });
 
-describe("getFileSha", () => {
-  const args = { owner: "o", repo: "r", path: "content/board.json", branch: "main", token: "t" };
-  it("returns sha on 200", async () => {
-    const fetchImpl = vi.fn().mockResolvedValue({ status: 200, ok: true, json: async () => ({ sha: "SHA1" }) });
-    expect(await getFileSha(fetchImpl, args)).toBe("SHA1");
-    expect(fetchImpl).toHaveBeenCalledWith(
-      "https://api.github.com/repos/o/r/contents/content/board.json?ref=main",
-      expect.objectContaining({ headers: expect.objectContaining({ Authorization: "Bearer t" }) }),
+describe("createBlob", () => {
+  it("posts base64 content and returns the sha", async () => {
+    const f = vi.fn().mockResolvedValue(json(201, { sha: "BLOB1" }));
+    expect(await createBlob(f, R, "AAEC")).toBe("BLOB1");
+    expect(f).toHaveBeenCalledWith(
+      "https://api.github.com/repos/o/r/git/blobs",
+      expect.objectContaining({ method: "POST", body: JSON.stringify({ content: "AAEC", encoding: "base64" }) }),
     );
   });
-  it("returns null on 404", async () => {
-    const fetchImpl = vi.fn().mockResolvedValue({ status: 404, ok: false, json: async () => ({}) });
-    expect(await getFileSha(fetchImpl, args)).toBeNull();
+  it("throws on failure", async () => {
+    const f = vi.fn().mockResolvedValue(json(500, {}));
+    await expect(createBlob(f, R, "AAEC")).rejects.toThrow("createBlob failed: 500");
   });
 });
 
-describe("commitFile", () => {
-  it("fetches sha then PUTs with it and returns commit url", async () => {
-    const fetchImpl = vi.fn()
-      .mockResolvedValueOnce({ status: 200, ok: true, json: async () => ({ sha: "OLD" }) })
-      .mockResolvedValueOnce({ status: 200, ok: true, json: async () => ({ commit: { html_url: "https://github.com/commit/1" } }) });
-    const out = await commitFile(fetchImpl, {
-      owner: "o", repo: "r", path: "content/board.json", branch: "main",
-      token: "t", contentUtf8: "[]", message: "update",
+describe("getHeadSha", () => {
+  it("reads the branch ref", async () => {
+    const f = vi.fn().mockResolvedValue(json(200, { object: { sha: "HEAD1" } }));
+    expect(await getHeadSha(f, R)).toBe("HEAD1");
+    expect(f.mock.calls[0][0]).toBe("https://api.github.com/repos/o/r/git/ref/heads/main");
+  });
+});
+
+describe("getFileAt", () => {
+  it("returns sha and decoded text", async () => {
+    const f = vi.fn().mockResolvedValue(json(200, { sha: "S", content: Buffer.from("[1]\n").toString("base64") }));
+    expect(await getFileAt(f, R, "content/board.json", "HEAD1")).toEqual({ sha: "S", text: "[1]\n" });
+    expect(f.mock.calls[0][0]).toBe("https://api.github.com/repos/o/r/contents/content/board.json?ref=HEAD1");
+  });
+  it("returns null on 404", async () => {
+    const f = vi.fn().mockResolvedValue(json(404, {}));
+    expect(await getFileAt(f, R, "x", "HEAD1")).toBeNull();
+  });
+  it("throws on other errors", async () => {
+    const f = vi.fn().mockResolvedValue(json(403, {}));
+    await expect(getFileAt(f, R, "x", "HEAD1")).rejects.toThrow("getFileAt failed: 403");
+  });
+});
+
+describe("commitTree", () => {
+  it("builds a tree on the parent's tree and creates a commit", async () => {
+    const f = vi.fn()
+      .mockResolvedValueOnce(json(200, { tree: { sha: "BASETREE" } }))
+      .mockResolvedValueOnce(json(201, { sha: "NEWTREE" }))
+      .mockResolvedValueOnce(json(201, { sha: "C2", html_url: "u" }));
+    const out = await commitTree(f, R, {
+      parent: "C1",
+      message: "m",
+      entries: [
+        { path: "content/board.json", content: "[]\n" },
+        { path: "public/images/uploads/board/a-20261008-a1b2.jpg", sha: "BLOB1" },
+        { path: "public/images/uploads/board/old-20261001-ffff.jpg", sha: null },
+      ],
     });
-    expect(out.commitUrl).toBe("https://github.com/commit/1");
-    const putCall = fetchImpl.mock.calls[1];
-    expect(putCall[1].method).toBe("PUT");
-    expect(JSON.parse(putCall[1].body).sha).toBe("OLD");
+    expect(out).toEqual({ sha: "C2", commitUrl: "u" });
+    expect(f.mock.calls[0][0]).toBe("https://api.github.com/repos/o/r/git/commits/C1");
+    const treeBody = JSON.parse(f.mock.calls[1][1].body);
+    expect(treeBody).toEqual({
+      base_tree: "BASETREE",
+      tree: [
+        { path: "content/board.json", mode: "100644", type: "blob", content: "[]\n" },
+        { path: "public/images/uploads/board/a-20261008-a1b2.jpg", mode: "100644", type: "blob", sha: "BLOB1" },
+        { path: "public/images/uploads/board/old-20261001-ffff.jpg", mode: "100644", type: "blob", sha: null },
+      ],
+    });
+    expect(JSON.parse(f.mock.calls[2][1].body)).toEqual({ message: "m", tree: "NEWTREE", parents: ["C1"] });
+  });
+});
+
+describe("updateRef", () => {
+  it("fast-forwards without force", async () => {
+    const f = vi.fn().mockResolvedValue(json(200, {}));
+    expect(await updateRef(f, R, "C2")).toBe("ok");
+    expect(f.mock.calls[0][0]).toBe("https://api.github.com/repos/o/r/git/refs/heads/main");
+    expect(JSON.parse(f.mock.calls[0][1].body)).toEqual({ sha: "C2", force: false });
+  });
+  it("reports a non-fast-forward on 422", async () => {
+    const f = vi.fn().mockResolvedValue(json(422, { message: "Update is not a fast forward" }));
+    expect(await updateRef(f, R, "C2")).toBe("not-fast-forward");
+  });
+  it("throws on other errors", async () => {
+    const f = vi.fn().mockResolvedValue(json(500, {}));
+    await expect(updateRef(f, R, "C2")).rejects.toThrow("updateRef failed: 500");
   });
 });
