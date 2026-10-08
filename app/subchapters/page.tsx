@@ -18,6 +18,8 @@ type Subchapter = {
   email: string;
   photo: string;
   photoAlt: string;
+  // Unsplash photographer and photo page, shown as a small credit.
+  photoCredit?: { name: string; href: string };
   badge?: string;
   facebook: string;
   facebookLabel?: string;
@@ -33,8 +35,12 @@ const SUBCHAPTERS: Subchapter[] = [
     state: "Georgia",
     abbr: "GA",
     email: "georgia@jetaase.org",
-    photo: "/images/5d847643-a9ef-4e82-aac5-6b577e2f00c1.jpg",
-    photoAlt: "Atlanta skyline",
+    photo: "/images/atlanta-skyline.jpg",
+    photoAlt: "Aerial view of downtown Atlanta lit up at night",
+    photoCredit: {
+      name: "Venti Views",
+      href: "https://unsplash.com/photos/an-aerial-view-of-a-city-at-night-F2PrSHG2nEk",
+    },
     badge: "MAIN CHAPTER",
     facebook: "https://www.facebook.com/jetaase",
     facebookLabel: "Follow JETAASE on Facebook →",
@@ -47,16 +53,24 @@ const SUBCHAPTERS: Subchapter[] = [
     state: "Alabama",
     abbr: "AL",
     email: "alabama@jetaase.org",
-    photo: "/images/d1f73aa2-a357-4bae-b201-6a2bcd57e360.jpg",
-    photoAlt: "Birmingham skyline",
+    photo: "/images/birmingham-skyline.jpg",
+    photoAlt: "Downtown Birmingham skyline reflected in a still pond at dusk",
+    photoCredit: {
+      name: "Zachary Farmer",
+      href: "https://unsplash.com/photos/landscape-photography-of-cityscape-by-water-TkunxoS98q0",
+    },
     facebook: "https://www.facebook.com/groups/jetaaseal/",
   },
   {
     state: "North Carolina",
     abbr: "NC",
     email: "northcarolina@jetaase.org",
-    photo: "/images/fbda0319-db81-414a-a148-ca51d98aa62e.jpg",
-    photoAlt: "Charlotte skyline or Blue Ridge Parkway",
+    photo: "/images/charlotte-skyline.jpg",
+    photoAlt: "Uptown Charlotte skyline under storm clouds at sunset",
+    photoCredit: {
+      name: "Daniel Weiss",
+      href: "https://unsplash.com/photos/birds-eye-view-of-city-aj2Os9mYgJU",
+    },
     facebook: "https://www.facebook.com/groups/jetaasenc/",
     facebookLabel: "Join the NC Facebook group →",
     cityGroups: [
@@ -72,8 +86,12 @@ const SUBCHAPTERS: Subchapter[] = [
     state: "South Carolina",
     abbr: "SC",
     email: "southcarolina@jetaase.org",
-    photo: "/images/7e7c8c7a-4da4-48c5-a5cd-e66710e0f772.jpg",
-    photoAlt: "Charleston — Rainbow Row or Ravenel Bridge",
+    photo: "/images/charleston-bridge.jpg",
+    photoAlt: "Aerial view of the Ravenel Bridge spanning the Cooper River in Charleston",
+    photoCredit: {
+      name: "David Martin",
+      href: "https://unsplash.com/photos/aerial-photo-of-bridge-during-daytime-p9vBVq_-nXY",
+    },
     facebook: "https://www.facebook.com/groups/jetaase.sc/",
   },
 ];
@@ -106,6 +124,16 @@ export default function SubchaptersPage() {
                 <div className={styles.cardPhotoWrap}>
                   <img src={sc.photo} alt={sc.photoAlt} className={styles.cardPhoto} />
                   {sc.badge && <span className={styles.cardBadge}>{sc.badge}</span>}
+                  {sc.photoCredit && (
+                    <a
+                      href={sc.photoCredit.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className={styles.photoCredit}
+                    >
+                      Photo: {sc.photoCredit.name} / Unsplash
+                    </a>
+                  )}
                 </div>
                 <div className={styles.cardBody}>
                   <h2 className={styles.cardTitle}>{sc.state}</h2>

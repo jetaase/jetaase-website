@@ -38,10 +38,18 @@ export default function Home() {
           </div>
           <div className={styles.heroImageWrap}>
             <img
-              src="/images/f4a88848-19c8-4520-895d-ce73e7d1b0fc.jpg"
-              alt="Vermilion bridge and temple set in green hills in Japan"
+              src="/images/minoo-bridge.jpg"
+              alt="Vermilion bridge in front of Ryūan-ji temple in the green hills of Minoo, Osaka"
               className={styles.heroImage}
             />
+            <a
+              href="https://unsplash.com/photos/a-red-bridge-crosses-over-a-river-in-front-of-a-building-tuqFwFEM3Io"
+              target="_blank"
+              rel="noopener noreferrer"
+              className={styles.photoCredit}
+            >
+              Photo: Pourya Gohari / Unsplash
+            </a>
           </div>
         </div>
       </section>

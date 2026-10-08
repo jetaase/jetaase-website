@@ -24,7 +24,7 @@ export default function WhoWeArePage() {
       <section className={styles.banner}>
         <div className={styles.bannerFrame}>
           <img
-            src="/images/c73dcaa0-6fc4-4039-a893-ed67663c1377.jpg"
+            src="/images/consulate-group-photo.jpg"
             alt="JETAASE members at the Consulate General of Japan in Atlanta"
             className={styles.bannerImg}
           />

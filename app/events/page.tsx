@@ -22,11 +22,19 @@ export default function EventsPage() {
         <div className={styles.featuredGrid}>
           <div className={styles.featuredPhotoWrap}>
             <img
-              src="/images/f9194416-27d7-406f-bb85-9cb891315c7b.jpg"
-              alt="Featured event photo"
+              src="/images/atlanta-skyline.jpg"
+              alt="Aerial view of downtown Atlanta lit up at night"
               className={styles.featuredPhoto}
             />
             <span className={styles.featuredBadge}>NEXT UP</span>
+            <a
+              href="https://unsplash.com/photos/an-aerial-view-of-a-city-at-night-F2PrSHG2nEk"
+              target="_blank"
+              rel="noopener noreferrer"
+              className={styles.photoCredit}
+            >
+              Photo: Venti Views / Unsplash
+            </a>
           </div>
           <div className={styles.featuredBody}>
             <div className={styles.featuredDate}>SAT · AUG 09 · 2:00 PM</div>
