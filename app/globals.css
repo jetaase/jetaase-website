@@ -12,4 +12,7 @@ body {
 
 a { text-decoration: none; color: inherit; }
 
+/* Keep anchor targets (e.g. /resources#careers) clear of the sticky header. */
+[id] { scroll-margin-top: 100px; }
+
 img { max-width: 100%; display: block; }

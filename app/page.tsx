@@ -195,7 +195,7 @@ export default function Home() {
             </p>
           </div>
           <div className={styles.resourcesGrid}>
-            <a href="#" className={styles.resourceCard}>
+            <Link href="/resources#japanese" className={styles.resourceCard}>
               <span className={styles.resourceIcon}>
                 <svg
                   width="24"
@@ -219,8 +219,13 @@ export default function Home() {
               <span className={styles.resourceDesc}>
                 Apps, meetups, and reading to stay sharp.
               </span>
-            </a>
-            <a href="#" className={styles.resourceCard}>
+            </Link>
+            <a
+              href="https://jetprogramme.org/en/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className={styles.resourceCard}
+            >
               <span className={styles.resourceIcon}>
                 <svg
                   width="24"
@@ -241,10 +246,10 @@ export default function Home() {
               </span>
               <span className={styles.resourceTitle}>Applying to JET</span>
               <span className={styles.resourceDesc}>
-                Timelines, interview tips, and alumni advice.
+                Eligibility, timelines, and how to apply.
               </span>
             </a>
-            <a href="#" className={styles.resourceCard}>
+            <Link href="/resources#careers" className={styles.resourceCard}>
               <span className={styles.resourceIcon}>
                 <svg
                   width="24"
@@ -264,8 +269,8 @@ export default function Home() {
               <span className={styles.resourceDesc}>
                 Japan-related roles and the JETAA job board.
               </span>
-            </a>
-            <a href="#" className={styles.resourceCard}>
+            </Link>
+            <Link href="/resources#culture" className={styles.resourceCard}>
               <span className={styles.resourceIcon}>
                 <svg
                   width="24"
@@ -283,9 +288,9 @@ export default function Home() {
               </span>
               <span className={styles.resourceTitle}>Culture near you</span>
               <span className={styles.resourceDesc}>
-                Festivals, consulate events, and matsuri.
+                Festivals, cultural events, and matsuri.
               </span>
-            </a>
+            </Link>
           </div>
         </div>
       </section>

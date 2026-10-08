@@ -147,10 +147,6 @@
   justify-content: center;
   flex-shrink: 0;
 }
-.iconApplying {
-  background: #fbe3e4;
-  color: var(--red);
-}
 .iconJapanese {
   background: #e5efff;
   color: #3f6fbf;
@@ -242,6 +238,12 @@
   flex-direction: column;
   justify-content: center;
 }
+/* In the culture band the icon stacks above the title instead of sitting
+   beside it like the other category headers. */
+.cultureCopy > .categoryIcon {
+  align-self: flex-start;
+  margin-bottom: 18px;
+}
 .cultureTitle {
   font-family: var(--font-serif);
   font-weight: 500;
@@ -328,7 +330,7 @@
   margin: 0;
 }
 
-/* STICKY TOOLBAR — static visual port, no filtering JS wired */
+/* STICKY TOOLBAR (search + category chips, wired in Directory.tsx) */
 .toolbar {
   position: sticky;
   top: 81px;
@@ -372,12 +374,6 @@
   border-radius: 999px;
   padding: 13px 18px 13px 44px;
   outline: none;
-}
-.resultCount {
-  font-family: var(--font-mono);
-  font-size: 13px;
-  color: #7a715e;
-  white-space: nowrap;
 }
 .chipsRow {
   display: flex;
@@ -559,4 +555,31 @@
   border-radius: 999px;
   white-space: nowrap;
   display: inline-block;
+}
+
+/* Directory filtering */
+.noResults {
+  font-size: 15px;
+  color: var(--ink-muted);
+  padding: 8px 0 44px;
+  margin: 0;
+}
+.clearBtn {
+  font: inherit;
+  font-weight: 700;
+  color: var(--red);
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+}
+.clearBtn:hover {
+  text-decoration: underline;
+}
+@media (max-width: 768px) {
+  /* The header wraps taller on phones and the chips wrap to several rows,
+     so a sticky toolbar would cover too much of the screen. */
+  .toolbar {
+    position: static;
+  }
 }

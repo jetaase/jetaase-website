@@ -59,7 +59,7 @@ export default function WhoWeArePage() {
               we&apos;re always looking to share our JET experience with
               anyone, especially those interested in applying to the{" "}
               <a
-                href="http://www.jetprogramme.org/"
+                href="https://jetprogramme.org/en/"
                 className={styles.welcomeLink}
               >
                 JET Program

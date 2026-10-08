@@ -1,118 +1,167 @@
 import Link from "next/link";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import Directory, { type DirCategory, type DirEntry } from "./Directory";
 import styles from "./page.module.css";
 
-const STATE_FACT_SHEETS = [
-  "Japan in Alabama",
-  "Japan in Georgia",
-  "Japan in North Carolina",
-  "Japan in South Carolina",
+// Directory compiled by the Consulate-General of Japan in Atlanta.
+// Most entries link to its pages; a few point to other organizations.
+const CONSULATE = "https://www.atlanta.us.emb-japan.go.jp";
+
+const c = (name: string, page: string): DirEntry => ({ name, href: `${CONSULATE}/${page}` });
+
+const STATE_FACT_SHEETS: DirEntry[] = [
+  c("Japan in Alabama", "japanalabama.html"),
+  c("Japan in Georgia", "japangeorgia.html"),
+  c("Japan in North Carolina", "japannorthcarolina.html"),
+  c("Japan in South Carolina", "japansouthcarolina.html"),
 ];
 
-const ARTS_CULTURE = [
-  "Ame-saiku (candy sculpting)",
-  "Anime and Manga",
-  "Antiques / Appraisals",
-  "Architecture and Carpentry",
-  "Bamboo and Asian Plants",
-  "Beauty Salons",
-  "Bonsai",
-  "Books",
-  "Calligraphy & Sumi-e",
-  "Cooking",
-  "Dolls",
-  "Embroidery",
-  "Films and Videos",
-  "Galleries and Museums",
-  "Games",
-  "Gardens and Gardening",
-  "Grocery Stores and Housewares",
-  "Haiku",
-  "Ikebana (flower arranging)",
-  "Incense",
-  "Japanese Dance",
-  "Kimono and Fashion",
-  "Koi",
-  "Martial Arts",
-  "Paper Arts (origami, washi)",
-  "Tea Ceremony",
-  "Western Music and Dance",
+const ARTS_CULTURE: DirEntry[] = [
+  c("Ame-saiku (candy sculpting)", "candy.html"),
+  c("Anime and Manga", "animation.html"),
+  c("Antiques / Appraisals", "antiques.html"),
+  c("Architecture and Carpentry", "architecture.html"),
+  c("Bamboo and Asian Plants", "bamboo.html"),
+  c("Beauty Salons", "beautysalons.html"),
+  c("Bonsai", "bonsai.html"),
+  c("Books", "books.html"),
+  c("Calligraphy & Sumi-e", "calligraphy.html"),
+  c("Cooking", "cooking.html"),
+  c("Dolls", "dolls.html"),
+  c("Embroidery", "embroidery.html"),
+  c("Films and Videos", "films.html"),
+  c("Galleries and Museums", "galleries.html"),
+  c("Games", "games.html"),
+  c("Gardens and Gardening", "gardens.html"),
+  c("Grocery Stores and Housewares", "grocerystores.html"),
+  c("Haiku", "haiku.html"),
+  c("Ikebana (flower arranging)", "ikebana.html"),
+  c("Incense", "incense.html"),
+  c("Japanese Dance", "dance.html"),
+  c("Kimono and Fashion", "kimono.html"),
+  c("Koi", "koi.html"),
+  c("Martial Arts", "martialarts.html"),
+  c("Paper Arts (origami, washi)", "paperarts.html"),
+  c("Tea Ceremony", "teaceremony.html"),
+  c("Western Music and Dance", "westernmusic.html"),
 ];
 
-const ASSOCIATIONS = [
-  "Japanese Embassies and Consulates Around the World",
-  "Japan-related Organizations in the Southeast",
-  "Sister City Organizations in the Southeast",
-  "Trade and Business Organizations in the Southeast",
+const ASSOCIATIONS: DirEntry[] = [
+  c("Japanese Embassies and Consulates Around the World", "consulates.html"),
+  c("Japan-related Organizations in the Southeast", "jpnrelatedorg.html"),
+  c("Sister City Organizations in the Southeast", "sistercities.html"),
+  c("Trade and Business Organizations in the Southeast", "tradebusiness.html"),
 ];
 
-const EDU_K12 = [
-  "Japanese Daycare Centers in the Southeast",
-  "Japanese Language Saturday Schools in the Southeast",
-  "Elementary and High Schools with Japanese Language Programs",
-  "Japanese Culture Summer Camps in the Southeast",
-  "Scholarships, Study Abroad & Exchange (K-12)",
-  "Resources on Japanese Culture for Teachers",
-  "Finding a Pen Pal in Japan (PDF)",
+const EDU_K12: DirEntry[] = [
+  c("Japanese Daycare Centers in the Southeast", "daycares.html"),
+  c("Japanese Language Saturday Schools in the Southeast", "nihongo/shisetsulist.html"),
+  c("Elementary and High Schools with Japanese Language Programs", "highschools.html"),
+  c("Japanese Culture Summer Camps in the Southeast", "summercamp.html"),
+  c("Scholarships, Study Abroad & Exchange (K-12)", "k12grants.html"),
+  c("Resources on Japanese Culture for Teachers", "teacherresources.html"),
 ];
 
-const EDU_UNIVERSITY = [
-  "Colleges & Universities with Japanese Language Programs",
-  "Japan Foundation Directory of Japanese-Language Institutions (US)",
+const EDU_UNIVERSITY: DirEntry[] = [
+  c("Colleges & Universities with Japanese Language Programs", "colleges.html"),
+  {
+    name: "Japan Foundation Directory of Japanese-Language Institutions",
+    href: "https://www.jpf.go.jp/e/project/japanese/survey/area/",
+  },
 ];
 
-const EDU_GENERAL = [
-  "Japanese Language Classes in the Southeast",
-  "Resources for Japanese Language Students and Teachers",
-  "ESL Schools and Tutors for Japanese Speakers",
+const EDU_GENERAL: DirEntry[] = [
+  c("Japanese Language Classes in the Southeast", "japaneseclasses.html"),
+  c("Resources for Japanese Language Students and Teachers", "japaneselearningtools.html"),
+  c("ESL Schools and Tutors for Japanese Speakers", "eslschools.html"),
 ];
 
-const EDU_CAREER = [
-  "Internships in Japan",
-  "Teaching English in Japan",
-  "Non-Teaching Jobs in Japan",
-  "Japan-Related Jobs in the United States",
+const EDU_CAREER: DirEntry[] = [
+  c("Internships in Japan", "internship.html"),
+  c("Teaching English in Japan", "teaching.html"),
+  c("Non-Teaching Jobs in Japan", "nonteaching.html"),
+  c("Japan-Related Jobs in the United States", "career.html"),
 ];
 
-const ENTERTAINMENT = [
-  "Japanese-style Accommodations in the U.S.",
-  "Annual Japan-related Events",
-  "Japanese Restaurants",
-  "Karaoke",
+const ENTERTAINMENT: DirEntry[] = [
+  c("Japanese-style Accommodations in the U.S.", "accomodations.html"),
+  c("Annual Japan-related Events", "events.html"),
+  c("Japanese Restaurants", "restaurants.html"),
+  c("Karaoke", "karaoke.html"),
 ];
 
-const MEDIA = [
-  "NA Coordinating Council on Japanese Library Resources (NCC)",
-  "Electronic Information and Databases",
-  "English Language Newspapers",
-  "English Language Periodicals (Duke University list)",
-  "Japanese Language Newspapers",
-  "Japanese Language Periodicals",
-  "Television Programming in Japanese",
+const MEDIA: DirEntry[] = [
+  {
+    name: "NA Coordinating Council on Japanese Library Resources (NCC)",
+    href: "https://guides.nccjapan.org/homepage",
+  },
+  c("Electronic Information and Databases", "databases.html"),
+  c("English Language Newspapers", "englishnewspapers.html"),
+  {
+    name: "Japanese Studies Research Guide (Duke University)",
+    href: "https://guides.library.duke.edu/japan",
+  },
+  c("Japanese Language Newspapers", "japanesenewspapers.html"),
+  c("Japanese Language Periodicals", "japaneseperiodicals.html"),
+  c("Television Programming in Japanese", "television.html"),
 ];
 
-const SERVICES = [
-  "Currency Exchange",
-  "Health and Medical Services",
-  "Interpreters and Translators",
-  "Printing Services",
+const SERVICES: DirEntry[] = [
+  c("Currency Exchange", "currencyexchange.html"),
+  c("Health and Medical Services", "health.html"),
+  c("Interpreters and Translators", "interpreters.html"),
+  c("Printing Services", "printing.html"),
 ];
 
-function DirItem({ name }: { name: string }) {
-  return (
-    <a
-      className={styles.dirItem}
-      href="#"
-      target="_blank"
-      rel="noopener"
-      data-name={name.toLowerCase()}
-    >
-      <span className={styles.dirMark} />
-      {name}
-    </a>
-  );
-}
+// Event calendars for each state's Japan-America society.
+const CULTURE_LINKS = [
+  {
+    name: "Japan-America Society of Georgia",
+    href: "https://www.jasgeorgia.org/page-18213?EventViewMode=1&EventListViewMode=1",
+  },
+  { name: "Japan-America Society of Alabama", href: "https://japanalabama.com/Events" },
+  { name: "Japan-America Society of North Carolina", href: "https://www.jasnc.org/calendar" },
+  { name: "Japan-America Association of South Carolina", href: "https://jaasc.org/events/" },
+];
+
+const DIRECTORY: DirCategory[] = [
+  {
+    id: "state", chip: "State fact sheets", title: "State fact sheets", columns: 3,
+    groups: [{ entries: STATE_FACT_SHEETS }],
+  },
+  {
+    id: "arts", chip: "Arts & culture", title: "Arts & culture", columns: 3,
+    groups: [{ entries: ARTS_CULTURE }],
+  },
+  {
+    id: "associations", chip: "Associations & gov",
+    title: "Associations & government agencies", columns: 2,
+    groups: [{ entries: ASSOCIATIONS }],
+  },
+  {
+    id: "education", chip: "Education & careers",
+    title: "Education & career resources", columns: 2,
+    groups: [
+      { label: "K-12 level", entries: EDU_K12 },
+      { label: "University level", entries: EDU_UNIVERSITY },
+      { label: "General language study", entries: EDU_GENERAL },
+      { label: "Career resources", entries: EDU_CAREER },
+    ],
+  },
+  {
+    id: "entertainment", chip: "Entertainment", title: "Entertainment", columns: 2,
+    groups: [{ entries: ENTERTAINMENT }],
+  },
+  {
+    id: "media", chip: "Media", title: "Media", columns: 2,
+    groups: [{ entries: MEDIA }],
+  },
+  {
+    id: "services", chip: "Services", title: "Services", columns: 3,
+    groups: [{ entries: SERVICES }],
+  },
+];
 
 export default function ResourcesPage() {
   return (
@@ -139,7 +188,7 @@ export default function ResourcesPage() {
       <section className={styles.featured}>
         <div className={styles.featuredGrid}>
           <a
-            href="http://www.jetprogramme.org/"
+            href="https://jetprogramme.org/en/"
             target="_blank"
             rel="noopener"
             className={styles.featuredCardRed}
@@ -175,82 +224,8 @@ export default function ResourcesPage() {
         </div>
       </section>
 
-      {/* CATEGORY: APPLYING */}
-      <section className={styles.category}>
-        <div className={styles.categoryHeader}>
-          <span className={`${styles.categoryIcon} ${styles.iconApplying}`}>
-            <svg
-              width="22"
-              height="22"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            >
-              <path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"></path>
-              <path d="M14 2v4a2 2 0 0 0 2 2h4"></path>
-              <path d="M16 13H8"></path>
-              <path d="M16 17H8"></path>
-              <path d="M10 9H8"></path>
-            </svg>
-          </span>
-          <div>
-            <h2 className={styles.categoryTitle}>Applying to JET</h2>
-            <p className={styles.categorySubtitle}>
-              Timelines, interview prep, and the offices that run it all.
-            </p>
-          </div>
-        </div>
-        <div className={styles.categoryGrid3}>
-          <a
-            href="https://www.us.emb-japan.go.jp/jetprogram/"
-            target="_blank"
-            rel="noopener"
-            className={styles.linkCard}
-          >
-            <span className={styles.linkCardTitle}>
-              Embassy of Japan, JET info
-            </span>
-            <span className={styles.linkCardDesc}>
-              US application portal, deadlines, and required documents.
-            </span>
-            <span className={styles.linkCardArrow}>↗</span>
-          </a>
-          <a
-            href="https://www.atlanta.us.emb-japan.go.jp/"
-            target="_blank"
-            rel="noopener"
-            className={styles.linkCard}
-          >
-            <span className={styles.linkCardTitle}>
-              Consulate General, Atlanta
-            </span>
-            <span className={styles.linkCardDesc}>
-              Our regional interview point for AL, GA, NC &amp; SC
-              applicants.
-            </span>
-            <span className={styles.linkCardArrow}>↗</span>
-          </a>
-          <a
-            href="https://www.clair.or.jp/e/"
-            target="_blank"
-            rel="noopener"
-            className={styles.linkCard}
-          >
-            <span className={styles.linkCardTitle}>CLAIR</span>
-            <span className={styles.linkCardDesc}>
-              The Japanese body that administers JET and supports
-              participants.
-            </span>
-            <span className={styles.linkCardArrow}>↗</span>
-          </a>
-        </div>
-      </section>
-
       {/* CATEGORY: JAPANESE */}
-      <section className={`${styles.category} ${styles.categoryTight}`}>
+      <section id="japanese" className={styles.category}>
         <div className={styles.categoryHeader}>
           <span className={`${styles.categoryIcon} ${styles.iconJapanese}`}>
             <svg
@@ -332,7 +307,7 @@ export default function ResourcesPage() {
       </section>
 
       {/* CATEGORY: CAREERS */}
-      <section className={`${styles.category} ${styles.categoryTight}`}>
+      <section id="careers" className={`${styles.category} ${styles.categoryTight}`}>
         <div className={styles.categoryHeader}>
           <span className={`${styles.categoryIcon} ${styles.iconCareers}`}>
             <svg
@@ -382,7 +357,7 @@ export default function ResourcesPage() {
             <span className={styles.linkCardArrow}>↗</span>
           </a>
           <a
-            href="https://www.jasgeorgia.org/"
+            href="https://www.jasgeorgia.org/Job-Bank"
             target="_blank"
             rel="noopener"
             className={styles.linkCard}
@@ -399,7 +374,7 @@ export default function ResourcesPage() {
       </section>
 
       {/* CULTURE BAND w/ PHOTO */}
-      <section className={styles.cultureSection}>
+      <section id="culture" className={styles.cultureSection}>
         <div className={styles.cultureBand}>
           <div className={styles.cultureCopy}>
             <span className={`${styles.categoryIcon} ${styles.iconCulture}`}>
@@ -419,38 +394,23 @@ export default function ResourcesPage() {
             </span>
             <h2 className={styles.cultureTitle}>Culture near you</h2>
             <p className={styles.cultureText}>
-              Festivals, consulate events, and matsuri across the Southeast
-              so you never have to miss home.
+              Festivals, cultural events, and matsuri across the Southeast
+              so you never have to miss home. Each state&apos;s Japan-America
+              society keeps a calendar of what&apos;s coming up.
             </p>
             <div className={styles.cultureLinks}>
-              <a
-                href="https://www.atlanta.us.emb-japan.go.jp/"
-                target="_blank"
-                rel="noopener"
-                className={styles.cultureLinkCard}
-              >
-                <span className={styles.cultureLinkTitle}>
-                  Consulate cultural events
-                </span>
-                <span className={styles.linkCardArrow}>↗</span>
-              </a>
-              <a
-                href="https://www.japanfest.org/"
-                target="_blank"
-                rel="noopener"
-                className={styles.cultureLinkCard}
-              >
-                <span className={styles.cultureLinkTitle}>
-                  JapanFest Atlanta
-                </span>
-                <span className={styles.linkCardArrow}>↗</span>
-              </a>
-              <Link href="/events" className={styles.cultureLinkCard}>
-                <span className={styles.cultureLinkTitle}>
-                  JETAASE events calendar
-                </span>
-                <span className={styles.linkCardArrow}>→</span>
-              </Link>
+              {CULTURE_LINKS.map((l) => (
+                <a
+                  key={l.href}
+                  href={l.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={styles.cultureLinkCard}
+                >
+                  <span className={styles.cultureLinkTitle}>{l.name}</span>
+                  <span className={styles.linkCardArrow}>↗</span>
+                </a>
+              ))}
             </div>
           </div>
           <div className={styles.culturePhotoWrap} />
@@ -466,197 +426,14 @@ export default function ResourcesPage() {
               Directory of Japan-related resources
             </h2>
             <p className={styles.directoryText}>
-              Hundreds of listings across the Southeast, compiled by the
+              Dozens of listings across the Southeast, compiled by the
               Consulate-General of Japan in Atlanta. Search by name or
               filter by category to jump straight to what you need.
             </p>
           </div>
         </div>
 
-        {/* STICKY TOOLBAR — static visual port, no filtering JS wired */}
-        <div className={styles.toolbar}>
-          <div className={styles.toolbarInner}>
-            <div className={styles.toolbarRow}>
-              <div className={styles.searchWrap}>
-                <span className={styles.searchIcon}>
-                  <svg
-                    width="18"
-                    height="18"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  >
-                    <circle cx="11" cy="11" r="8"></circle>
-                    <path d="m21 21-4.3-4.3"></path>
-                  </svg>
-                </span>
-                <input
-                  id="dir-search"
-                  type="text"
-                  placeholder="Search 200+ resources, e.g. bonsai, restaurants, jobs"
-                  className={styles.searchInput}
-                />
-              </div>
-              <div className={styles.resultCount} />
-            </div>
-            <div className={styles.chipsRow}>
-              <button
-                type="button"
-                className={`${styles.chip} ${styles.chipActive}`}
-              >
-                All
-              </button>
-              <button type="button" className={styles.chip}>
-                State fact sheets
-              </button>
-              <button type="button" className={styles.chip}>
-                Arts &amp; culture
-              </button>
-              <button type="button" className={styles.chip}>
-                Associations &amp; gov
-              </button>
-              <button type="button" className={styles.chip}>
-                Education &amp; careers
-              </button>
-              <button type="button" className={styles.chip}>
-                Entertainment
-              </button>
-              <button type="button" className={styles.chip}>
-                Media
-              </button>
-              <button type="button" className={styles.chip}>
-                Services
-              </button>
-            </div>
-          </div>
-        </div>
-
-        {/* DIRECTORY BODY */}
-        <div className={styles.directoryBody}>
-          <div className={styles.dirCat}>
-            <div className={styles.dirCatHeader}>
-              <h3 className={styles.dirCatTitle}>State fact sheets</h3>
-              <span className={styles.dirCatCount}>04</span>
-            </div>
-            <div className={styles.dirColumns3}>
-              {STATE_FACT_SHEETS.map((name) => (
-                <DirItem key={name} name={name} />
-              ))}
-            </div>
-          </div>
-
-          <div className={styles.dirCat}>
-            <div className={styles.dirCatHeader}>
-              <h3 className={styles.dirCatTitle}>Arts &amp; culture</h3>
-              <span className={styles.dirCatCount}>26</span>
-            </div>
-            <div className={styles.dirColumns3}>
-              {ARTS_CULTURE.map((name) => (
-                <DirItem key={name} name={name} />
-              ))}
-            </div>
-          </div>
-
-          <div className={styles.dirCat}>
-            <div className={styles.dirCatHeader}>
-              <h3 className={styles.dirCatTitle}>
-                Associations &amp; government agencies
-              </h3>
-              <span className={styles.dirCatCount}>04</span>
-            </div>
-            <div className={styles.dirColumns2}>
-              {ASSOCIATIONS.map((name) => (
-                <DirItem key={name} name={name} />
-              ))}
-            </div>
-          </div>
-
-          <div className={styles.dirCat}>
-            <div className={styles.dirCatHeader}>
-              <h3 className={styles.dirCatTitle}>
-                Education &amp; career resources
-              </h3>
-              <span className={styles.dirCatCount}>16</span>
-            </div>
-            <div className={styles.dirGroup}>
-              <div
-                className={`${styles.dirGroupLabel} ${styles.dirGroupLabelFirst}`}
-              >
-                K-12 level
-              </div>
-              <div className={styles.dirColumns2}>
-                {EDU_K12.map((name) => (
-                  <DirItem key={name} name={name} />
-                ))}
-              </div>
-            </div>
-            <div className={styles.dirGroup}>
-              <div className={styles.dirGroupLabel}>University level</div>
-              <div className={styles.dirColumns2}>
-                {EDU_UNIVERSITY.map((name) => (
-                  <DirItem key={name} name={name} />
-                ))}
-              </div>
-            </div>
-            <div className={styles.dirGroup}>
-              <div className={styles.dirGroupLabel}>
-                General language study
-              </div>
-              <div className={styles.dirColumns2}>
-                {EDU_GENERAL.map((name) => (
-                  <DirItem key={name} name={name} />
-                ))}
-              </div>
-            </div>
-            <div className={styles.dirGroup}>
-              <div className={styles.dirGroupLabel}>Career resources</div>
-              <div className={styles.dirColumns2}>
-                {EDU_CAREER.map((name) => (
-                  <DirItem key={name} name={name} />
-                ))}
-              </div>
-            </div>
-          </div>
-
-          <div className={styles.dirCat}>
-            <div className={styles.dirCatHeader}>
-              <h3 className={styles.dirCatTitle}>Entertainment</h3>
-              <span className={styles.dirCatCount}>04</span>
-            </div>
-            <div className={styles.dirColumns2}>
-              {ENTERTAINMENT.map((name) => (
-                <DirItem key={name} name={name} />
-              ))}
-            </div>
-          </div>
-
-          <div className={styles.dirCat}>
-            <div className={styles.dirCatHeader}>
-              <h3 className={styles.dirCatTitle}>Media</h3>
-              <span className={styles.dirCatCount}>07</span>
-            </div>
-            <div className={styles.dirColumns2}>
-              {MEDIA.map((name) => (
-                <DirItem key={name} name={name} />
-              ))}
-            </div>
-          </div>
-
-          <div className={styles.dirCat}>
-            <div className={styles.dirCatHeader}>
-              <h3 className={styles.dirCatTitle}>Services</h3>
-              <span className={styles.dirCatCount}>04</span>
-            </div>
-            <div className={styles.dirColumns3}>
-              {SERVICES.map((name) => (
-                <DirItem key={name} name={name} />
-              ))}
-            </div>
-          </div>
-        </div>
+        <Directory categories={DIRECTORY} />
       </section>
 
       {/* SUGGEST A LINK */}
