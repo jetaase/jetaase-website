@@ -123,14 +123,14 @@
   background: #fff;
   border: 1px solid #e6ddca;
   border-radius: 14px;
-  padding: 20px;
+  padding: 22px;
   display: flex;
   align-items: center;
-  gap: 14px;
+  gap: 18px;
 }
 .subchapterAvatar {
-  width: 64px;
-  height: 64px;
+  width: 88px;
+  height: 88px;
   border-radius: 50%;
   object-fit: cover;
   display: block;
@@ -152,21 +152,22 @@
 }
 .subchapterName {
   font-weight: 700;
-  font-size: 15px;
+  font-size: 17px;
+  margin-top: 2px;
 }
 .subchapterCity {
-  font-size: 13px;
+  font-size: 13.5px;
   font-weight: 600;
   color: var(--ink-muted);
   margin-top: 2px;
 }
 .subchapterPlacement {
-  font-size: 13px;
+  font-size: 13.5px;
   color: #6a6252;
   margin: 2px 0 4px;
 }
 .subchapterEmail {
-  font-size: 12px;
+  font-size: 13px;
 }
 
 /* CTA */
