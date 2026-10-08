@@ -1,6 +1,7 @@
 import Link from "next/link";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import { CULTURE_LINKS, CultureIcon } from "@/components/CultureBand";
 import Directory, { type DirCategory, type DirEntry } from "./Directory";
 import styles from "./page.module.css";
 
@@ -112,17 +113,6 @@ const SERVICES: DirEntry[] = [
   c("Health and Medical Services", "health.html"),
   c("Interpreters and Translators", "interpreters.html"),
   c("Printing Services", "printing.html"),
-];
-
-// Event calendars for each state's Japan-America society.
-const CULTURE_LINKS = [
-  {
-    name: "Japan-America Society of Georgia",
-    href: "https://www.jasgeorgia.org/page-18213?EventViewMode=1&EventListViewMode=1",
-  },
-  { name: "Japan-America Society of Alabama", href: "https://japanalabama.com/Events" },
-  { name: "Japan-America Society of North Carolina", href: "https://www.jasnc.org/calendar" },
-  { name: "Japan-America Association of South Carolina", href: "https://jaasc.org/events/" },
 ];
 
 const DIRECTORY: DirCategory[] = [
@@ -374,46 +364,35 @@ export default function ResourcesPage() {
       </section>
 
       {/* CULTURE BAND w/ PHOTO */}
-      <section id="culture" className={styles.cultureSection}>
-        <div className={styles.cultureBand}>
-          <div className={styles.cultureCopy}>
-            <span className={`${styles.categoryIcon} ${styles.iconCulture}`}>
-              <svg
-                width="22"
-                height="22"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              >
-                <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"></path>
-                <circle cx="12" cy="10" r="3"></circle>
-              </svg>
-            </span>
-            <h2 className={styles.cultureTitle}>Culture near you</h2>
-            <p className={styles.cultureText}>
-              Festivals, cultural events, and matsuri across the Southeast
-              so you never have to miss home. Each state&apos;s Japan-America
-              society keeps a calendar of what&apos;s coming up.
+      <section id="culture" className={`${styles.category} ${styles.categoryTight}`}>
+        <div className={styles.categoryHeader}>
+          <span className={`${styles.categoryIcon} ${styles.iconCulture}`}>
+            <CultureIcon />
+          </span>
+          <div>
+            <h2 className={styles.categoryTitle}>Culture near you</h2>
+            <p className={styles.categorySubtitle}>
+              Each state&apos;s Japan-America society brings Japanese culture
+              and community to the Southeast.
             </p>
-            <div className={styles.cultureLinks}>
-              {CULTURE_LINKS.map((l) => (
-                <a
-                  key={l.href}
-                  href={l.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className={styles.cultureLinkCard}
-                >
-                  <span className={styles.cultureLinkTitle}>{l.name}</span>
-                  <span className={styles.linkCardArrow}>↗</span>
-                </a>
-              ))}
-            </div>
           </div>
-          <div className={styles.culturePhotoWrap} />
+        </div>
+        <div className={styles.categoryGrid4}>
+          {CULTURE_LINKS.map((l) => (
+            <a
+              key={l.homepage}
+              href={l.homepage}
+              target="_blank"
+              rel="noopener noreferrer"
+              className={styles.linkCard}
+            >
+              <span className={styles.linkCardTitle}>{l.name}</span>
+              <span className={styles.linkCardDesc}>
+                Programs, events, and community in {l.state}.
+              </span>
+              <span className={styles.linkCardArrow}>↗</span>
+            </a>
+          ))}
         </div>
       </section>
 

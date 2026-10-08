@@ -2,6 +2,7 @@ import Link from "next/link";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import Hero from "@/components/Hero";
+import CultureBand from "@/components/CultureBand";
 import styles from "./page.module.css";
 
 export default function EventsPage() {
@@ -135,6 +136,9 @@ export default function EventsPage() {
           </div>
         </div>
       </section>
+
+      {/* CULTURE NEAR YOU — Japan-America society calendars */}
+      <CultureBand />
 
       {/* SUGGEST AN EVENT */}
       <section className={styles.suggest}>
