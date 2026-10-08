@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import Hero from "@/components/Hero";
@@ -5,6 +6,8 @@ import EmailLink from "@/components/EmailLink";
 import { readReps, type State, type SubchapterRep } from "@/lib/content";
 import styles from "./page.module.css";
 import { headshotSrc } from "@/lib/uploads";
+
+export const metadata: Metadata = { title: "Subchapters" };
 
 type CityGroup = {
   city: string;

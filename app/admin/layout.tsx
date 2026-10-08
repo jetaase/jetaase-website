@@ -1,7 +1,10 @@
+import type { Metadata } from "next";
 import { requireSession } from "@/lib/auth-cookie";
 import LoginForm from "./LoginForm";
 import AdminTabs from "./AdminTabs";
 import styles from "./page.module.css";
+
+export const metadata: Metadata = { title: "Admin" };
 
 export default async function AdminLayout({ children }: { children: React.ReactNode }) {
   if (!(await requireSession())) {

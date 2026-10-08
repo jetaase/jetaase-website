@@ -1,7 +1,10 @@
+import type { Metadata } from "next";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import Hero from "@/components/Hero";
 import styles from "./page.module.css";
+
+export const metadata: Metadata = { title: "Join" };
 
 export default function JoinPage() {
   return (

@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import Hero from "@/components/Hero";
@@ -6,6 +7,8 @@ import EmailLink from "@/components/EmailLink";
 import { readBoard, readReps, vacantRepStates } from "@/lib/content";
 import styles from "./page.module.css";
 import { DEFAULT_HEADSHOT, headshotSrc } from "@/lib/uploads";
+
+export const metadata: Metadata = { title: "Who We Are" };
 
 export default function WhoWeArePage() {
   const board = readBoard();

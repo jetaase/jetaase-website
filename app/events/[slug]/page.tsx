@@ -23,7 +23,7 @@ export async function generateMetadata({ params }: Params): Promise<Metadata> {
   if (!event) return {};
   const description = event.summary || undefined;
   return {
-    title: `${event.title} · JETAASE Events`,
+    title: event.title,
     description,
     openGraph: { title: event.title, description, images: event.poster ? [event.poster] : undefined },
   };

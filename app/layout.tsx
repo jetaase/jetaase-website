@@ -9,7 +9,8 @@ const siteUrl = process.env.VERCEL_PROJECT_PRODUCTION_URL
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
-  title: "JETAASE Southeast",
+  // Pages set a short title, shown in the browser tab as "JETAASE - Events".
+  title: { default: "JETAASE Southeast", template: "JETAASE - %s" },
   description:
     "Japan Exchange and Teaching Alumni Association, Southeast US — AL, GA, NC, SC.",
 };

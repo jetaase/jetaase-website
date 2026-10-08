@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
@@ -9,6 +10,8 @@ import NewsletterPrompt from "@/components/NewsletterPrompt";
 import { readEvents, readPartnerEvents } from "@/lib/content";
 import { formatEventDate, splitEvents, todayInEastern, upcomingPartners } from "@/lib/events";
 import styles from "./page.module.css";
+
+export const metadata: Metadata = { title: "Events" };
 
 // Re-render hourly so events move into "Looking back" without a deploy.
 export const revalidate = 3600;

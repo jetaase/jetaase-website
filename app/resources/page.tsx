@@ -1,9 +1,12 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { CULTURE_LINKS, CultureIcon } from "@/components/CultureBand";
 import Directory, { type DirCategory, type DirEntry } from "./Directory";
 import styles from "./page.module.css";
+
+export const metadata: Metadata = { title: "Resources" };
 
 // Directory compiled by the Consulate-General of Japan in Atlanta.
 // Most entries link to its pages; a few point to other organizations.
