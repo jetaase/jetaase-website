@@ -81,3 +81,6 @@
     padding: 16px var(--gutter);
   }
 }
+.footer :focus-visible {
+  outline-color: var(--blue);
+}

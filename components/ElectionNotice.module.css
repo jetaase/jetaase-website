@@ -80,8 +80,6 @@ details[open] > summary.positionTitle::before {
   transform: rotate(90deg);
 }
 summary.positionTitle:focus-visible {
-  outline: 2px solid var(--blue);
-  outline-offset: 2px;
   border-radius: var(--radius-md);
 }
 .positionText {

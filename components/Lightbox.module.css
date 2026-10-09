@@ -88,3 +88,6 @@
     transform: none;
   }
 }
+.dialog :focus-visible {
+  outline-color: #fff;
+}
