@@ -213,7 +213,7 @@ export default function ResourcesPage() {
             </span>
           </a>
           <a
-            href="https://jetaausa.com/"
+            href="https://usjetaa.org/"
             target="_blank"
             rel="noopener"
             className={styles.featuredCardBlue}
@@ -224,7 +224,7 @@ export default function ResourcesPage() {
               All 19 alumni chapters across the country.
             </p>
             <span className={styles.featuredLink}>
-              jetaausa.com <span className={styles.arrow}>↗</span>
+              usjetaa.org <span className={styles.arrow}>↗</span>
             </span>
           </a>
         </div>
