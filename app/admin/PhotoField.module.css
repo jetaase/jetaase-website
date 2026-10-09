@@ -9,7 +9,7 @@
   height: 80px;
   object-fit: contain;
   border-radius: 8px;
-  background: #efe7d6;
+  background: var(--stripe-a);
   flex-shrink: 0;
 }
 .thumbRound {
@@ -17,7 +17,7 @@
   height: 64px;
   object-fit: cover;
   border-radius: 50%;
-  background: #efe7d6;
+  background: var(--stripe-a);
   flex-shrink: 0;
 }
 .empty {

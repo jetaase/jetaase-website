@@ -32,7 +32,7 @@
   aspect-ratio: 1;
   object-fit: cover;
   border-radius: 8px;
-  background: #efe7d6;
+  background: var(--stripe-a);
   display: block;
 }
 .faded {
@@ -44,7 +44,7 @@
 }
 .tile input {
   padding: 0.35rem 0.5rem;
-  border: 1px solid #d6cdb9;
+  border: 1px solid var(--border-strong);
   border-radius: 6px;
   font: inherit;
   font-size: 0.85rem;

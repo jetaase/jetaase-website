@@ -11,7 +11,7 @@
 .featuredGrid {
   display: grid;
   grid-template-columns: minmax(0, 2fr) minmax(0, 3fr);
-  border: 1px solid #e6ddca;
+  border: 1px solid var(--border);
   border-radius: 18px;
   overflow: hidden;
   background: #fff;
@@ -62,7 +62,7 @@
 .featuredDesc {
   font-size: 16px;
   line-height: 1.6;
-  color: #6a6252;
+  color: var(--text-muted);
   margin: 0 0 24px;
 }
 .featuredActions {
@@ -80,7 +80,7 @@
   display: inline-block;
 }
 .detailsBtn {
-  border: 1.5px solid #cfc6b4;
+  border: 1.5px solid var(--border-strong);
   color: var(--ink);
   font-weight: 700;
   font-size: 15px;
@@ -119,7 +119,7 @@
 
 /* LOOKING BACK / PAST EVENTS */
 .lookingBackSection {
-  background: #f4ede0;
+  background: var(--surface-tan);
   margin-top: 36px;
 }
 .lookingBackInner {
@@ -140,7 +140,7 @@
   font-size: 12px;
   letter-spacing: 0.2em;
   text-transform: uppercase;
-  color: #a48365;
+  color: var(--tan);
   margin-bottom: 8px;
 }
 .instagramLink {
@@ -160,7 +160,7 @@
   padding: 56px 40px;
 }
 .suggestBox {
-  border: 1.5px dashed #cfc6b4;
+  border: 1.5px dashed var(--border-strong);
   border-radius: 18px;
   padding: 40px;
   display: flex;
@@ -181,7 +181,7 @@
 .suggestText {
   font-size: 16px;
   line-height: 1.6;
-  color: #6a6252;
+  color: var(--text-muted);
   margin: 0;
 }
 .suggestBtn {
@@ -218,14 +218,14 @@
 }
 .partnersIntro {
   margin: 0 0 16px;
-  color: #6a6252;
+  color: var(--text-muted);
   font-size: 15px;
 }
 .partnerList {
   list-style: none;
   margin: 0;
   padding: 0;
-  border-top: 1px solid #e6ddca;
+  border-top: 1px solid var(--border);
 }
 .partnerRow {
   display: grid;
@@ -233,7 +233,7 @@
   align-items: center;
   gap: 16px;
   padding: 14px 4px;
-  border-bottom: 1px solid #e6ddca;
+  border-bottom: 1px solid var(--border);
   color: inherit;
 }
 a.partnerRow:hover .partnerTitle {
@@ -254,11 +254,11 @@ a.partnerRow:hover .partnerTitle {
 }
 .partnerMeta {
   font-size: 14px;
-  color: #7a715e;
+  color: var(--text-subtle);
 }
 .partnerSummary {
   font-size: 14px;
-  color: #3a352d;
+  color: var(--text-body);
   margin-top: 4px;
 }
 /* When any partner event has a poster, every row gets a thumbnail column. */
@@ -271,7 +271,7 @@ a.partnerRow:hover .partnerTitle {
   aspect-ratio: 4 / 5;
   border-radius: 6px;
   overflow: hidden;
-  background: #f4ede0;
+  background: var(--surface-tan);
 }
 .partnerNoPoster {
   width: 64px;

@@ -29,10 +29,10 @@
   margin-bottom: 16px;
   background: repeating-linear-gradient(
     135deg,
-    #efe7d6,
-    #efe7d6 9px,
-    #e8dfcb 9px,
-    #e8dfcb 18px
+    var(--stripe-a),
+    var(--stripe-a) 9px,
+    var(--stripe-b) 9px,
+    var(--stripe-b) 18px
   );
 }
 
@@ -58,7 +58,7 @@
 .bio {
   font-size: 14px;
   line-height: 1.5;
-  color: #6a6252;
+  color: var(--text-muted);
   margin: 0;
   text-wrap: balance;
 }

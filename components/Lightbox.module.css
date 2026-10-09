@@ -43,7 +43,7 @@
 .count {
   font-family: var(--font-mono);
   font-size: 12px;
-  color: #cfc7b8;
+  color: var(--on-dark-muted);
 }
 .nav,
 .close {

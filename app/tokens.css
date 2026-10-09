@@ -1,9 +1,30 @@
 :root {
+  /* Brand */
   --cream: #FBF7F0;
   --red: #ED1C24;
   --ink: #231f1a;
-  --ink-muted: #4a443b;
   --blue: #A1C5FF;
-  --border: #ece5d7;
+  --navy: #17233f; /* text and buttons on blue */
+  --blue-ink: #1f4a94; /* icons on blue tiles */
+  --gold: #f0b429; /* accent on dark backgrounds */
+  --tan: #a48365; /* quiet labels */
+
+  /* Text, darkest to lightest */
+  --text-body: #3a352d; /* long-form paragraphs */
+  --ink-muted: #4a443b; /* nav, hero subtitles */
+  --text-muted: #6a6252; /* intros and secondary copy */
+  --text-subtle: #7a715e; /* card descriptions */
+  --text-faint: #8a8069; /* meta, counts, captions */
+  --on-dark-muted: #cfc7b8; /* text on ink backgrounds */
+
+  /* Lines and surfaces */
+  --border: #e6ddca; /* card outlines */
+  --border-strong: #cfc6b4; /* ghost buttons, chips, dashed boxes */
+  --divider: #f0e8d7; /* rules inside cards */
+  --surface-tan: #f4ede0; /* tan bands and callouts */
+  --tint-tan: #f4e3d2; /* tan icon tiles */
+  --stripe-a: #efe7d6; /* striped image placeholder */
+  --stripe-b: #e8dfcb;
+
   --maxw: 1200px;
 }

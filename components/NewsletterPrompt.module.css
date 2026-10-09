@@ -1,14 +1,14 @@
 .prompt {
   margin: 0;
   font-size: 16px;
-  color: #6a6252;
+  color: var(--text-muted);
 }
 .link {
   font-weight: 700;
   color: var(--red);
 }
 .empty {
-  border: 1.5px dashed #cfc6b4;
+  border: 1.5px dashed var(--border-strong);
   border-radius: 14px;
   padding: 28px;
   text-align: center;

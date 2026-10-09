@@ -1,6 +1,6 @@
 .footer {
   background: var(--ink);
-  color: #cfc7b8;
+  color: var(--on-dark-muted);
 }
 .inner {
   max-width: var(--maxw);
@@ -32,7 +32,7 @@
   margin: 0 0 16px;
 }
 .email {
-  color: #f0b429;
+  color: var(--gold);
   font-size: 14px;
   font-weight: 600;
 }
@@ -48,7 +48,7 @@
   font-size: 14px;
 }
 .columnHeading {
-  color: #8a8069;
+  color: var(--text-faint);
   font-family: var(--font-mono);
   font-size: 11px;
   letter-spacing: 0.16em;
@@ -56,17 +56,17 @@
   margin-bottom: 4px;
 }
 .columnLink {
-  color: #cfc7b8;
+  color: var(--on-dark-muted);
 }
 .bottomBar {
-  border-top: 1px solid #3a352d;
+  border-top: 1px solid var(--text-body);
 }
 .bottomInner {
   max-width: var(--maxw);
   margin: 0 auto;
   padding: 20px 40px;
   font-size: 13px;
-  color: #8a8069;
+  color: var(--text-faint);
 }
 @media (max-width: 768px) {
   .inner {

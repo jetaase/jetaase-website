@@ -61,12 +61,12 @@
   justify-content: center;
 }
 .iconTan {
-  background: #f4e3d2;
+  background: var(--tint-tan);
   color: var(--red);
 }
 .iconBlue {
   background: var(--blue);
-  color: #1f4a94;
+  color: var(--blue-ink);
 }
 .whyJoinItemTitle {
   font-weight: 700;
@@ -75,17 +75,17 @@
 }
 .whyJoinItemText {
   font-size: 14px;
-  color: #6a6252;
+  color: var(--text-muted);
   line-height: 1.5;
 }
 .questionsBox {
   margin-top: 26px;
   padding: 20px;
-  background: #f4ede0;
+  background: var(--surface-tan);
   border-radius: 14px;
   font-size: 14px;
   line-height: 1.6;
-  color: #6a6252;
+  color: var(--text-muted);
 }
 .questionsBox a {
   font-weight: 600;
@@ -94,7 +94,7 @@
 /* FORM */
 .formCard {
   background: #fff;
-  border: 1px solid #e6ddca;
+  border: 1px solid var(--border);
   border-radius: 18px;
   padding: 16px;
   box-shadow: 0 24px 50px -30px rgba(60, 40, 20, 0.3);

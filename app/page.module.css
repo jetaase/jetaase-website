@@ -47,7 +47,7 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  border: 1.5px solid #cfc6b4;
+  border: 1.5px solid var(--border-strong);
   color: var(--ink);
   font-weight: 600;
   font-size: 16px;
@@ -107,7 +107,7 @@
   font-size: 12px;
   letter-spacing: 0.24em;
   text-transform: uppercase;
-  color: #f0b429;
+  color: var(--gold);
   margin-bottom: 20px;
 }
 .missionText {
@@ -147,12 +147,12 @@
   margin-bottom: 18px;
 }
 .iconBoxTan {
-  background: #f4e3d2;
+  background: var(--tint-tan);
   color: var(--red);
 }
 .iconBoxBlue {
   background: var(--blue);
-  color: #1f4a94;
+  color: var(--blue-ink);
 }
 .featureTitle {
   font-family: var(--font-serif);
@@ -163,7 +163,7 @@
 .featureText {
   font-size: 16px;
   line-height: 1.6;
-  color: #6a6252;
+  color: var(--text-muted);
   margin: 0;
 }
 
@@ -204,7 +204,7 @@
 
 /* RESOURCES */
 .resourcesSection {
-  background: #f4ede0;
+  background: var(--surface-tan);
 }
 .resourcesInner {
   max-width: var(--maxw);
@@ -218,7 +218,7 @@
 .resourcesSubtitle {
   font-size: 17px;
   line-height: 1.6;
-  color: #6a6252;
+  color: var(--text-muted);
   margin: 0;
 }
 .resourcesGrid {
@@ -235,7 +235,7 @@
 .resourceCard {
   color: var(--ink);
   background: #fff;
-  border: 1px solid #e6ddca;
+  border: 1px solid var(--border);
   border-radius: 14px;
   padding: 26px;
   display: flex;
@@ -253,7 +253,7 @@
 }
 .resourceDesc {
   font-size: 14px;
-  color: #7a715e;
+  color: var(--text-subtle);
 }
 
 /* VOLUNTEER-RUN CALLOUT */
@@ -263,7 +263,7 @@
   padding: 80px 40px;
 }
 .calloutBox {
-  background: #f4ede0;
+  background: var(--surface-tan);
   border-radius: 18px;
   padding: 52px;
   display: flex;
@@ -293,7 +293,7 @@
 .calloutText {
   font-size: 17px;
   line-height: 1.6;
-  color: #6a6252;
+  color: var(--text-muted);
   margin: 0;
 }
 .calloutBtn {
@@ -315,7 +315,7 @@
 }
 .subchaptersBox {
   background: #fff;
-  border: 1px solid #e6ddca;
+  border: 1px solid var(--border);
   border-radius: 18px;
   padding: 44px;
   display: flex;
@@ -345,7 +345,7 @@
 }
 .chip {
   color: var(--ink);
-  border: 1.5px solid #cfc6b4;
+  border: 1.5px solid var(--border-strong);
   border-radius: 999px;
   padding: 12px 24px;
   font-weight: 700;
@@ -356,7 +356,7 @@
 /* JOIN CTA */
 .joinSection {
   background: var(--blue);
-  color: #17233f;
+  color: var(--navy);
 }
 .joinInner {
   max-width: var(--maxw);
@@ -385,7 +385,7 @@
   margin: 0;
 }
 .joinBtn {
-  background: #17233f;
+  background: var(--navy);
   color: #fff;
   font-weight: 800;
   font-size: 18px;

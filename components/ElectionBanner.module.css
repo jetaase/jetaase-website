@@ -7,11 +7,11 @@
   padding: 12px 40px;
   font-size: 16px;
   font-weight: 600;
-  color: #17233f;
+  color: var(--navy);
 }
 .link {
   font-weight: 800;
-  color: #17233f;
+  color: var(--navy);
   text-decoration: underline;
   text-underline-offset: 3px;
   white-space: nowrap;

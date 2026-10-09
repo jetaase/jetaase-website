@@ -26,7 +26,7 @@
 }
 .card {
   background: #fff;
-  border: 1px solid #e6ddca;
+  border: 1px solid var(--border);
   border-radius: 18px;
   overflow: hidden;
   display: flex;
@@ -38,10 +38,10 @@
   overflow: hidden;
   background: repeating-linear-gradient(
     135deg,
-    #efe7d6,
-    #efe7d6 8px,
-    #e8dfcb 8px,
-    #e8dfcb 16px
+    var(--stripe-a),
+    var(--stripe-a) 8px,
+    var(--stripe-b) 8px,
+    var(--stripe-b) 16px
   );
 }
 .cardPhoto {
@@ -83,8 +83,8 @@
 }
 .cardDetails {
   padding: 16px 0;
-  border-top: 1px solid #f0e8d7;
-  border-bottom: 1px solid #f0e8d7;
+  border-top: 1px solid var(--divider);
+  border-bottom: 1px solid var(--divider);
   margin-bottom: 20px;
 }
 .cardDetailsLabel {
@@ -98,7 +98,7 @@
 .cardDetailsText {
   font-size: 14px;
   line-height: 1.55;
-  color: #6a6252;
+  color: var(--text-muted);
 }
 .leaderRow {
   display: flex;
@@ -107,7 +107,7 @@
   padding: 16px 0;
 }
 .leaderRow + .leaderRow {
-  border-top: 1px solid #f0e8d7;
+  border-top: 1px solid var(--divider);
 }
 .leaderAvatar {
   width: 96px;
@@ -117,10 +117,10 @@
   display: block;
   background: repeating-linear-gradient(
     135deg,
-    #efe7d6,
-    #efe7d6 8px,
-    #e8dfcb 8px,
-    #e8dfcb 16px
+    var(--stripe-a),
+    var(--stripe-a) 8px,
+    var(--stripe-b) 8px,
+    var(--stripe-b) 16px
   );
   flex-shrink: 0;
 }
@@ -130,7 +130,7 @@
 }
 .leaderMeta {
   font-size: 13.5px;
-  color: #7a715e;
+  color: var(--text-subtle);
   text-wrap: balance;
 }
 .leaderLocation {
@@ -141,8 +141,8 @@
   color: var(--red);
 }
 .leaderBlock {
-  border-top: 1px solid #f0e8d7;
-  border-bottom: 1px solid #f0e8d7;
+  border-top: 1px solid var(--divider);
+  border-bottom: 1px solid var(--divider);
   margin-bottom: 20px;
 }
 .fbBtn {
@@ -165,7 +165,7 @@
   padding: 20px 40px 80px;
 }
 .helpCtaBox {
-  background: #f4ede0;
+  background: var(--surface-tan);
   border-radius: 18px;
   padding: 44px;
   display: flex;
@@ -186,7 +186,7 @@
 .helpCtaText {
   font-size: 16px;
   line-height: 1.6;
-  color: #6a6252;
+  color: var(--text-muted);
   margin: 0;
 }
 .helpCtaBtn {
@@ -202,7 +202,7 @@
 
 .cityGroup + .cityGroup,
 .leaderRow + .cityGroup {
-  border-top: 1px solid #f0e8d7;
+  border-top: 1px solid var(--divider);
 }
 .cityGroupHeader {
   display: flex;

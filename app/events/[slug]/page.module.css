@@ -57,14 +57,14 @@
   font-size: 13px;
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  color: #8a8069;
+  color: var(--text-faint);
 }
 .details {
   margin-top: 40px;
   max-width: 680px;
   font-size: 17px;
   line-height: 1.7;
-  color: #3a352d;
+  color: var(--text-body);
   white-space: pre-line; /* keep single line breaks inside a paragraph */
 }
 .details p {

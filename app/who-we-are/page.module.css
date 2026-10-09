@@ -63,13 +63,13 @@
 .welcomeParagraph {
   font-size: 18px;
   line-height: 1.75;
-  color: #3a352d;
+  color: var(--text-body);
   margin: 0 0 22px;
 }
 .welcomeParagraphLast {
   font-size: 18px;
   line-height: 1.75;
-  color: #3a352d;
+  color: var(--text-body);
   margin: 0;
 }
 .welcomeLink {
@@ -104,7 +104,7 @@
 .officersIntro {
   font-size: 17px;
   line-height: 1.6;
-  color: #6a6252;
+  color: var(--text-muted);
   margin: 0;
 }
 
@@ -127,7 +127,7 @@
 }
 .subchapterCard {
   background: #fff;
-  border: 1px solid #e6ddca;
+  border: 1px solid var(--border);
   border-radius: 14px;
   padding: 22px;
   display: flex;
@@ -143,10 +143,10 @@
   flex-shrink: 0;
   background: repeating-linear-gradient(
     135deg,
-    #efe7d6,
-    #efe7d6 9px,
-    #e8dfcb 9px,
-    #e8dfcb 18px
+    var(--stripe-a),
+    var(--stripe-a) 9px,
+    var(--stripe-b) 9px,
+    var(--stripe-b) 18px
   );
 }
 .subchapterRegion {
@@ -169,7 +169,7 @@
 }
 .subchapterPlacement {
   font-size: 13.5px;
-  color: #6a6252;
+  color: var(--text-muted);
   margin: 2px 0 4px;
 }
 .subchapterEmail {
@@ -186,7 +186,7 @@
 /* CTA */
 .cta {
   background: var(--blue);
-  color: #17233f;
+  color: var(--navy);
 }
 .ctaInner {
   max-width: var(--maxw);
@@ -215,7 +215,7 @@
   margin: 0;
 }
 .ctaBtn {
-  background: #17233f;
+  background: var(--navy);
   color: #fff;
   font-weight: 800;
   font-size: 18px;

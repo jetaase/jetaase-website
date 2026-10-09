@@ -1,7 +1,7 @@
 .card {
   display: flex;
   flex-direction: column;
-  border: 1px solid #e6ddca;
+  border: 1px solid var(--border);
   border-radius: 14px;
   overflow: hidden;
   background: #fff;
@@ -28,13 +28,13 @@
 }
 .summary {
   font-size: 14px;
-  color: #7a715e;
+  color: var(--text-subtle);
 }
 .small .body {
   padding: 12px 14px 14px;
 }
 .small .date {
-  color: #8a8069;
+  color: var(--text-faint);
   font-size: 11px;
 }
 .small .title {

@@ -4,7 +4,7 @@
   padding: 44px 40px 12px;
 }
 .band {
-  background: #f4ede0;
+  background: var(--surface-tan);
   border-radius: 20px;
   overflow: hidden;
   display: grid;
@@ -38,7 +38,7 @@
 }
 .text {
   font-size: 15px;
-  color: #6a6252;
+  color: var(--text-muted);
   line-height: 1.6;
   margin: 0 0 22px;
   max-width: 420px;
@@ -51,7 +51,7 @@
 .linkCard {
   color: var(--ink);
   background: #fff;
-  border: 1px solid #e6ddca;
+  border: 1px solid var(--border);
   border-radius: 12px;
   padding: 16px 20px;
   display: flex;
@@ -72,10 +72,10 @@
   min-height: 420px;
   background: repeating-linear-gradient(
     135deg,
-    #efe7d6,
-    #efe7d6 14px,
-    #e8dfcb 14px,
-    #e8dfcb 28px
+    var(--stripe-a),
+    var(--stripe-a) 14px,
+    var(--stripe-b) 14px,
+    var(--stripe-b) 28px
   );
 }
 .photo {
