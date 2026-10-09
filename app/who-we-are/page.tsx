@@ -4,16 +4,24 @@ import Footer from "@/components/Footer";
 import Hero from "@/components/Hero";
 import BoardGrid from "@/components/BoardGrid";
 import EmailLink from "@/components/EmailLink";
-import { readBoard, readReps } from "@/lib/content";
+import ElectionNotice from "@/components/ElectionNotice";
+import { readBoard, readElection, readReps } from "@/lib/content";
+import { isElectionLive } from "@/lib/elections";
+import { todayInEastern } from "@/lib/events";
 import { repSlots } from "@/lib/reps";
 import styles from "./page.module.css";
 import { DEFAULT_HEADSHOT, headshotSrc } from "@/lib/uploads";
 
 export const metadata: Metadata = { title: "Who We Are" };
 
+// Re-render hourly so the elections notice hides itself after its date.
+export const revalidate = 3600;
+
 export default function WhoWeArePage() {
   const board = readBoard();
   const reps = readReps();
+  const election = readElection();
+  const showElection = isElectionLive(election, todayInEastern(new Date()));
   return (
     <div className={styles.pageRoot}>
       <Header />
@@ -74,6 +82,8 @@ export default function WhoWeArePage() {
           </div>
         </div>
       </section>
+
+      {showElection && <ElectionNotice election={election} />}
 
       {/* OFFICERS */}
       <section id="officers" className={styles.officers}>

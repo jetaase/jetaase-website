@@ -4,8 +4,10 @@ import Footer from "@/components/Footer";
 import Eyebrow from "@/components/Eyebrow";
 import Button from "@/components/Button";
 import EventCard from "@/components/EventCard";
+import ElectionBanner from "@/components/ElectionBanner";
 import NewsletterPrompt from "@/components/NewsletterPrompt";
-import { readEvents } from "@/lib/content";
+import { readElection, readEvents } from "@/lib/content";
+import { electionBanner, isElectionLive } from "@/lib/elections";
 import { splitEvents, todayInEastern } from "@/lib/events";
 import styles from "./page.module.css";
 
@@ -13,12 +15,15 @@ import styles from "./page.module.css";
 export const revalidate = 3600;
 
 export default function Home() {
-  const { next, upcoming } = splitEvents(readEvents(), todayInEastern(new Date()));
+  const today = todayInEastern(new Date());
+  const { next, upcoming } = splitEvents(readEvents(), today);
+  const election = readElection();
   const shown = next ? [next, ...upcoming.slice(0, 2)] : [];
 
   return (
     <div className={styles.pageRoot}>
       <Header />
+      {isElectionLive(election, today) && <ElectionBanner text={electionBanner(election, today)} />}
 
       {/* HERO */}
       <section id="top" className={styles.hero}>
