@@ -4,13 +4,13 @@ import Directory, { type DirCategory, type DirEntry } from "./Directory";
 import { INFO_EMAIL, JET_PROGRAMME_URL, USJETAA_URL } from "@/lib/site";
 import Button from "@/components/Button";
 import Eyebrow from "@/components/Eyebrow";
-import PhotoCredit from "@/components/PhotoCredit";
 import JoinCta from "@/components/JoinCta";
 import CalloutBox from "@/components/CalloutBox";
 import IconTile from "@/components/IconTile";
 import { BriefcaseIcon, LanguagesIcon, MapPinIcon } from "@/components/icons";
 import LinkCard from "@/components/LinkCard";
 import SectionHeading from "@/components/SectionHeading";
+import Hero from "@/components/Hero";
 import styles from "./page.module.css";
 
 export const metadata: Metadata = { title: "Resources" };
@@ -166,28 +166,19 @@ const DIRECTORY: DirCategory[] = [
 export default function ResourcesPage() {
   return (
     <>
-      {/* PAGE HERO */}
-      <section className={styles.hero}>
-        <div className={styles.heroGrid}>
-          <div>
-            <Eyebrow size="hero">Your Japan toolkit</Eyebrow>
-            <h1 className={styles.heroTitle}>Resources</h1>
-            <p className={styles.heroSubtitle}>
-              Hand-picked links and guides from alumni who&apos;ve walked the
-              path, whether you&apos;re applying to JET, keeping your
-              Japanese sharp, job hunting, or chasing a matsuri near home.
-            </p>
-          </div>
-          <div className={styles.heroImageWrap}>
-            <img
-              src="/images/kyoto-bookshelf.jpg"
-              alt="Shelves of Japanese paperbacks in a Kyoto bookshop"
-              className={styles.heroImage}
-            />
-            <PhotoCredit name="Hendrik Schuette" href="https://unsplash.com/photos/a-book-shelf-filled-with-lots-of-books-cB70SPAS0eo" />
-          </div>
-        </div>
-      </section>
+      <Hero
+        eyebrow="Your Japan toolkit"
+        title="Resources"
+        subtitle="Hand-picked links and guides from alumni who've walked the path, whether you're applying to JET, keeping your Japanese sharp, job hunting, or chasing a matsuri near home."
+        image={{
+          src: "/images/kyoto-bookshelf.jpg",
+          alt: "Shelves of Japanese paperbacks in a Kyoto bookshop",
+          credit: {
+            name: "Hendrik Schuette",
+            href: "https://unsplash.com/photos/a-book-shelf-filled-with-lots-of-books-cB70SPAS0eo",
+          },
+        }}
+      />
 
       {/* FEATURED */}
       <section className={styles.featured}>

@@ -17,6 +17,30 @@
   color: var(--ink-muted);
   max-width: 620px;
 }
+.withImage {
+  display: grid;
+  grid-template-columns: 1fr 420px;
+  gap: 56px;
+  align-items: center;
+}
+.imageWrap {
+  position: relative;
+  height: 320px;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  background: repeating-linear-gradient(
+    135deg,
+    var(--stripe-a),
+    var(--stripe-a) 14px,
+    var(--stripe-b) 14px,
+    var(--stripe-b) 28px
+  );
+}
+.image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
 @media (max-width: 768px) {
   .hero {
     padding: 40px var(--gutter) 20px;
@@ -26,5 +50,9 @@
   }
   .subtitle {
     font-size: 17px;
+  }
+  .withImage {
+    grid-template-columns: 1fr;
+    gap: 28px;
   }
 }
