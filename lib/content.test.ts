@@ -41,6 +41,8 @@ describe("readEvents", () => {
       expect(isValidDate(e.date)).toBe(true);
       expect(typeof e.poster).toBe("string");
       expect(typeof e.rsvpUrl).toBe("string");
+      expect(Array.isArray(e.photos)).toBe(true);
+      expect(typeof e.photoCredit).toBe("string");
     }
     const slugs = events.map((e) => e.slug);
     expect(new Set(slugs).size).toBe(slugs.length);

@@ -1,6 +1,6 @@
 import { readFileSync } from "node:fs";
 import { join } from "node:path";
-import type { JetaaseEvent, PartnerEvent } from "./events";
+import { normalizeEvent, type JetaaseEvent, type PartnerEvent } from "./events";
 import { sortReps } from "./reps";
 
 export type Chapter = "AL" | "GA" | "NC" | "SC";
@@ -45,7 +45,7 @@ export function readReps(): SubchapterRep[] {
 
 // Unsorted: pages split and sort events by date (see lib/events.ts).
 export function readEvents(): JetaaseEvent[] {
-  return JSON.parse(readRaw("events.json")) as JetaaseEvent[];
+  return (JSON.parse(readRaw("events.json")) as Partial<JetaaseEvent>[]).map(normalizeEvent);
 }
 
 export function readPartnerEvents(): PartnerEvent[] {

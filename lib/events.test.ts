@@ -1,7 +1,7 @@
 import { describe, it, expect, vi, afterEach } from "vitest";
 import {
   isValidDate, todayInEastern, splitEvents, upcomingPartners,
-  makeSlug, assignSlugs, formatEventDate, dateParts, toParagraphs,
+  makeSlug, assignSlugs, formatEventDate, dateParts, toParagraphs, normalizeEvent, photoCountLabel,
 } from "./events";
 
 describe("isValidDate", () => {
@@ -139,5 +139,31 @@ describe("toParagraphs", () => {
   it("splits on blank lines and drops empty pieces", () => {
     expect(toParagraphs("One\nstill one\n\n\n  Two  \n \nThree")).toEqual(["One\nstill one", "Two", "Three"]);
     expect(toParagraphs("   ")).toEqual([]);
+  });
+});
+
+describe("normalizeEvent", () => {
+  it("fills a missing gallery and credit", () => {
+    const e = normalizeEvent({ id: "e1", title: "T", date: "2026-01-01" });
+    expect(e.photos).toEqual([]);
+    expect(e.photoCredit).toBe("");
+  });
+  it("replaces a non-array photos value", () => {
+    expect(normalizeEvent({ id: "e1", photos: "oops" as unknown as [] }).photos).toEqual([]);
+  });
+  it("keeps existing photos and credit", () => {
+    const photos = [{ id: "ph1-0", src: "/images/uploads/events/a-20261009-a1b2.jpg", caption: "Hi" }];
+    const e = normalizeEvent({ id: "e1", photos, photoCredit: "Photos by Jo" });
+    expect(e.photos).toEqual(photos);
+    expect(e.photoCredit).toBe("Photos by Jo");
+  });
+});
+
+describe("photoCountLabel", () => {
+  it("is singular for one photo", () => {
+    expect(photoCountLabel(1)).toBe("1 photo");
+  });
+  it("is plural otherwise", () => {
+    expect(photoCountLabel(12)).toBe("12 photos");
   });
 });

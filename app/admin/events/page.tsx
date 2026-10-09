@@ -29,6 +29,7 @@ const PARTNER_FIELDS: Field[] = [
 // ListEditor fills in today's date for new items.
 const BLANK_EVENT: Omit<JetaaseEvent, "id" | "order"> = {
   slug: "", title: "", date: "", time: "", location: "", summary: "", details: "", poster: "", rsvpUrl: "",
+  photos: [], photoCredit: "",
 };
 
 const BLANK_PARTNER: Omit<PartnerEvent, "id" | "order"> = {

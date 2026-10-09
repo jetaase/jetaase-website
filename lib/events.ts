@@ -2,6 +2,12 @@
 // admin. Keep this file free of Node-only imports; it ships to the browser.
 import { slugify } from "./uploads";
 
+export type EventPhoto = {
+  id: string; // "ph<timestamp>-<n>", set when added; the editor's stable key
+  src: string; // public URL under /images/uploads/events/
+  caption: string; // "" for none
+};
+
 export type JetaaseEvent = {
   id: string; order: number;
   slug: string; // set on first save, never changed, so shared links keep working
@@ -12,6 +18,8 @@ export type JetaaseEvent = {
   details: string; // blank lines separate paragraphs
   poster: string; // public URL, or "" for none
   rsvpUrl: string; // "" or an http(s) URL
+  photos: EventPhoto[]; // gallery, in display order
+  photoCredit: string; // "" for none, e.g. "Photos by Jane Doe"
 };
 
 export type PartnerEvent = {
@@ -100,4 +108,17 @@ export function dateParts(date: string): { month: string; day: string } {
 
 export function toParagraphs(text: string): string[] {
   return text.split(/\n\s*\n/).map((p) => p.trim()).filter(Boolean);
+}
+
+// Hand-edited files may lack the gallery fields; treat that as no gallery.
+export function normalizeEvent(raw: Partial<JetaaseEvent>): JetaaseEvent {
+  return {
+    ...raw,
+    photos: Array.isArray(raw.photos) ? raw.photos : [],
+    photoCredit: raw.photoCredit ?? "",
+  } as JetaaseEvent;
+}
+
+export function photoCountLabel(n: number): string {
+  return n === 1 ? "1 photo" : `${n} photos`;
 }
