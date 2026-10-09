@@ -128,27 +128,6 @@
   gap: 16px;
   margin-bottom: 24px;
 }
-.categoryIcon {
-  width: 44px;
-  height: 44px;
-  border-radius: var(--radius-md);
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
-}
-.iconJapanese {
-  background: #e5efff;
-  color: #3f6fbf;
-}
-.iconCareers {
-  background: #efe6da;
-  color: var(--tan);
-}
-.iconCulture {
-  background: #fbe3e4;
-  color: var(--red);
-}
 .categoryTitle {
   font-family: var(--font-serif);
   font-weight: 500;

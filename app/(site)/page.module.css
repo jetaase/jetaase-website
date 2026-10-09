@@ -99,30 +99,11 @@
     gap: 28px;
   }
 }
-.iconBox {
-  width: 46px;
-  height: 46px;
-  border-radius: var(--radius-md);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-family: var(--font-serif);
-  font-size: 24px;
-  margin-bottom: 18px;
-}
-.iconBoxTan {
-  background: var(--tint-tan);
-  color: var(--red);
-}
-.iconBoxBlue {
-  background: var(--blue);
-  color: var(--blue-ink);
-}
 .featureTitle {
   font-family: var(--font-serif);
   font-weight: 500;
   font-size: 24px;
-  margin: 0 0 10px;
+  margin: 18px 0 10px;
 }
 .featureText {
   font-size: 16px;

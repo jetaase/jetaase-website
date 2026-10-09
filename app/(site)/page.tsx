@@ -12,6 +12,8 @@ import PhotoCredit from "@/components/PhotoCredit";
 import Highlight from "@/components/Highlight";
 import JoinCta from "@/components/JoinCta";
 import CalloutBox from "@/components/CalloutBox";
+import IconTile from "@/components/IconTile";
+import { BriefcaseIcon, CompassIcon, FileTextIcon, GlobeIcon, LanguagesIcon, MapPinIcon, PeopleIcon } from "@/components/icons";
 import styles from "./page.module.css";
 
 // Re-render hourly so past events drop off without a deploy.
@@ -80,23 +82,7 @@ export default function Home() {
       <section className={styles.whatWeDo}>
         <div className={styles.whatWeDoGrid}>
           <div>
-            <div className={`${styles.iconBox} ${styles.iconBoxTan}`}>
-              <svg
-                width="26"
-                height="26"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              >
-                <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path>
-                <circle cx="9" cy="7" r="4"></circle>
-                <path d="M22 21v-2a4 4 0 0 0-3-3.87"></path>
-                <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
-              </svg>
-            </div>
+            <IconTile tone="tan"><PeopleIcon size={26} /></IconTile>
             <h3 className={styles.featureTitle}>Reconnect with your people</h3>
             <p className={styles.featureText}>
               Picnics, potlucks, and reunions across four states bring the JET
@@ -104,21 +90,7 @@ export default function Home() {
             </p>
           </div>
           <div>
-            <div className={`${styles.iconBox} ${styles.iconBoxBlue}`}>
-              <svg
-                width="26"
-                height="26"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              >
-                <circle cx="12" cy="12" r="10"></circle>
-                <polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"></polygon>
-              </svg>
-            </div>
+            <IconTile tone="blue"><CompassIcon size={26} /></IconTile>
             <h3 className={styles.featureTitle}>Guide the next generation</h3>
             <p className={styles.featureText}>
               Thinking of applying to JET? Talk to alumni who&apos;ve been
@@ -126,22 +98,7 @@ export default function Home() {
             </p>
           </div>
           <div>
-            <div className={`${styles.iconBox} ${styles.iconBoxTan}`}>
-              <svg
-                width="26"
-                height="26"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              >
-                <circle cx="12" cy="12" r="10"></circle>
-                <path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"></path>
-                <path d="M2 12h20"></path>
-              </svg>
-            </div>
+            <IconTile tone="tan"><GlobeIcon size={26} /></IconTile>
             <h3 className={styles.featureTitle}>Stay close to Japan</h3>
             <p className={styles.featureText}>
               Language practice, cultural events, and a community that still
@@ -181,25 +138,7 @@ export default function Home() {
           </div>
           <div className={styles.resourcesGrid}>
             <Link href="/resources#japanese" className={styles.resourceCard}>
-              <span className={styles.resourceIcon}>
-                <svg
-                  width="24"
-                  height="24"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                >
-                  <path d="m5 8 6 6"></path>
-                  <path d="m4 14 6-6 2-3"></path>
-                  <path d="M2 5h12"></path>
-                  <path d="M7 2h1"></path>
-                  <path d="m22 22-5-10-5 10"></path>
-                  <path d="M14 18h6"></path>
-                </svg>
-              </span>
+              <span className={styles.resourceIcon}><LanguagesIcon size={24} /></span>
               <span className={styles.resourceTitle}>Keep up your Japanese</span>
               <span className={styles.resourceDesc}>
                 Apps, meetups, and reading to stay sharp.
@@ -211,66 +150,21 @@ export default function Home() {
               rel="noopener noreferrer"
               className={styles.resourceCard}
             >
-              <span className={styles.resourceIcon}>
-                <svg
-                  width="24"
-                  height="24"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                >
-                  <path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"></path>
-                  <path d="M14 2v4a2 2 0 0 0 2 2h4"></path>
-                  <path d="M16 13H8"></path>
-                  <path d="M16 17H8"></path>
-                  <path d="M10 9H8"></path>
-                </svg>
-              </span>
+              <span className={styles.resourceIcon}><FileTextIcon size={24} /></span>
               <span className={styles.resourceTitle}>Applying to JET</span>
               <span className={styles.resourceDesc}>
                 Eligibility, timelines, and how to apply.
               </span>
             </a>
             <Link href="/resources#careers" className={styles.resourceCard}>
-              <span className={styles.resourceIcon}>
-                <svg
-                  width="24"
-                  height="24"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                >
-                  <rect width="20" height="14" x="2" y="7" rx="2" ry="2"></rect>
-                  <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path>
-                </svg>
-              </span>
+              <span className={styles.resourceIcon}><BriefcaseIcon size={24} /></span>
               <span className={styles.resourceTitle}>Careers &amp; jobs</span>
               <span className={styles.resourceDesc}>
                 Japan-related roles and the JETAA job board.
               </span>
             </Link>
             <Link href="/resources#culture" className={styles.resourceCard}>
-              <span className={styles.resourceIcon}>
-                <svg
-                  width="24"
-                  height="24"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                >
-                  <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"></path>
-                  <circle cx="12" cy="10" r="3"></circle>
-                </svg>
-              </span>
+              <span className={styles.resourceIcon}><MapPinIcon size={24} /></span>
               <span className={styles.resourceTitle}>Culture near you</span>
               <span className={styles.resourceDesc}>
                 Festivals, cultural events, and matsuri.

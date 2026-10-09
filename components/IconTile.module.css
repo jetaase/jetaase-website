@@ -1,0 +1,31 @@
+.tile {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  border-radius: var(--radius-md);
+}
+.md {
+  width: 46px;
+  height: 46px;
+}
+.sm {
+  width: 36px;
+  height: 36px;
+}
+.tan {
+  background: var(--tint-tan);
+  color: var(--red);
+}
+.blue {
+  background: var(--blue);
+  color: var(--blue-ink);
+}
+.red {
+  background: var(--tint-red);
+  color: var(--red);
+}
+.white {
+  background: #fff;
+  color: var(--red);
+}

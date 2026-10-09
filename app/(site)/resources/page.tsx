@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { CULTURE_LINKS, CultureIcon } from "@/components/CultureBand";
+import { CULTURE_LINKS } from "@/components/CultureBand";
 import Directory, { type DirCategory, type DirEntry } from "./Directory";
 import { INFO_EMAIL, JET_PROGRAMME_URL, USJETAA_URL } from "@/lib/site";
 import Button from "@/components/Button";
@@ -7,6 +7,8 @@ import Eyebrow from "@/components/Eyebrow";
 import PhotoCredit from "@/components/PhotoCredit";
 import JoinCta from "@/components/JoinCta";
 import CalloutBox from "@/components/CalloutBox";
+import IconTile from "@/components/IconTile";
+import { BriefcaseIcon, LanguagesIcon, MapPinIcon } from "@/components/icons";
 import styles from "./page.module.css";
 
 export const metadata: Metadata = { title: "Resources" };
@@ -227,25 +229,7 @@ export default function ResourcesPage() {
       {/* CATEGORY: JAPANESE */}
       <section id="japanese" className={styles.category}>
         <div className={styles.categoryHeader}>
-          <span className={`${styles.categoryIcon} ${styles.iconJapanese}`}>
-            <svg
-              width="22"
-              height="22"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            >
-              <path d="m5 8 6 6"></path>
-              <path d="m4 14 6-6 2-3"></path>
-              <path d="M2 5h12"></path>
-              <path d="M7 2h1"></path>
-              <path d="m22 22-5-10-5 10"></path>
-              <path d="M14 18h6"></path>
-            </svg>
-          </span>
+          <IconTile tone="blue"><LanguagesIcon size={22} /></IconTile>
           <div>
             <h2 className={styles.categoryTitle}>Keep up your Japanese</h2>
             <p className={styles.categorySubtitle}>
@@ -309,21 +293,7 @@ export default function ResourcesPage() {
       {/* CATEGORY: CAREERS */}
       <section id="careers" className={`${styles.category} ${styles.categoryTight}`}>
         <div className={styles.categoryHeader}>
-          <span className={`${styles.categoryIcon} ${styles.iconCareers}`}>
-            <svg
-              width="22"
-              height="22"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            >
-              <rect width="20" height="14" x="2" y="7" rx="2" ry="2"></rect>
-              <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path>
-            </svg>
-          </span>
+          <IconTile tone="tan"><BriefcaseIcon size={22} /></IconTile>
           <div>
             <h2 className={styles.categoryTitle}>Careers &amp; jobs</h2>
             <p className={styles.categorySubtitle}>
@@ -376,9 +346,7 @@ export default function ResourcesPage() {
       {/* CULTURE BAND w/ PHOTO */}
       <section id="culture" className={`${styles.category} ${styles.categoryTight}`}>
         <div className={styles.categoryHeader}>
-          <span className={`${styles.categoryIcon} ${styles.iconCulture}`}>
-            <CultureIcon />
-          </span>
+          <IconTile tone="red"><MapPinIcon size={22} /></IconTile>
           <div>
             <h2 className={styles.categoryTitle}>Culture near you</h2>
             <p className={styles.categorySubtitle}>

@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import Hero from "@/components/Hero";
 import { INFO_EMAIL } from "@/lib/site";
 import Highlight from "@/components/Highlight";
+import IconTile from "@/components/IconTile";
+import { BriefcaseIcon, GlobeIcon, PeopleIcon } from "@/components/icons";
 import styles from "./page.module.css";
 
 export const metadata: Metadata = { title: "Join" };
@@ -28,23 +30,7 @@ export default function JoinPage() {
             <h2 className={styles.whyJoinTitle}>Why join?</h2>
             <div className={styles.whyJoinList}>
               <div className={styles.whyJoinItem}>
-                <div className={`${styles.whyJoinIcon} ${styles.iconTan}`}>
-                  <svg
-                    width="20"
-                    height="20"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  >
-                    <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path>
-                    <circle cx="9" cy="7" r="4"></circle>
-                    <path d="M22 21v-2a4 4 0 0 0-3-3.87"></path>
-                    <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
-                  </svg>
-                </div>
+                <IconTile tone="tan" size="sm"><PeopleIcon size={20} /></IconTile>
                 <div>
                   <div className={styles.whyJoinItemTitle}>
                     Reunions &amp; events
@@ -55,23 +41,7 @@ export default function JoinPage() {
                 </div>
               </div>
               <div className={styles.whyJoinItem}>
-                <div className={`${styles.whyJoinIcon} ${styles.iconBlue}`}>
-                  <svg
-                    width="20"
-                    height="20"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  >
-                    <path d="M4 22h16"></path>
-                    <path d="M10 14.66V17c0 .55.47.98.97 1.21C12.15 18.75 13 20.24 13 22"></path>
-                    <path d="M14 14.66V17c0 .55-.47.98-.97 1.21C11.85 18.75 11 20.24 11 22"></path>
-                    <path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"></path>
-                  </svg>
-                </div>
+                <IconTile tone="blue" size="sm"><GlobeIcon size={20} /></IconTile>
                 <div>
                   <div className={styles.whyJoinItemTitle}>
                     A network that gets it
@@ -83,21 +53,7 @@ export default function JoinPage() {
                 </div>
               </div>
               <div className={styles.whyJoinItem}>
-                <div className={`${styles.whyJoinIcon} ${styles.iconTan}`}>
-                  <svg
-                    width="20"
-                    height="20"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  >
-                    <path d="m22 2-7 20-4-9-9-4Z"></path>
-                    <path d="M22 2 11 13"></path>
-                  </svg>
-                </div>
+                <IconTile tone="tan" size="sm"><BriefcaseIcon size={20} /></IconTile>
                 <div>
                   <div className={styles.whyJoinItemTitle}>
                     Guidance &amp; jobs

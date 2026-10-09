@@ -7,6 +7,7 @@ import Button from "@/components/Button";
 import PhotoCredit from "@/components/PhotoCredit";
 import Highlight from "@/components/Highlight";
 import CalloutBox from "@/components/CalloutBox";
+import { FacebookIcon } from "@/components/icons";
 import styles from "./page.module.css";
 import { headshotSrc } from "@/lib/uploads";
 
@@ -227,10 +228,3 @@ function LeaderRow({ rep, location }: { rep: SubchapterRep; location?: string })
   );
 }
 
-function FacebookIcon() {
-  return (
-    <svg viewBox="0 0 24 24" width="13" height="13" aria-hidden="true" fill="currentColor">
-      <path d="M24 12a12 12 0 1 0-13.9 11.9v-8.4H7.1V12h3V9.4c0-3 1.8-4.7 4.5-4.7 1.3 0 2.7.2 2.7.2v3h-1.5c-1.5 0-2 .9-2 1.9V12h3.4l-.5 3.5h-2.9v8.4A12 12 0 0 0 24 12z" />
-    </svg>
-  );
-}
