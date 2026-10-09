@@ -51,6 +51,15 @@ export function saveErrorMessage(status: number | null, serverError?: string): s
   return serverError || "Save failed — try again";
 }
 
+// What the sticky save bar says, or null to hide it. A save's result
+// (saved or error) stays until the next edit clears it.
+export function saveBarMessage(s: { dirty: boolean; saving: boolean; busy: boolean; status: string }): string | null {
+  if (s.saving) return "Saving…";
+  if (s.status) return s.status;
+  if (!s.dirty) return null;
+  return s.busy ? "Waiting for photos to finish uploading…" : "Unsaved changes";
+}
+
 export type CheckedField = { key: string; label: string; type?: "date" | "url" | "textarea"; required?: boolean };
 
 // "RSVP link (optional)" → "RSVP link"; "Event name" → "event name".

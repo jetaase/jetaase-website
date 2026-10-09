@@ -4,7 +4,7 @@ import PhotoField, { type PhotoView } from "./PhotoField";
 import GalleryField, { type GalleryPhotoView } from "./GalleryField";
 import { blobToBase64 } from "@/lib/image";
 import {
-  buildSavePayload, cardHeading, prepareItems, saveErrorMessage, uploadErrorMessage, validate, type PendingPhoto,
+  buildSavePayload, cardHeading, prepareItems, saveBarMessage, saveErrorMessage, uploadErrorMessage, validate, type PendingPhoto,
 } from "@/lib/editor-save";
 import { formatEventDate, todayInEastern } from "@/lib/events";
 import { movePhoto, newPhotoId, slotKey, type EditorPhoto } from "@/lib/gallery";
@@ -411,17 +411,14 @@ export default function ListEditor<T extends Item>({
   }
 
   const current = items.filter((it) => !pastIds.includes(it.id));
+  const barMessage = saveBarMessage({ dirty, saving, busy, status });
   const past = items.filter((it) => pastIds.includes(it.id)).reverse(); // newest first
 
   return (
     <section className={styles.section}>
       <div className={styles.header}>
         <h2 className={styles.title}>{title}</h2>
-        <button className={styles.primary} onClick={save} disabled={!dirty || saving || busy}>
-          {saving ? "Saving…" : "Save changes"}
-        </button>
       </div>
-      {status && <p className={styles.status} role="status">{status}</p>}
 
       {/* Disabled while saving, so nothing changes under an in-flight save. */}
       <fieldset disabled={saving} className={styles.fieldset}>
@@ -440,6 +437,16 @@ export default function ListEditor<T extends Item>({
         </div>
       )}
       </fieldset>
+      {/* The section's only Save: sticks to the bottom of the screen while this
+          section is in view, and shows the save's status or result. */}
+      {barMessage && (
+        <div className={`${styles.saveBar} ${status.startsWith("Error") ? styles.saveBarError : ""}`}>
+          <span className={styles.saveBarText} role="status"><strong>{title}</strong> · {barMessage}</span>
+          <button className={styles.primary} onClick={save} disabled={!dirty || saving || busy}>
+            {saving ? "Saving…" : "Save changes"}
+          </button>
+        </div>
+      )}
     </section>
   );
 }

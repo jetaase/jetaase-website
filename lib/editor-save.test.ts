@@ -1,6 +1,6 @@
 import { describe, it, expect } from "vitest";
 import {
-  buildSavePayload, uploadErrorMessage, saveErrorMessage, validate, prepareItems, cardHeading, type PendingPhoto,
+  buildSavePayload, saveBarMessage, uploadErrorMessage, saveErrorMessage, validate, prepareItems, cardHeading, type PendingPhoto,
 } from "./editor-save";
 
 const blob = new Blob(["x"]);
@@ -189,5 +189,23 @@ describe("cardHeading", () => {
   });
   it("marks an empty role as new and an empty name as vacant", () => {
     expect(cardHeading({ role: "", name: "" }, "role", "role")).toEqual({ title: "New role", subtitle: "(vacant)" });
+  });
+});
+
+describe("saveBarMessage", () => {
+  const idle = { dirty: false, saving: false, busy: false, status: "" };
+  it("hides the bar when there is nothing to save or report", () => {
+    expect(saveBarMessage(idle)).toBeNull();
+  });
+  it("says there are unsaved changes", () => {
+    expect(saveBarMessage({ ...idle, dirty: true })).toBe("Unsaved changes");
+  });
+  it("explains a dimmed Save while photos are still on the way", () => {
+    expect(saveBarMessage({ ...idle, dirty: true, busy: true })).toBe("Waiting for photos to finish uploading…");
+  });
+  it("shows saving, then the save's result", () => {
+    expect(saveBarMessage({ ...idle, dirty: true, saving: true, status: "Saving…" })).toBe("Saving…");
+    expect(saveBarMessage({ ...idle, status: "Saved. New photos appear soon." })).toBe("Saved. New photos appear soon.");
+    expect(saveBarMessage({ ...idle, dirty: true, status: "Error: add the date." })).toBe("Error: add the date.");
   });
 });
