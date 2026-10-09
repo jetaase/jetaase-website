@@ -9,6 +9,7 @@ import { todayInEastern } from "@/lib/events";
 import { repSlots } from "@/lib/reps";
 import { INFO_EMAIL, JET_PROGRAMME_URL } from "@/lib/site";
 import Button from "@/components/Button";
+import Eyebrow from "@/components/Eyebrow";
 import styles from "./page.module.css";
 import { DEFAULT_HEADSHOT, headshotSrc } from "@/lib/uploads";
 
@@ -85,7 +86,7 @@ export default function WhoWeArePage() {
       {/* OFFICERS */}
       <section id="officers" className={styles.officers}>
         <div className={styles.officersHeader}>
-          <div className={styles.officersEyebrow}>Meet the team</div>
+          <Eyebrow>Meet the team</Eyebrow>
           <h2 className={styles.officersTitle}>Officers</h2>
           <p className={styles.officersIntro}>
             JETAASE is led by a volunteer board of alumni from across the

@@ -27,7 +27,7 @@ export default function Home() {
       <section id="top" className={styles.hero}>
         <div className={styles.heroGrid}>
           <div className={styles.heroCopy}>
-            <Eyebrow>JET Alumni of AL · GA · NC · SC</Eyebrow>
+            <Eyebrow size="hero">JET Alumni of AL · GA · NC · SC</Eyebrow>
             <h1 className={styles.heroTitle}>
               Connect.
               <br />
@@ -70,7 +70,7 @@ export default function Home() {
       {/* MISSION BAND */}
       <section className={styles.missionSection}>
         <div className={styles.missionInner}>
-          <div className={styles.missionEyebrow}>Our mission</div>
+          <Eyebrow tone="gold">Our mission</Eyebrow>
           <p className={styles.missionText}>
             To promote, inspire, encourage, and invest in cross-cultural
             awareness, keeping the JET spirit alive long after the flight
@@ -287,9 +287,7 @@ export default function Home() {
       <section id="officers" className={styles.calloutSection}>
         <div className={styles.calloutBox}>
           <div className={styles.calloutCopy}>
-            <div className={styles.calloutEyebrow}>
-              Run by alumni, for alumni
-            </div>
+            <Eyebrow>Run by alumni, for alumni</Eyebrow>
             <h2 className={styles.calloutTitle}>100% volunteer-powered</h2>
             <p className={styles.calloutText}>
               Every event, email, and reunion is put together by JET alumni
@@ -305,9 +303,7 @@ export default function Home() {
       <section id="chapters" className={styles.subchaptersSection}>
         <div className={styles.subchaptersBox}>
           <div>
-            <div className={styles.subchaptersEyebrow}>
-              Find your local crew
-            </div>
+            <Eyebrow>Find your local crew</Eyebrow>
             <h2 className={styles.subchaptersTitle}>
               Four states, one community
             </h2>

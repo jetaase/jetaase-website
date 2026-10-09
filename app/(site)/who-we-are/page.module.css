@@ -83,14 +83,6 @@
   max-width: 600px;
   margin-bottom: 34px;
 }
-.officersEyebrow {
-  font-family: var(--font-mono);
-  font-size: 13px;
-  letter-spacing: 0.22em;
-  text-transform: uppercase;
-  color: var(--red);
-  margin-bottom: 14px;
-}
 .officersTitle {
   font-family: var(--font-serif);
   font-weight: 500;

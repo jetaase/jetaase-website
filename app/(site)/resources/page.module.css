@@ -100,13 +100,6 @@
   gap: 12px;
   min-height: 220px;
 }
-.featuredEyebrow {
-  font-family: var(--font-mono);
-  font-size: 12px;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  opacity: 0.85;
-}
 .featuredTitle {
   font-family: var(--font-serif);
   font-weight: 500;
@@ -233,14 +226,6 @@
 }
 .directoryIntroInner {
   max-width: 620px;
-}
-.directoryEyebrow {
-  font-family: var(--font-mono);
-  font-size: 13px;
-  letter-spacing: 0.22em;
-  text-transform: uppercase;
-  color: var(--red);
-  margin-bottom: 14px;
 }
 .directoryTitle {
   font-family: var(--font-serif);

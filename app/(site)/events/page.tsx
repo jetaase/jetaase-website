@@ -9,6 +9,7 @@ import { readEvents, readPartnerEvents } from "@/lib/content";
 import { formatEventDate, splitEvents, todayInEastern, upcomingPartners } from "@/lib/events";
 import { EVENTS_EMAIL, INSTAGRAM_URL } from "@/lib/site";
 import Button from "@/components/Button";
+import Eyebrow from "@/components/Eyebrow";
 import styles from "./page.module.css";
 
 export const metadata: Metadata = { title: "Events" };
@@ -126,7 +127,7 @@ export default function EventsPage() {
           <div className={styles.lookingBackInner}>
             <div className={styles.lookingBackHeader}>
               <div>
-                <div className={styles.lookingBackEyebrow}>Looking back</div>
+                <Eyebrow>Looking back</Eyebrow>
                 <h2 className={styles.sectionTitle}>A few recent get-togethers</h2>
               </div>
               <a href={INSTAGRAM_URL} className={styles.instagramLink}>

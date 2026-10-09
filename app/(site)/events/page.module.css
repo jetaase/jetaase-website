@@ -113,14 +113,6 @@
   flex-wrap: wrap;
   gap: 12px;
 }
-.lookingBackEyebrow {
-  font-family: var(--font-mono);
-  font-size: 12px;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  color: var(--tan);
-  margin-bottom: 8px;
-}
 .instagramLink {
   font-size: 15px;
   font-weight: 700;

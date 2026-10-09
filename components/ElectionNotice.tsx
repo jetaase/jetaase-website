@@ -1,5 +1,6 @@
 import { openPositions, timelineSteps, type Election } from "@/lib/elections";
 import { toParagraphs } from "@/lib/events";
+import Eyebrow from "./Eyebrow";
 import styles from "./ElectionNotice.module.css";
 
 // The board elections call for nominations, shown on Who We Are while live.
@@ -9,7 +10,7 @@ export default function ElectionNotice({ election: e }: { election: Election }) 
   return (
     <section id="elections" className={styles.section}>
       <div className={styles.inner}>
-        <div className={styles.eyebrow}>Board elections</div>
+        <Eyebrow>Get involved</Eyebrow>
         <h2 className={styles.title}>{e.title}</h2>
         {toParagraphs(e.intro).map((p, i) => <p key={i} className={styles.text}>{p}</p>)}
         {positions.length > 0 && (

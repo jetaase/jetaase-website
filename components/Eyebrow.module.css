@@ -1,8 +1,24 @@
 .eyebrow {
   font-family: var(--font-mono);
+  text-transform: uppercase;
+}
+.section {
+  font-size: 12px;
+  letter-spacing: 0.2em;
+  margin-bottom: 12px;
+}
+.hero {
   font-size: 13px;
   letter-spacing: 0.22em;
-  text-transform: uppercase;
-  color: var(--red);
   margin-bottom: 20px;
+}
+.red {
+  color: var(--red);
+}
+.gold {
+  color: var(--gold);
+}
+.inherit {
+  color: inherit;
+  opacity: 0.85;
 }

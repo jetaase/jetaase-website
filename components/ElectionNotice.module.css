@@ -11,14 +11,6 @@
   border-radius: var(--radius);
   padding: 32px 36px;
 }
-.eyebrow {
-  font-family: var(--font-mono);
-  font-size: 13px;
-  letter-spacing: 0.22em;
-  text-transform: uppercase;
-  color: var(--red);
-  margin-bottom: 10px;
-}
 .title {
   font-family: var(--font-serif);
   font-weight: 500;

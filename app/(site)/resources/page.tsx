@@ -3,6 +3,7 @@ import { CULTURE_LINKS, CultureIcon } from "@/components/CultureBand";
 import Directory, { type DirCategory, type DirEntry } from "./Directory";
 import { INFO_EMAIL, JET_PROGRAMME_URL, USJETAA_URL } from "@/lib/site";
 import Button from "@/components/Button";
+import Eyebrow from "@/components/Eyebrow";
 import styles from "./page.module.css";
 
 export const metadata: Metadata = { title: "Resources" };
@@ -162,7 +163,7 @@ export default function ResourcesPage() {
       <section className={styles.hero}>
         <div className={styles.heroGrid}>
           <div>
-            <div className={styles.directoryEyebrow}>Your Japan toolkit</div>
+            <Eyebrow size="hero">Your Japan toolkit</Eyebrow>
             <h1 className={styles.heroTitle}>Resources</h1>
             <p className={styles.heroSubtitle}>
               Hand-picked links and guides from alumni who&apos;ve walked the
@@ -197,7 +198,7 @@ export default function ResourcesPage() {
             rel="noopener"
             className={styles.featuredCardRed}
           >
-            <div className={styles.featuredEyebrow}>Start here</div>
+            <Eyebrow tone="inherit">Start here</Eyebrow>
             <div className={styles.featuredTitle}>
               The JET Programme, official site
             </div>
@@ -215,7 +216,7 @@ export default function ResourcesPage() {
             rel="noopener"
             className={styles.featuredCardBlue}
           >
-            <div className={styles.featuredEyebrow}>The bigger network</div>
+            <Eyebrow tone="inherit">The bigger network</Eyebrow>
             <div className={styles.featuredTitle}>USJETAA</div>
             <p className={styles.featuredDesc}>
               All 19 alumni chapters across the country.
@@ -413,7 +414,7 @@ export default function ResourcesPage() {
       <section className={styles.directorySection}>
         <div className={styles.directoryIntro}>
           <div className={styles.directoryIntroInner}>
-            <div className={styles.directoryEyebrow}>The full index</div>
+            <Eyebrow>The full index</Eyebrow>
             <h2 className={styles.directoryTitle}>
               Directory of Japan-related resources
             </h2>

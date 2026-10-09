@@ -12,7 +12,7 @@ export default function Hero({
 }) {
   return (
     <section className={styles.hero}>
-      {eyebrow && <Eyebrow>{eyebrow}</Eyebrow>}
+      {eyebrow && <Eyebrow size="hero">{eyebrow}</Eyebrow>}
       <h1 className={styles.title}>{title}</h1>
       {subtitle && <p className={styles.subtitle}>{subtitle}</p>}
     </section>
