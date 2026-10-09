@@ -44,9 +44,9 @@ export default function Home() {
               <Button href="/join" variant="solid">
                 Become a member
               </Button>
-              <Link href="#events" className={styles.heroGhostBtn}>
+              <Button href="#events" variant="ghost">
                 Upcoming events →
-              </Link>
+              </Button>
             </div>
           </div>
           <div className={styles.heroImageWrap}>
@@ -297,9 +297,7 @@ export default function Home() {
               us directly.
             </p>
           </div>
-          <Link href="/who-we-are" className={styles.calloutBtn}>
-            Meet the team →
-          </Link>
+          <Button href="/who-we-are">Meet the team →</Button>
         </div>
       </section>
 
@@ -342,9 +340,9 @@ export default function Home() {
               jobs, and reunions.
             </p>
           </div>
-          <Link href="/join" className={styles.joinBtn}>
+          <Button href="/join" variant="navy" size="lg">
             Join JETAASE →
-          </Link>
+          </Button>
         </div>
       </section>
     </>

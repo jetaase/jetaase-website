@@ -39,15 +39,6 @@
   font-weight: 700;
   margin-bottom: 24px;
 }
-.rsvpBtn {
-  background: var(--red);
-  color: #fff;
-  font-weight: 700;
-  font-size: 16px;
-  padding: 14px 32px;
-  border-radius: 999px;
-  display: inline-block;
-}
 .passed {
   margin: 0;
   font-family: var(--font-mono);

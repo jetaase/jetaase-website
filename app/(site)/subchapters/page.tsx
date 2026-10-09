@@ -3,6 +3,7 @@ import Hero from "@/components/Hero";
 import EmailLink from "@/components/EmailLink";
 import { readReps, type State, type SubchapterRep } from "@/lib/content";
 import { FACEBOOK_URL, INFO_EMAIL } from "@/lib/site";
+import Button from "@/components/Button";
 import styles from "./page.module.css";
 import { headshotSrc } from "@/lib/uploads";
 
@@ -188,9 +189,9 @@ export default function SubchaptersPage() {
                       </div>
                     </div>
                   )}
-                  <a href={sc.facebook} className={styles.fbBtn} target="_blank" rel="noopener noreferrer">
+                  <Button href={sc.facebook} variant="dark" className={styles.fbBtn}>
                     {sc.facebookLabel ?? "Join the Facebook group →"}
-                  </a>
+                  </Button>
                 </div>
               </div>
             );
@@ -209,9 +210,7 @@ export default function SubchaptersPage() {
               group, we&apos;d love to hear from you.
             </p>
           </div>
-          <a href={`mailto:${INFO_EMAIL}`} className={styles.helpCtaBtn}>
-            Get in touch →
-          </a>
+          <Button href={`mailto:${INFO_EMAIL}`}>Get in touch →</Button>
         </div>
       </section>
     </>

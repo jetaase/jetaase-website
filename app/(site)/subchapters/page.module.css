@@ -143,15 +143,7 @@
 }
 .fbBtn {
   margin-top: auto;
-  background: var(--ink);
-  color: #fff;
-  font-weight: 700;
-  font-size: 15px;
-  padding: 14px 22px;
-  border-radius: 999px;
-  text-align: center;
-  text-wrap: balance;
-  display: block;
+  width: 100%;
 }
 
 /* HELP / LEAD CTA */
@@ -184,16 +176,6 @@
   line-height: 1.6;
   color: var(--text-muted);
   margin: 0;
-}
-.helpCtaBtn {
-  background: var(--red);
-  color: #fff;
-  font-weight: 700;
-  font-size: 16px;
-  padding: 15px 30px;
-  border-radius: 999px;
-  white-space: nowrap;
-  display: inline-block;
 }
 
 .cityGroup + .cityGroup,

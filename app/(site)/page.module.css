@@ -39,17 +39,6 @@
   gap: 14px;
   flex-wrap: wrap;
 }
-.heroGhostBtn {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  border: 1.5px solid var(--border-strong);
-  color: var(--ink);
-  font-weight: 600;
-  font-size: 16px;
-  padding: 15px 30px;
-  border-radius: 999px;
-}
 .heroImageWrap {
   position: relative;
   min-height: 540px;
@@ -292,16 +281,6 @@
   color: var(--text-muted);
   margin: 0;
 }
-.calloutBtn {
-  background: var(--red);
-  color: #fff;
-  font-weight: 700;
-  font-size: 16px;
-  padding: 16px 34px;
-  border-radius: 999px;
-  white-space: nowrap;
-  display: inline-block;
-}
 
 /* SUBCHAPTERS */
 .subchaptersSection {
@@ -379,16 +358,6 @@
   font-size: 18px;
   line-height: 1.55;
   margin: 0;
-}
-.joinBtn {
-  background: var(--navy);
-  color: #fff;
-  font-weight: 800;
-  font-size: 18px;
-  padding: 18px 40px;
-  border-radius: 999px;
-  white-space: nowrap;
-  display: inline-block;
 }
 
 @media (max-width: 768px) {

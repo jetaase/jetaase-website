@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
-import Link from "next/link";
 import { CULTURE_LINKS, CultureIcon } from "@/components/CultureBand";
 import Directory, { type DirCategory, type DirEntry } from "./Directory";
 import { INFO_EMAIL, JET_PROGRAMME_URL, USJETAA_URL } from "@/lib/site";
+import Button from "@/components/Button";
 import styles from "./page.module.css";
 
 export const metadata: Metadata = { title: "Resources" };
@@ -440,12 +440,9 @@ export default function ResourcesPage() {
               it our way and we&apos;ll add it for the next crew.
             </p>
           </div>
-          <a
-            href={`mailto:${INFO_EMAIL}?subject=Resource%20suggestion`}
-            className={styles.suggestBtn}
-          >
-            Suggest a resource
-          </a>
+          <Button href={`mailto:${INFO_EMAIL}?subject=Resource%20suggestion`}>
+            Suggest a resource →
+          </Button>
         </div>
       </section>
 
@@ -460,9 +457,9 @@ export default function ResourcesPage() {
               jobs, and reunions.
             </p>
           </div>
-          <Link href="/join" className={styles.joinBtn}>
+          <Button href="/join" variant="navy" size="lg">
             Join JETAASE →
-          </Link>
+          </Button>
         </div>
       </section>
     </>

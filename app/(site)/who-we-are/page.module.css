@@ -211,12 +211,3 @@
   line-height: 1.55;
   margin: 0;
 }
-.ctaBtn {
-  background: var(--navy);
-  color: #fff;
-  font-weight: 800;
-  font-size: 18px;
-  padding: 18px 40px;
-  border-radius: 999px;
-  white-space: nowrap;
-}

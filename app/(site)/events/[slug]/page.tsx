@@ -5,6 +5,7 @@ import Gallery from "@/components/Gallery";
 import Poster from "@/components/Poster";
 import { readEvents } from "@/lib/content";
 import { formatEventDate, isValidDate, todayInEastern, toParagraphs } from "@/lib/events";
+import Button from "@/components/Button";
 import styles from "./page.module.css";
 
 export const revalidate = 3600;
@@ -48,9 +49,7 @@ export default async function EventPage({ params }: Params) {
               <p className={styles.passed}>This event has passed.</p>
             ) : (
               event.rsvpUrl && (
-                <a href={event.rsvpUrl} target="_blank" rel="noopener noreferrer" className={styles.rsvpBtn}>
-                  RSVP
-                </a>
+                <Button href={event.rsvpUrl}>RSVP</Button>
               )
             )}
           </div>

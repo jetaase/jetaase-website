@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Button from "./Button";
 import styles from "./Header.module.css";
 
 const NAV = [
@@ -31,9 +32,9 @@ export default function Header() {
               {n.label}
             </Link>
           ))}
-          <Link href="/join" className={styles.joinBtn}>
+          <Button href="/join" size="sm">
             Join us
-          </Link>
+          </Button>
         </nav>
       </div>
     </header>

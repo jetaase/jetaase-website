@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import Link from "next/link";
 import Hero from "@/components/Hero";
 import BoardGrid from "@/components/BoardGrid";
 import EmailLink from "@/components/EmailLink";
@@ -9,6 +8,7 @@ import { isElectionLive } from "@/lib/elections";
 import { todayInEastern } from "@/lib/events";
 import { repSlots } from "@/lib/reps";
 import { INFO_EMAIL, JET_PROGRAMME_URL } from "@/lib/site";
+import Button from "@/components/Button";
 import styles from "./page.module.css";
 import { DEFAULT_HEADSHOT, headshotSrc } from "@/lib/uploads";
 
@@ -136,9 +136,9 @@ export default function WhoWeArePage() {
               Japan across the Southeast.
             </p>
           </div>
-          <Link href="/join" className={styles.ctaBtn}>
+          <Button href="/join" variant="navy" size="lg">
             Join JETAASE →
-          </Link>
+          </Button>
         </div>
       </section>
     </>

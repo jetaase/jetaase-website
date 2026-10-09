@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import Image from "next/image";
-import Link from "next/link";
 import Hero from "@/components/Hero";
 import CultureBand from "@/components/CultureBand";
 import Poster from "@/components/Poster";
@@ -9,6 +8,7 @@ import NewsletterPrompt from "@/components/NewsletterPrompt";
 import { readEvents, readPartnerEvents } from "@/lib/content";
 import { formatEventDate, splitEvents, todayInEastern, upcomingPartners } from "@/lib/events";
 import { EVENTS_EMAIL, INSTAGRAM_URL } from "@/lib/site";
+import Button from "@/components/Button";
 import styles from "./page.module.css";
 
 export const metadata: Metadata = { title: "Events" };
@@ -47,13 +47,11 @@ export default function EventsPage() {
               {next.summary && <p className={styles.featuredDesc}>{next.summary}</p>}
               <div className={styles.featuredActions}>
                 {next.rsvpUrl && (
-                  <a href={next.rsvpUrl} target="_blank" rel="noopener noreferrer" className={styles.rsvpBtn}>
-                    RSVP
-                  </a>
+                  <Button href={next.rsvpUrl}>RSVP</Button>
                 )}
-                <Link href={`/events/${next.slug}`} className={styles.detailsBtn}>
+                <Button href={`/events/${next.slug}`} variant="ghost">
                   Details →
-                </Link>
+                </Button>
               </div>
             </div>
           </div>
@@ -154,9 +152,7 @@ export default function EventsPage() {
               suggest something in your area, we&apos;ll help make it happen.
             </p>
           </div>
-          <a href={`mailto:${EVENTS_EMAIL}`} className={styles.suggestBtn}>
-            Suggest an event →
-          </a>
+          <Button href={`mailto:${EVENTS_EMAIL}`}>Suggest an event →</Button>
         </div>
       </section>
     </>
