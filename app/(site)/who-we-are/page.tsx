@@ -10,6 +10,7 @@ import { repSlots } from "@/lib/reps";
 import { INFO_EMAIL, JET_PROGRAMME_URL } from "@/lib/site";
 import Button from "@/components/Button";
 import Eyebrow from "@/components/Eyebrow";
+import Highlight from "@/components/Highlight";
 import styles from "./page.module.css";
 import { DEFAULT_HEADSHOT, headshotSrc } from "@/lib/uploads";
 
@@ -49,7 +50,7 @@ export default function WhoWeArePage() {
           <h2 className={styles.welcomeHeading}>
             Welcome to
             <br />
-            <span className={styles.welcomeHighlight}>JETAASE</span>
+            <Highlight>JETAASE</Highlight>
           </h2>
           <div className={styles.welcomeBody}>
             <p className={styles.welcomeParagraph}>

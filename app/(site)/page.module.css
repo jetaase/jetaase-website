@@ -24,8 +24,6 @@
 }
 .heroEmphasis {
   color: var(--red);
-  border-bottom: 5px solid var(--blue);
-  padding-bottom: 2px;
 }
 .heroSubtitle {
   font-size: 19px;

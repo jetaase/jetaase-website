@@ -9,6 +9,7 @@ import { electionBanner, isElectionLive } from "@/lib/elections";
 import { splitEvents, todayInEastern } from "@/lib/events";
 import { JET_PROGRAMME_URL } from "@/lib/site";
 import PhotoCredit from "@/components/PhotoCredit";
+import Highlight from "@/components/Highlight";
 import styles from "./page.module.css";
 
 // Re-render hourly so past events drop off without a deploy.
@@ -34,7 +35,7 @@ export default function Home() {
               <br />
               Remember.
               <br />
-              <em className={styles.heroEmphasis}>Engage.</em>
+              <em className={styles.heroEmphasis}><Highlight>Engage.</Highlight></em>
             </h1>
             <p className={styles.heroSubtitle}>
               The alumni association for everyone who taught, lived, and grew

@@ -1,8 +1,3 @@
-.heroSpanUnderline {
-  border-bottom: 5px solid var(--blue);
-  padding-bottom: 2px;
-}
-
 /* BODY */
 .body {
   max-width: var(--maxw);

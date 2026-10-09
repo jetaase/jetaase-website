@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Hero from "@/components/Hero";
 import { INFO_EMAIL } from "@/lib/site";
+import Highlight from "@/components/Highlight";
 import styles from "./page.module.css";
 
 export const metadata: Metadata = { title: "Join" };
@@ -13,7 +14,7 @@ export default function JoinPage() {
         eyebrow="Membership · always free"
         title={
           <>
-            Join <span className={styles.heroSpanUnderline}>JETAASE</span>
+            Join <Highlight>JETAASE</Highlight>
           </>
         }
         subtitle="Whether you just landed back stateside or came home decades ago, there's a seat for you. Fill out the form below and we'll welcome you into the Southeast JET community."

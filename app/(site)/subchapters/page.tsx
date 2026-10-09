@@ -5,6 +5,7 @@ import { readReps, type State, type SubchapterRep } from "@/lib/content";
 import { FACEBOOK_URL, INFO_EMAIL } from "@/lib/site";
 import Button from "@/components/Button";
 import PhotoCredit from "@/components/PhotoCredit";
+import Highlight from "@/components/Highlight";
 import styles from "./page.module.css";
 import { headshotSrc } from "@/lib/uploads";
 
@@ -111,7 +112,7 @@ export default function SubchaptersPage() {
         title={
           <>
             Find your local{" "}
-            <span className={styles.heroSpanUnderline}>subchapter</span>
+            <Highlight>subchapter</Highlight>
           </>
         }
         subtitle="JETAASE spans the Southeast, and each subchapter has its own Facebook group and a local leader who keeps things running. Find your region below and say hello."
