@@ -2,6 +2,7 @@ import { readFileSync } from "node:fs";
 import { join } from "node:path";
 import { normalizeEvent, normalizePartner, type JetaaseEvent, type PartnerEvent } from "./events";
 import { sortReps } from "./reps";
+import { normalizeElection, type Election } from "./elections";
 
 export type Chapter = "AL" | "GA" | "NC" | "SC";
 export type BoardMember = {
@@ -21,7 +22,8 @@ export const BOARD_PATH = "content/board.json";
 export const REPS_PATH = "content/subchapter-reps.json";
 export const EVENTS_PATH = "content/events.json";
 export const PARTNERS_PATH = "content/partner-events.json";
-export const EDITABLE_PATHS = [BOARD_PATH, REPS_PATH, EVENTS_PATH, PARTNERS_PATH];
+export const ELECTIONS_PATH = "content/elections.json";
+export const EDITABLE_PATHS = [BOARD_PATH, REPS_PATH, EVENTS_PATH, PARTNERS_PATH, ELECTIONS_PATH];
 
 const CONTENT_DIR = join(process.cwd(), "content");
 
@@ -50,4 +52,9 @@ export function readEvents(): JetaaseEvent[] {
 
 export function readPartnerEvents(): PartnerEvent[] {
   return (JSON.parse(readRaw("partner-events.json")) as Partial<PartnerEvent>[]).map(normalizePartner);
+}
+
+// One notice, not a list; normalized so a hand-edited file can't break pages.
+export function readElection(): Election {
+  return normalizeElection(JSON.parse(readRaw("elections.json")));
 }

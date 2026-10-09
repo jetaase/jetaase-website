@@ -1,7 +1,8 @@
 import { describe, it, expect } from "vitest";
 import {
-  readBoard, readReps, readEvents, readPartnerEvents, EDITABLE_PATHS,
+  readBoard, readReps, readEvents, readPartnerEvents, readElection, EDITABLE_PATHS,
 } from "./content";
+import { isElectionLive } from "./elections";
 import { isValidDate } from "./events";
 import { sortReps } from "./reps";
 
@@ -63,5 +64,20 @@ describe("readPartnerEvents", () => {
 describe("EDITABLE_PATHS", () => {
   it("lets the admin save both event files", () => {
     expect(EDITABLE_PATHS).toEqual(expect.arrayContaining(["content/events.json", "content/partner-events.json"]));
+  });
+});
+
+describe("readElection", () => {
+  it("returns a valid notice that starts switched off", () => {
+    const e = readElection();
+    expect(e.title).toBeTruthy();
+    expect(e.positions.length).toBeGreaterThan(0);
+    expect(isElectionLive(e, "2026-02-20")).toBe(false);
+  });
+});
+
+describe("EDITABLE_PATHS (elections)", () => {
+  it("lets the admin save the elections notice", () => {
+    expect(EDITABLE_PATHS).toContain("content/elections.json");
   });
 });

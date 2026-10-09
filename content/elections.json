@@ -1,0 +1,17 @@
+{
+  "enabled": false,
+  "showUntil": "2026-03-02",
+  "title": "2026–2027 board elections",
+  "intro": "JETAASE is looking for candidates for its 2026–2027 board. Anyone in our membership can run, and you don't need to live in Atlanta.\n\nBoard meetings are held online once a month for about an hour, and outgoing officers train whoever takes on their role.",
+  "positions": [
+    { "id": "pos-president", "title": "President", "description": "Provides overall leadership and strategy, presides over board meetings, and represents JETAASE externally." },
+    { "id": "pos-vp", "title": "Vice President", "description": "Supports the President, helps move projects forward, and represents JETAASE when needed." },
+    { "id": "pos-secretary", "title": "Secretary", "description": "Keeps records, shares meeting notes, and supports continuity across leadership changes." },
+    { "id": "pos-social", "title": "Social Media Coordinator", "description": "Creates and schedules content, promotes events and alumni, and keeps an eye on engagement." },
+    { "id": "pos-newsletter", "title": "Newsletter Editor", "description": "Gathers news and writes our email newsletter at least quarterly. No Constant Contact experience needed." },
+    { "id": "pos-discord", "title": "Discord Coordinator", "description": "Manages and moderates our Discord server, organizes channels, and shares announcements." }
+  ],
+  "howToRun": "Email a platform of under 200 words to president@jetaase.org by the deadline. Introduce yourself (where and when you were on JET) and say what you'd like to accomplish as an officer. A headshot is optional.",
+  "deadline": "2026-02-23",
+  "timeline": "Feb 16–23: Self-nominations due\nFeb 25–27: Voting\nMar 2: New officers announced"
+}
