@@ -6,6 +6,7 @@ import {
   buildSavePayload, cardHeading, prepareItems, saveErrorMessage, uploadErrorMessage, validate, type PendingPhoto,
 } from "@/lib/editor-save";
 import { formatEventDate, todayInEastern } from "@/lib/events";
+import { slotKey } from "@/lib/gallery";
 import { sortReps } from "@/lib/reps";
 import { isUploadPath, toPublicUrl, toRepoPath, type UploadFolder } from "@/lib/uploads";
 import styles from "./ListEditor.module.css";
@@ -77,18 +78,18 @@ export default function ListEditor<T extends Item>({
   const [dirty, setDirty] = useState(false);
   const [saving, setSaving] = useState(false);
   const [status, setStatus] = useState("");
-  // Photos picked this session, keyed by item id.
+  // Photos picked this session, keyed by slot (lib/gallery.ts slotKey).
   const [pending, setPending] = useState<Record<string, PendingPhoto>>({});
   // Published upload files to delete on the next save.
   const [deletes, setDeletes] = useState<string[]>([]);
-  // Each item's photo as published, recorded the first time it changes.
+  // Each single-photo slot's value as published, recorded the first time it changes.
   const [originals, setOriginals] = useState<Record<string, string>>({});
   const [baseShas, setBaseShas] = useState(base);
   const busy = Object.values(pending).some((p) => p.status !== "uploaded");
-  // Per-item upload generation: removing or undoing bumps it, so a late
+  // Per-slot upload generation: removing or undoing bumps it, so a late
   // upload result for a photo that's no longer wanted is ignored.
   const uploadGen = useRef<Record<string, number>>({});
-  const bumpGen = (id: string) => (uploadGen.current[id] = (uploadGen.current[id] ?? 0) + 1);
+  const bumpGen = (slot: string) => (uploadGen.current[slot] = (uploadGen.current[slot] ?? 0) + 1);
 
   useEffect(() => {
     if (!dirty) return;
@@ -115,9 +116,11 @@ export default function ListEditor<T extends Item>({
     });
   }
   function remove(it: T) {
-    bumpGen(it.id);
-    for (const f of fields) if (f.kind) markForDelete(String(originals[it.id] ?? it[f.key] ?? ""));
-    dropPending(it.id);
+    for (const f of fields) if (f.kind) markForDelete(String(originals[slotKey(it.id, f.key)] ?? it[f.key] ?? ""));
+    // Ignore late results for any of this item's uploads, and forget them.
+    const mine = (slot: string) => slot.startsWith(`${it.id}:`);
+    Object.keys(uploadGen.current).filter(mine).forEach(bumpGen);
+    setPending((p) => Object.fromEntries(Object.entries(p).filter(([slot]) => !mine(slot))));
     update((prev) => prev.filter((x) => x.id !== it.id));
   }
   function add() {
@@ -130,33 +133,40 @@ export default function ListEditor<T extends Item>({
   // ── Photos ──
 
   function rememberOriginal(it: T, key: string) {
-    setOriginals((o) => (it.id in o ? o : { ...o, [it.id]: String(it[key] ?? "") }));
+    const slot = slotKey(it.id, key);
+    setOriginals((o) => (slot in o ? o : { ...o, [slot]: String(it[key] ?? "") }));
   }
   // Only published uploads are deleted; this session's unsaved uploads simply drop.
   function markForDelete(publicUrl: string) {
     const repoPath = toRepoPath(publicUrl);
     if (isUploadPath(repoPath)) setDeletes((d) => (d.includes(repoPath) ? d : [...d, repoPath]));
   }
-  function dropPending(id: string) {
+  function unmarkForDelete(publicUrl: string) {
+    setDeletes((d) => d.filter((x) => x !== toRepoPath(publicUrl)));
+  }
+  function dropPending(slot: string) {
     setPending((p) => {
       const rest = { ...p };
-      delete rest[id];
+      delete rest[slot];
       return rest;
     });
   }
-  async function upload(it: T, key: string, jpeg: Blob, previewUrl: string) {
-    const gen = bumpGen(it.id);
-    const current = () => uploadGen.current[it.id] === gen;
-    setPending((p) => ({ ...p, [it.id]: { status: "uploading", previewUrl, jpeg } }));
+  // Uploads a rendered photo into `slot`; `done` stores its public URL.
+  async function upload(
+    slot: string, nameHint: string, jpeg: Blob, previewUrl: string, done: (publicUrl: string) => void,
+  ) {
+    const gen = bumpGen(slot);
+    const current = () => uploadGen.current[slot] === gen;
+    setPending((p) => ({ ...p, [slot]: { status: "uploading", previewUrl, jpeg } }));
     setDirty(true);
     const fail = (error: string) => {
-      if (current()) setPending((p) => ({ ...p, [it.id]: { status: "failed", previewUrl, jpeg, error } }));
+      if (current()) setPending((p) => ({ ...p, [slot]: { status: "failed", previewUrl, jpeg, error } }));
     };
     let res: Response;
     try {
       res = await fetch("/api/upload", {
         method: "POST", headers: { "content-type": "application/json" },
-        body: JSON.stringify({ folder: uploadFolder, nameHint: nameOf(it), dataBase64: await blobToBase64(jpeg) }),
+        body: JSON.stringify({ folder: uploadFolder, nameHint, dataBase64: await blobToBase64(jpeg) }),
       });
     } catch {
       return fail(uploadErrorMessage(null));
@@ -164,29 +174,34 @@ export default function ListEditor<T extends Item>({
     const data = await res.json().catch(() => ({}));
     if (!res.ok) return fail(uploadErrorMessage(res.status, data.error));
     if (!current()) return;
-    setPending((p) => ({ ...p, [it.id]: { status: "uploaded", previewUrl, jpeg, upload: data } }));
-    setField(it.id, key, toPublicUrl(data.path));
+    setPending((p) => ({ ...p, [slot]: { status: "uploaded", previewUrl, jpeg, upload: data } }));
+    done(toPublicUrl(data.path));
+  }
+  function uploadPhoto(it: T, key: string, jpeg: Blob, previewUrl: string) {
+    return upload(slotKey(it.id, key), nameOf(it), jpeg, previewUrl, (url) => setField(it.id, key, url));
   }
   function pickPhoto(it: T, key: string, jpeg: Blob, previewUrl: string) {
-    const original = String(originals[it.id] ?? it[key] ?? "");
+    const original = String(originals[slotKey(it.id, key)] ?? it[key] ?? "");
     rememberOriginal(it, key);
     markForDelete(original);
-    void upload(it, key, jpeg, previewUrl);
+    void uploadPhoto(it, key, jpeg, previewUrl);
   }
   function removePhoto(it: T, f: Field) {
-    bumpGen(it.id);
-    const original = String(originals[it.id] ?? it[f.key] ?? "");
+    const slot = slotKey(it.id, f.key);
+    bumpGen(slot);
+    const original = String(originals[slot] ?? it[f.key] ?? "");
     rememberOriginal(it, f.key);
     markForDelete(original);
-    dropPending(it.id);
+    dropPending(slot);
     setField(it.id, f.key, ""); // no photo: pages show the default
   }
   function undoRemove(it: T, key: string) {
-    const original = originals[it.id];
+    const slot = slotKey(it.id, key);
+    const original = originals[slot];
     if (original === undefined) return;
-    bumpGen(it.id);
-    setDeletes((d) => d.filter((x) => x !== toRepoPath(original)));
-    dropPending(it.id);
+    bumpGen(slot);
+    unmarkForDelete(original);
+    dropPending(slot);
     setField(it.id, key, original);
   }
 
@@ -298,8 +313,9 @@ export default function ListEditor<T extends Item>({
         <div id={`fields-${it.id}`} className={styles.fields} hidden={!open}>
           {fields.map((f) => {
             if (!f.kind) return renderInput(it, f);
-            const p = pending[it.id];
-            const original = originals[it.id];
+            const slot = slotKey(it.id, f.key);
+            const p = pending[slot];
+            const original = originals[slot];
             const view: PhotoView = {
               src: p?.previewUrl ?? String(it[f.key] ?? ""),
               status: p?.status ?? "saved",
@@ -313,7 +329,7 @@ export default function ListEditor<T extends Item>({
                 onPick={(jpeg, url) => pickPhoto(it, f.key, jpeg, url)}
                 onRemove={() => removePhoto(it, f)}
                 onUndoRemove={() => undoRemove(it, f.key)}
-                onRetry={() => p && void upload(it, f.key, p.jpeg, p.previewUrl)}
+                onRetry={() => p && void uploadPhoto(it, f.key, p.jpeg, p.previewUrl)}
               />
             );
           })}
