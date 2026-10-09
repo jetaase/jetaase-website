@@ -3,6 +3,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import Gallery from "@/components/Gallery";
 import Poster from "@/components/Poster";
 import { readEvents } from "@/lib/content";
 import { formatEventDate, isValidDate, todayInEastern, toParagraphs } from "@/lib/events";
@@ -61,6 +62,9 @@ export default async function EventPage({ params }: Params) {
           <div className={styles.details}>
             {toParagraphs(event.details).map((p, i) => <p key={i}>{p}</p>)}
           </div>
+        )}
+        {event.photos.length > 0 && (
+          <Gallery photos={event.photos} eventTitle={event.title} credit={event.photoCredit} />
         )}
       </main>
       <Footer />
