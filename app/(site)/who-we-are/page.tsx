@@ -53,7 +53,7 @@ export default function WhoWeArePage() {
           </h2>
           <div className={styles.welcomeBody}>
             <p className={styles.welcomeParagraph}>
-              Welcome to the official home of the{" "}
+              This is the official home of the{" "}
               <strong>
                 Japan Exchange and Teaching Program Alumni Association of the
                 Southeast (JETAASE)

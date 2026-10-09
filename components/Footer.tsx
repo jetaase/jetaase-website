@@ -15,8 +15,8 @@ export default function Footer() {
             />
           </div>
           <p className={styles.blurb}>
-            The JET Program Alumni Association of the Southeast. Chapter 4 of
-            USJETAA, serving AL, GA, NC &amp; SC since the early 1990s.
+            The JET Alumni Association of the Southeast, serving AL, GA, NC &amp; SC
+            since the early 1990s.
           </p>
           <a href={`mailto:${INFO_EMAIL}`} className={styles.email}>
             {INFO_EMAIL}

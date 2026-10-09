@@ -12,7 +12,7 @@ export const metadata: Metadata = {
   // Pages set a short title, shown in the browser tab as "JETAASE - Events".
   title: { default: "JETAASE Southeast", template: "JETAASE - %s" },
   description:
-    "Japan Exchange and Teaching Alumni Association, Southeast US — AL, GA, NC, SC.",
+    "JET Alumni Association of the Southeast, for JET Program alumni in Alabama, Georgia, North Carolina, and South Carolina.",
 };
 
 export default function RootLayout({
