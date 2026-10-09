@@ -81,7 +81,8 @@ export default function Home() {
       </section>
 
       {/* WHAT WE DO */}
-      <section className={styles.whatWeDo}>
+      <section className={styles.whatWeDo} aria-labelledby="what-we-do">
+        <h2 id="what-we-do" className="visually-hidden">What we do</h2>
         <div className={styles.whatWeDoGrid}>
           <div>
             <IconTile tone="tan"><PeopleIcon size={26} /></IconTile>
@@ -143,7 +144,7 @@ export default function Home() {
               title="Careers & jobs" description="Job boards and Japan-tied employers."
             />
             <LinkCard
-              href="/resources#culture" icon={<MapPinIcon />}
+              href="/events#culture" icon={<MapPinIcon />}
               title="Culture near you" description="Festivals, cultural events, and matsuri."
             />
           </div>

@@ -17,6 +17,16 @@ a { text-decoration: none; color: inherit; }
 
 img { max-width: 100%; display: block; }
 
+/* Hidden on screen but still read by screen readers. */
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
 /* Keyboard focus ring. Dark blue reads on cream, white and the blue bands;
    the footer switches to light blue for its dark background. */
 :focus-visible {
