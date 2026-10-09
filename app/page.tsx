@@ -317,16 +317,16 @@ export default function Home() {
             </h2>
           </div>
           <div className={styles.subchaptersChips}>
-            <Link href="/subchapters" className={styles.chip}>
+            <Link href="/subchapters#alabama" className={styles.chip}>
               Alabama
             </Link>
-            <Link href="/subchapters" className={styles.chip}>
+            <Link href="/subchapters#georgia" className={styles.chip}>
               Georgia
             </Link>
-            <Link href="/subchapters" className={styles.chip}>
+            <Link href="/subchapters#north-carolina" className={styles.chip}>
               North Carolina
             </Link>
-            <Link href="/subchapters" className={styles.chip}>
+            <Link href="/subchapters#south-carolina" className={styles.chip}>
               South Carolina
             </Link>
           </div>

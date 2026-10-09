@@ -127,7 +127,8 @@ export default function SubchaptersPage() {
           {SUBCHAPTERS.map((sc) => {
             const leaders = reps.filter((r) => r.state === sc.state);
             return (
-              <div key={sc.state} className={styles.card}>
+              // The id lets other pages link straight to a state, e.g. /subchapters#north-carolina.
+              <div key={sc.state} id={stateAnchor(sc.state)} className={styles.card}>
                 <div className={styles.cardPhotoWrap}>
                   <img src={sc.photo} alt={sc.photoAlt} className={styles.cardPhoto} />
                   {sc.badge && <span className={styles.cardBadge}>{sc.badge}</span>}
@@ -223,6 +224,10 @@ export default function SubchaptersPage() {
       <Footer />
     </div>
   );
+}
+
+function stateAnchor(state: string) {
+  return state.toLowerCase().replace(/\s+/g, "-");
 }
 
 function groupFor(sc: Subchapter, rep: SubchapterRep) {
