@@ -1,18 +1,19 @@
 .banner {
-  background: #fff4e5;
-  border-top: 1px solid #f3dcc0;
-  border-bottom: 1px solid #f3dcc0;
+  background: var(--blue);
 }
 .inner {
   max-width: var(--maxw);
   margin: 0 auto;
   padding: 12px 40px;
   font-size: 16px;
-  color: var(--ink);
+  font-weight: 600;
+  color: #17233f;
 }
 .link {
-  font-weight: 700;
-  color: var(--red);
+  font-weight: 800;
+  color: #17233f;
+  text-decoration: underline;
+  text-underline-offset: 3px;
   white-space: nowrap;
 }
 @media (max-width: 768px) {
