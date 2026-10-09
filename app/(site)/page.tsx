@@ -10,6 +10,7 @@ import { splitEvents, todayInEastern } from "@/lib/events";
 import { JET_PROGRAMME_URL } from "@/lib/site";
 import PhotoCredit from "@/components/PhotoCredit";
 import Highlight from "@/components/Highlight";
+import JoinCta from "@/components/JoinCta";
 import styles from "./page.module.css";
 
 // Re-render hourly so past events drop off without a deploy.
@@ -320,22 +321,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* JOIN CTA */}
-      <section id="join" className={styles.joinSection}>
-        <div className={styles.joinInner}>
-          <div className={styles.joinCopy}>
-            <h2 className={styles.joinTitle}>Ready to reconnect?</h2>
-            <p className={styles.joinText}>
-              Membership is free and takes two minutes. Join hundreds of
-              alumni across the Southeast and stay in the loop on events,
-              jobs, and reunions.
-            </p>
-          </div>
-          <Button href="/join" variant="navy" size="lg">
-            Join JETAASE →
-          </Button>
-        </div>
-      </section>
+      <JoinCta />
     </>
   );
 }

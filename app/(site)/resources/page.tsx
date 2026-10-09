@@ -5,6 +5,7 @@ import { INFO_EMAIL, JET_PROGRAMME_URL, USJETAA_URL } from "@/lib/site";
 import Button from "@/components/Button";
 import Eyebrow from "@/components/Eyebrow";
 import PhotoCredit from "@/components/PhotoCredit";
+import JoinCta from "@/components/JoinCta";
 import styles from "./page.module.css";
 
 export const metadata: Metadata = { title: "Resources" };
@@ -441,22 +442,7 @@ export default function ResourcesPage() {
         </div>
       </section>
 
-      {/* JOIN CTA */}
-      <section className={styles.joinSection}>
-        <div className={styles.joinInner}>
-          <div className={styles.joinCopy}>
-            <h2 className={styles.joinTitle}>Ready to reconnect?</h2>
-            <p className={styles.joinText}>
-              Membership is free and takes two minutes. Join hundreds of
-              alumni across the Southeast and stay in the loop on events,
-              jobs, and reunions.
-            </p>
-          </div>
-          <Button href="/join" variant="navy" size="lg">
-            Join JETAASE →
-          </Button>
-        </div>
-      </section>
+      <JoinCta />
     </>
   );
 }

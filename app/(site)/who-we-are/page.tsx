@@ -8,9 +8,9 @@ import { isElectionLive } from "@/lib/elections";
 import { todayInEastern } from "@/lib/events";
 import { repSlots } from "@/lib/reps";
 import { INFO_EMAIL, JET_PROGRAMME_URL } from "@/lib/site";
-import Button from "@/components/Button";
 import Eyebrow from "@/components/Eyebrow";
 import Highlight from "@/components/Highlight";
+import JoinCta from "@/components/JoinCta";
 import styles from "./page.module.css";
 import { DEFAULT_HEADSHOT, headshotSrc } from "@/lib/uploads";
 
@@ -128,21 +128,10 @@ export default function WhoWeArePage() {
         </div>
       </section>
 
-      {/* CTA */}
-      <section className={styles.cta}>
-        <div className={styles.ctaInner}>
-          <div className={styles.ctaCopy}>
-            <h2 className={styles.ctaTitle}>Become part of the story</h2>
-            <p className={styles.ctaText}>
-              Membership is free and open to all JET alumni and friends of
-              Japan across the Southeast.
-            </p>
-          </div>
-          <Button href="/join" variant="navy" size="lg">
-            Join JETAASE →
-          </Button>
-        </div>
-      </section>
+      <JoinCta
+        title="Become part of the story"
+        text="Membership is free and open to all JET alumni and friends of Japan across the Southeast."
+      />
     </>
   );
 }

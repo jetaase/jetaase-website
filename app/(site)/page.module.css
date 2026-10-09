@@ -291,37 +291,6 @@
   display: inline-block;
 }
 
-/* JOIN CTA */
-.joinSection {
-  background: var(--blue);
-  color: var(--navy);
-}
-.joinInner {
-  max-width: var(--maxw);
-  margin: 0 auto;
-  padding: 72px var(--gutter);
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 40px;
-  flex-wrap: wrap;
-}
-.joinCopy {
-  max-width: 560px;
-}
-.joinTitle {
-  font-family: var(--font-serif);
-  font-weight: 500;
-  font-size: 44px;
-  margin: 0 0 12px;
-  letter-spacing: -0.01em;
-}
-.joinText {
-  opacity: 0.82;
-  font-size: 18px;
-  line-height: 1.55;
-  margin: 0;
-}
 
 @media (max-width: 768px) {
   /* Boxes inside the page gutter: keep the text column wide on phones. */

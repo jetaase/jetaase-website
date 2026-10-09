@@ -168,34 +168,3 @@
   color: var(--red);
 }
 
-/* CTA */
-.cta {
-  background: var(--blue);
-  color: var(--navy);
-}
-.ctaInner {
-  max-width: var(--maxw);
-  margin: 0 auto;
-  padding: 64px var(--gutter);
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 40px;
-  flex-wrap: wrap;
-}
-.ctaCopy {
-  max-width: 560px;
-}
-.ctaTitle {
-  font-family: var(--font-serif);
-  font-weight: 500;
-  font-size: 40px;
-  margin: 0 0 10px;
-  letter-spacing: -0.01em;
-}
-.ctaText {
-  opacity: 0.82;
-  font-size: 18px;
-  line-height: 1.55;
-  margin: 0;
-}
