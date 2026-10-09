@@ -221,8 +221,7 @@ export default function ResourcesPage() {
             <div className={styles.featuredEyebrow}>The bigger network</div>
             <div className={styles.featuredTitle}>USJETAA</div>
             <p className={styles.featuredDesc}>
-              All 19 alumni chapters across the country. We&apos;re chapter
-              4, the Southeast.
+              All 19 alumni chapters across the country.
             </p>
             <span className={styles.featuredLink}>
               jetaausa.com <span className={styles.arrow}>↗</span>
