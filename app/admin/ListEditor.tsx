@@ -87,7 +87,9 @@ export default function ListEditor<T extends Item>({
   // Each single-photo slot's value as published, recorded the first time it changes.
   const [originals, setOriginals] = useState<Record<string, string>>({});
   const [baseShas, setBaseShas] = useState(base);
-  const busy = Object.values(pending).some((p) => p.status !== "uploaded");
+  // Galleries still decoding picked photos; their uploads haven't started yet.
+  const [preparing, setPreparing] = useState(0);
+  const busy = preparing > 0 || Object.values(pending).some((p) => p.status !== "uploaded");
   // Per-slot upload generation: removing or undoing bumps it, so a late
   // upload result for a photo that's no longer wanted is ignored.
   const uploadGen = useRef<Record<string, number>>({});
@@ -258,6 +260,7 @@ export default function ListEditor<T extends Item>({
     return (
       <GalleryField
         key={f.key} label={f.label} photos={views}
+        onPreparing={(on) => setPreparing((n) => n + (on ? 1 : -1))}
         onAdd={(picked) => addPhotos(it, f.key, picked)}
         onRemove={(id) => removeGalleryPhoto(it, f.key, find(id))}
         onUndo={(id) => undoGalleryRemove(it, f.key, find(id))}

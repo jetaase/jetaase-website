@@ -13,9 +13,10 @@ export type GalleryPhotoView = {
 
 // A row of photo tiles plus "Add photos"; the parent owns uploading and state.
 export default function GalleryField({
-  label, photos, onAdd, onRemove, onUndo, onRetry, onMove, onCaption,
+  label, photos, onPreparing, onAdd, onRemove, onUndo, onRetry, onMove, onCaption,
 }: {
   label: string; photos: GalleryPhotoView[];
+  onPreparing: (on: boolean) => void; // the parent keeps Save disabled while photos are being prepared
   onAdd: (picked: { jpeg: Blob; previewUrl: string }[]) => void;
   onRemove: (id: string) => void; onUndo: (id: string) => void; onRetry: (id: string) => void;
   onMove: (id: string, delta: -1 | 1) => void; onCaption: (id: string, value: string) => void;
@@ -29,6 +30,7 @@ export default function GalleryField({
     e.target.value = ""; // allow re-picking the same files
     if (!files.length) return;
     setPreparing(true);
+    onPreparing(true);
     // One at a time: decoding a dozen phone photos at once can run a phone out of memory.
     const picked: { jpeg: Blob; previewUrl: string }[] = [];
     let skipped = 0;
@@ -41,6 +43,7 @@ export default function GalleryField({
       }
     }
     setPreparing(false);
+    onPreparing(false);
     setMessage(skippedMessage(skipped));
     if (picked.length) onAdd(picked);
   }

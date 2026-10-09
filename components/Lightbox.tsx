@@ -33,6 +33,9 @@ export default function Lightbox({
     }
   }, [open]);
 
+  // Leaving the page with the viewer open (e.g. Back) unmounts it without a close event.
+  useEffect(() => () => { document.documentElement.style.overflow = ""; }, []);
+
   // Preload the neighbors so next/previous feel instant.
   useEffect(() => {
     if (index === null || n < 2) return;
@@ -54,8 +57,13 @@ export default function Lightbox({
         if (e.key === "ArrowLeft") go(-1);
         if (e.key === "ArrowRight") go(1);
       }}
-      onPointerDown={(e) => { swipeStart.current = e.clientX; }}
+      onPointerDown={(e) => {
+        if (!e.isPrimary) return; // a second finger (pinch) isn't a swipe
+        swipeStart.current = e.clientX;
+        swiped.current = false; // a touch swipe produces no click to clear it
+      }}
       onPointerUp={(e) => {
+        if (!e.isPrimary) return;
         const start = swipeStart.current;
         swipeStart.current = null;
         if (start === null || n < 2) return;
