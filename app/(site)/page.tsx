@@ -1,6 +1,4 @@
 import Link from "next/link";
-import Header from "@/components/Header";
-import Footer from "@/components/Footer";
 import Eyebrow from "@/components/Eyebrow";
 import Button from "@/components/Button";
 import EventCard from "@/components/EventCard";
@@ -22,8 +20,7 @@ export default function Home() {
   const shown = next ? [next, ...upcoming.slice(0, 2)] : [];
 
   return (
-    <div className={styles.pageRoot}>
-      <Header />
+    <>
       {isElectionLive(election, today) && <ElectionBanner text={electionBanner(election, today)} />}
 
       {/* HERO */}
@@ -350,8 +347,6 @@ export default function Home() {
           </Link>
         </div>
       </section>
-
-      <Footer />
-    </div>
+    </>
   );
 }

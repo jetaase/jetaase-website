@@ -1,6 +1,4 @@
 import type { Metadata } from "next";
-import Header from "@/components/Header";
-import Footer from "@/components/Footer";
 import Hero from "@/components/Hero";
 import EmailLink from "@/components/EmailLink";
 import { readReps, type State, type SubchapterRep } from "@/lib/content";
@@ -104,9 +102,7 @@ const SUBCHAPTERS: Subchapter[] = [
 export default function SubchaptersPage() {
   const reps = readReps();
   return (
-    <div className={styles.pageRoot}>
-      <Header />
-
+    <>
       {/* PAGE HEADER */}
       <Hero
         eyebrow="Four states · one community"
@@ -218,9 +214,7 @@ export default function SubchaptersPage() {
           </a>
         </div>
       </section>
-
-      <Footer />
-    </div>
+    </>
   );
 }
 

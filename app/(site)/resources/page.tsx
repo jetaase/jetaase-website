@@ -1,7 +1,5 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import Header from "@/components/Header";
-import Footer from "@/components/Footer";
 import { CULTURE_LINKS, CultureIcon } from "@/components/CultureBand";
 import Directory, { type DirCategory, type DirEntry } from "./Directory";
 import { INFO_EMAIL, JET_PROGRAMME_URL, USJETAA_URL } from "@/lib/site";
@@ -159,9 +157,7 @@ const DIRECTORY: DirCategory[] = [
 
 export default function ResourcesPage() {
   return (
-    <div className={styles.pageRoot}>
-      <Header />
-
+    <>
       {/* PAGE HERO */}
       <section className={styles.hero}>
         <div className={styles.heroGrid}>
@@ -469,8 +465,6 @@ export default function ResourcesPage() {
           </Link>
         </div>
       </section>
-
-      <Footer />
-    </div>
+    </>
   );
 }

@@ -1,7 +1,5 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import Header from "@/components/Header";
-import Footer from "@/components/Footer";
 import Hero from "@/components/Hero";
 import BoardGrid from "@/components/BoardGrid";
 import EmailLink from "@/components/EmailLink";
@@ -25,9 +23,7 @@ export default function WhoWeArePage() {
   const election = readElection();
   const showElection = isElectionLive(election, todayInEastern(new Date()));
   return (
-    <div className={styles.pageRoot}>
-      <Header />
-
+    <>
       {/* PAGE HERO */}
       <Hero
         eyebrow="About JETAASE"
@@ -145,8 +141,6 @@ export default function WhoWeArePage() {
           </Link>
         </div>
       </section>
-
-      <Footer />
-    </div>
+    </>
   );
 }

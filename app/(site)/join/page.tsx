@@ -1,6 +1,4 @@
 import type { Metadata } from "next";
-import Header from "@/components/Header";
-import Footer from "@/components/Footer";
 import Hero from "@/components/Hero";
 import { INFO_EMAIL } from "@/lib/site";
 import styles from "./page.module.css";
@@ -9,9 +7,7 @@ export const metadata: Metadata = { title: "Join" };
 
 export default function JoinPage() {
   return (
-    <div className={styles.pageRoot}>
-      <Header />
-
+    <>
       {/* PAGE HERO */}
       <Hero
         eyebrow="Membership · always free"
@@ -132,8 +128,6 @@ export default function JoinPage() {
           </div>
         </div>
       </section>
-
-      <Footer />
-    </div>
+    </>
   );
 }

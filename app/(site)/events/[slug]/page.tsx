@@ -1,8 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import Header from "@/components/Header";
-import Footer from "@/components/Footer";
 import Gallery from "@/components/Gallery";
 import Poster from "@/components/Poster";
 import { readEvents } from "@/lib/content";
@@ -37,9 +35,8 @@ export default async function EventPage({ params }: Params) {
   const when = [formatEventDate(event.date, "long"), event.time].filter(Boolean).join(" · ");
 
   return (
-    <div className={styles.pageRoot}>
-      <Header />
-      <main className={styles.main}>
+    <>
+      <div className={styles.main}>
         <Link href="/events" className={styles.back}>← All events</Link>
         <div className={styles.grid}>
           <Poster event={event} className={styles.poster} priority />
@@ -66,8 +63,7 @@ export default async function EventPage({ params }: Params) {
         {event.photos.length > 0 && (
           <Gallery photos={event.photos} eventTitle={event.title} credit={event.photoCredit} />
         )}
-      </main>
-      <Footer />
-    </div>
+      </div>
+    </>
   );
 }

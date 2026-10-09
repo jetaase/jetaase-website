@@ -1,8 +1,6 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
-import Header from "@/components/Header";
-import Footer from "@/components/Footer";
 import Hero from "@/components/Hero";
 import CultureBand from "@/components/CultureBand";
 import Poster from "@/components/Poster";
@@ -25,9 +23,7 @@ export default function EventsPage() {
   const hasPosters = partners.some((p) => p.poster);
 
   return (
-    <div className={styles.pageRoot}>
-      <Header />
-
+    <>
       <Hero
         eyebrow="What's coming up"
         title="Events"
@@ -163,8 +159,6 @@ export default function EventsPage() {
           </a>
         </div>
       </section>
-
-      <Footer />
-    </div>
+    </>
   );
 }

@@ -1,7 +1,3 @@
-.pageRoot {
-  width: 100%;
-}
-
 .heroSpanUnderline {
   border-bottom: 5px solid var(--blue);
   padding-bottom: 2px;
