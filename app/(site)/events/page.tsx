@@ -10,6 +10,7 @@ import { formatEventDate, splitEvents, todayInEastern, upcomingPartners } from "
 import { EVENTS_EMAIL, INSTAGRAM_URL } from "@/lib/site";
 import Button from "@/components/Button";
 import Eyebrow from "@/components/Eyebrow";
+import CalloutBox from "@/components/CalloutBox";
 import styles from "./page.module.css";
 
 export const metadata: Metadata = { title: "Events" };
@@ -143,19 +144,12 @@ export default function EventsPage() {
 
       <CultureBand />
 
-      {/* SUGGEST AN EVENT */}
-      <section className={styles.suggest}>
-        <div className={styles.suggestBox}>
-          <div className={styles.suggestCopy}>
-            <h2 className={styles.suggestTitle}>Have an event idea?</h2>
-            <p className={styles.suggestText}>
-              Reunions, language tables, hikes — if you&apos;d like to host or
-              suggest something in your area, we&apos;ll help make it happen.
-            </p>
-          </div>
-          <Button href={`mailto:${EVENTS_EMAIL}`}>Suggest an event →</Button>
-        </div>
-      </section>
+      <CalloutBox
+        variant="dashed"
+        title="Have an event idea?"
+        text="Reunions, language tables, hikes — if you'd like to host or suggest something in your area, we'll help make it happen."
+        action={<Button href={`mailto:${EVENTS_EMAIL}`}>Suggest an event →</Button>}
+      />
     </>
   );
 }

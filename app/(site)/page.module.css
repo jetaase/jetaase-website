@@ -220,63 +220,8 @@
   color: var(--text-subtle);
 }
 
-/* VOLUNTEER-RUN CALLOUT */
-.calloutSection {
-  max-width: var(--maxw);
-  margin: 0 auto;
-  padding: 80px var(--gutter);
-}
-.calloutBox {
-  background: var(--surface-tan);
-  border-radius: var(--radius-lg);
-  padding: 52px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 40px;
-  flex-wrap: wrap;
-}
-.calloutCopy {
-  max-width: 620px;
-}
-.calloutTitle {
-  font-family: var(--font-serif);
-  font-weight: 500;
-  font-size: 36px;
-  margin: 0 0 12px;
-  letter-spacing: -0.01em;
-}
-.calloutText {
-  font-size: 17px;
-  line-height: 1.6;
-  color: var(--text-muted);
-  margin: 0;
-}
-
-/* SUBCHAPTERS */
-.subchaptersSection {
-  max-width: var(--maxw);
-  margin: 0 auto;
-  padding: 20px var(--gutter) 80px;
-}
-.subchaptersBox {
-  background: #fff;
-  border: 1px solid var(--border);
-  border-radius: var(--radius-lg);
-  padding: 44px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 30px;
-  flex-wrap: wrap;
-}
-.subchaptersTitle {
-  font-family: var(--font-serif);
-  font-weight: 500;
-  font-size: 30px;
-  margin: 0;
-}
-.subchaptersChips {
+/* SUBCHAPTER CHIPS */
+.chips {
   display: flex;
   gap: 12px;
   flex-wrap: wrap;
@@ -291,11 +236,3 @@
   display: inline-block;
 }
 
-
-@media (max-width: 768px) {
-  /* Boxes inside the page gutter: keep the text column wide on phones. */
-  .calloutBox,
-  .subchaptersBox {
-    padding: 28px 24px;
-  }
-}

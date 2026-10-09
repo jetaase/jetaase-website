@@ -11,6 +11,7 @@ import { JET_PROGRAMME_URL } from "@/lib/site";
 import PhotoCredit from "@/components/PhotoCredit";
 import Highlight from "@/components/Highlight";
 import JoinCta from "@/components/JoinCta";
+import CalloutBox from "@/components/CalloutBox";
 import styles from "./page.module.css";
 
 // Re-render hourly so past events drop off without a deploy.
@@ -279,47 +280,26 @@ export default function Home() {
         </div>
       </section>
 
-      {/* VOLUNTEER-RUN CALLOUT */}
-      <section id="officers" className={styles.calloutSection}>
-        <div className={styles.calloutBox}>
-          <div className={styles.calloutCopy}>
-            <Eyebrow>Run by alumni, for alumni</Eyebrow>
-            <h2 className={styles.calloutTitle}>100% volunteer-powered</h2>
-            <p className={styles.calloutText}>
-              Every event, email, and reunion is put together by JET alumni
-              giving their time. Meet the board behind it, and reach any of
-              us directly.
-            </p>
-          </div>
-          <Button href="/who-we-are">Meet the team →</Button>
-        </div>
-      </section>
+      <CalloutBox
+        eyebrow="Run by alumni, for alumni"
+        title="100% volunteer-powered"
+        text="Every event, email, and reunion is put together by JET alumni giving their time. Meet the board behind it, and reach any of us directly."
+        action={<Button href="/who-we-are">Meet the team →</Button>}
+      />
 
-      {/* SUBCHAPTERS */}
-      <section id="chapters" className={styles.subchaptersSection}>
-        <div className={styles.subchaptersBox}>
-          <div>
-            <Eyebrow>Find your local crew</Eyebrow>
-            <h2 className={styles.subchaptersTitle}>
-              Four states, one community
-            </h2>
+      <CalloutBox
+        variant="outlined"
+        eyebrow="Find your local crew"
+        title="Four states, one community"
+        action={
+          <div className={styles.chips}>
+            <Link href="/subchapters#alabama" className={styles.chip}>Alabama</Link>
+            <Link href="/subchapters#georgia" className={styles.chip}>Georgia</Link>
+            <Link href="/subchapters#north-carolina" className={styles.chip}>North Carolina</Link>
+            <Link href="/subchapters#south-carolina" className={styles.chip}>South Carolina</Link>
           </div>
-          <div className={styles.subchaptersChips}>
-            <Link href="/subchapters#alabama" className={styles.chip}>
-              Alabama
-            </Link>
-            <Link href="/subchapters#georgia" className={styles.chip}>
-              Georgia
-            </Link>
-            <Link href="/subchapters#north-carolina" className={styles.chip}>
-              North Carolina
-            </Link>
-            <Link href="/subchapters#south-carolina" className={styles.chip}>
-              South Carolina
-            </Link>
-          </div>
-        </div>
-      </section>
+        }
+      />
 
       <JoinCta />
     </>

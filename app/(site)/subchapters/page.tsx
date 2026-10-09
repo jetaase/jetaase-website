@@ -6,6 +6,7 @@ import { FACEBOOK_URL, INFO_EMAIL } from "@/lib/site";
 import Button from "@/components/Button";
 import PhotoCredit from "@/components/PhotoCredit";
 import Highlight from "@/components/Highlight";
+import CalloutBox from "@/components/CalloutBox";
 import styles from "./page.module.css";
 import { headshotSrc } from "@/lib/uploads";
 
@@ -194,20 +195,11 @@ export default function SubchaptersPage() {
         </div>
       </section>
 
-      {/* HELP / LEAD CTA */}
-      <section className={styles.helpCta}>
-        <div className={styles.helpCtaBox}>
-          <div className={styles.helpCtaCopy}>
-            <h2 className={styles.helpCtaTitle}>Don&apos;t see your area?</h2>
-            <p className={styles.helpCtaText}>
-              We&apos;re always looking for volunteers to help grow the
-              community. If you&apos;d like to help start or lead a local
-              group, we&apos;d love to hear from you.
-            </p>
-          </div>
-          <Button href={`mailto:${INFO_EMAIL}`}>Get in touch →</Button>
-        </div>
-      </section>
+      <CalloutBox
+        title="Don't see your area?"
+        text="We're always looking for volunteers to help grow the community. If you'd like to help start or lead a local group, we'd love to hear from you."
+        action={<Button href={`mailto:${INFO_EMAIL}`}>Get in touch →</Button>}
+      />
     </>
   );
 }

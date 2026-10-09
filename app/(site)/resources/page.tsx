@@ -6,6 +6,7 @@ import Button from "@/components/Button";
 import Eyebrow from "@/components/Eyebrow";
 import PhotoCredit from "@/components/PhotoCredit";
 import JoinCta from "@/components/JoinCta";
+import CalloutBox from "@/components/CalloutBox";
 import styles from "./page.module.css";
 
 export const metadata: Metadata = { title: "Resources" };
@@ -424,23 +425,14 @@ export default function ResourcesPage() {
         <Directory categories={DIRECTORY} />
       </section>
 
-      {/* SUGGEST A LINK */}
-      <section className={styles.suggest}>
-        <div className={styles.suggestBox}>
-          <div className={styles.suggestCopy}>
-            <h2 className={styles.suggestTitle}>
-              Know a link we&apos;re missing?
-            </h2>
-            <p className={styles.suggestText}>
-              This page is built by alumni. If a resource helped you, send
-              it our way and we&apos;ll add it for the next crew.
-            </p>
-          </div>
-          <Button href={`mailto:${INFO_EMAIL}?subject=Resource%20suggestion`}>
-            Suggest a resource →
-          </Button>
-        </div>
-      </section>
+      <CalloutBox
+        variant="dashed"
+        title="Know a link we're missing?"
+        text="This page is built by alumni. If a resource helped you, send it our way and we'll add it for the next crew."
+        action={
+          <Button href={`mailto:${INFO_EMAIL}?subject=Resource%20suggestion`}>Suggest a resource →</Button>
+        }
+      />
 
       <JoinCta />
     </>
