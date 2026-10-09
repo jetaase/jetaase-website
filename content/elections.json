@@ -1,6 +1,6 @@
 {
-  "enabled": false,
-  "showUntil": "2026-03-02",
+  "enabled": true,
+  "showUntil": "2026-10-23",
   "title": "2026–2027 board elections",
   "intro": "JETAASE is looking for candidates for its 2026–2027 board. Anyone in our membership can run, and you don't need to live in Atlanta.\n\nBoard meetings are held online once a month for about an hour, and outgoing officers train whoever takes on their role.",
   "positions": [
@@ -84,6 +84,6 @@
     }
   ],
   "howToRun": "Email a platform of under 200 words to president@jetaase.org by the deadline. Introduce yourself (where and when you were on JET) and say what you'd like to accomplish as an officer. A headshot is optional.",
-  "deadline": "2026-02-23",
-  "timeline": "Feb 16–23: Self-nominations due\nFeb 25–27: Voting\nMar 2: New officers announced"
+  "deadline": "2026-10-16",
+  "timeline": "Oct 16: Self-nominations due\nOct 25–27: Voting\nNov 2: New officers announced"
 }
