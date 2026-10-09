@@ -7,7 +7,7 @@
 .tab {
   padding: 0.6rem 1.1rem;
   font-weight: 600;
-  color: var(--ink-muted);
+  color: var(--text-muted);
   border-bottom: 3px solid transparent;
   margin-bottom: -1px;
 }

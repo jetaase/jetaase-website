@@ -3,6 +3,7 @@ import { useRef, useState } from "react";
 import { renderJpeg } from "@/lib/image";
 import { skippedMessage } from "@/lib/gallery";
 import type { PhotoStatus } from "./PhotoField";
+import AdminButton from "./AdminButton";
 import styles from "./GalleryField.module.css";
 
 export type GalleryPhotoView = {
@@ -59,11 +60,11 @@ export default function GalleryField({
             <li key={ph.id} className={styles.tile}>
               <img src={ph.src} alt="" className={`${styles.thumb} ${ph.removed ? styles.faded : ""}`} />
               <div className={styles.row}>
-                <button type="button" onClick={() => onMove(ph.id, -1)} disabled={i === 0} aria-label="Move earlier">‹</button>
-                <button type="button" onClick={() => onMove(ph.id, 1)} disabled={i === photos.length - 1} aria-label="Move later">›</button>
+                <AdminButton type="button" onClick={() => onMove(ph.id, -1)} disabled={i === 0} aria-label="Move earlier">‹</AdminButton>
+                <AdminButton type="button" onClick={() => onMove(ph.id, 1)} disabled={i === photos.length - 1} aria-label="Move later">›</AdminButton>
                 {ph.removed
-                  ? <button type="button" onClick={() => onUndo(ph.id)}>Undo</button>
-                  : <button type="button" onClick={() => onRemove(ph.id)} className={styles.danger}>Remove</button>}
+                  ? <AdminButton type="button" onClick={() => onUndo(ph.id)}>Undo</AdminButton>
+                  : <AdminButton type="button" onClick={() => onRemove(ph.id)} className={styles.danger}>Remove</AdminButton>}
               </div>
               <input
                 value={ph.caption} placeholder="Caption (optional)" aria-label={`Caption for photo ${i + 1}`}
@@ -74,7 +75,7 @@ export default function GalleryField({
               {ph.status === "failed" && (
                 <span className={styles.note} role="status">
                   {ph.error || "Upload failed — try again"}{" "}
-                  <button type="button" onClick={() => onRetry(ph.id)}>Retry</button>
+                  <AdminButton type="button" onClick={() => onRetry(ph.id)}>Retry</AdminButton>
                 </span>
               )}
               {ph.removed && <span className={styles.note}>Will be removed when you save</span>}
@@ -83,9 +84,9 @@ export default function GalleryField({
         </ol>
       )}
       <div className={styles.addRow}>
-        <button type="button" onClick={() => input.current?.click()} disabled={preparing}>
+        <AdminButton type="button" onClick={() => input.current?.click()} disabled={preparing}>
           {preparing ? "Preparing photos…" : "Add photos"}
-        </button>
+        </AdminButton>
         {message && <span className={styles.note} role="status">{message}</span>}
       </div>
       <input ref={input} type="file" accept="image/*" multiple hidden onChange={chosen} />

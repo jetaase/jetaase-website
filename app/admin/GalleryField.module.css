@@ -7,12 +7,12 @@
 .label {
   font-size: 0.8rem;
   font-weight: 600;
-  color: var(--ink-muted);
+  color: var(--text-muted);
 }
 .empty {
   margin: 0;
   font-size: 0.85rem;
-  color: var(--ink-muted);
+  color: var(--text-muted);
 }
 .tiles {
   list-style: none;
@@ -52,12 +52,9 @@
   background: #fff;
   min-width: 0;
 }
-.danger {
-  color: var(--red);
-}
 .note {
   font-size: 0.75rem;
-  color: var(--ink-muted);
+  color: var(--text-muted);
 }
 .badge {
   font-size: 0.75rem;

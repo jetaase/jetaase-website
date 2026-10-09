@@ -22,17 +22,6 @@
   font: inherit;
 }
 
-.login button {
-  padding: 0.7rem 1rem;
-  border-radius: 999px;
-  border: none;
-  background: var(--red);
-  color: #fff;
-  cursor: pointer;
-  font: inherit;
-  font-weight: 700;
-}
-
 .login p[role="alert"] {
   color: var(--red);
   margin: 0;
@@ -52,7 +41,7 @@
 }
 
 .intro {
-  color: var(--ink-muted);
+  color: var(--text-muted);
   margin: 0 0 2.5rem;
 }
 
@@ -61,7 +50,7 @@
   margin-bottom: 1rem;
   font-size: 0.9rem;
   font-weight: 600;
-  color: var(--ink-muted);
+  color: var(--text-muted);
 }
 .back:hover {
   color: var(--ink);

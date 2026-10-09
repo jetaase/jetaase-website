@@ -3,6 +3,7 @@ import { useRef, useState } from "react";
 import { canDecode, renderJpeg, UnsupportedImageError, type ImageKind, type PixelArea } from "@/lib/image";
 import CropDialog from "./CropDialog";
 import { headshotSrc } from "@/lib/uploads";
+import AdminButton from "./AdminButton";
 import styles from "./PhotoField.module.css";
 
 export type PhotoStatus = "saved" | "uploading" | "uploaded" | "failed";
@@ -72,13 +73,13 @@ export default function PhotoField({
       )}
       <div className={styles.side}>
         <div className={styles.buttons}>
-          <button type="button" onClick={() => input.current?.click()} disabled={view.status === "uploading"}>
+          <AdminButton type="button" onClick={() => input.current?.click()} disabled={view.status === "uploading"}>
             {view.status === "uploading" ? "Uploading…" : view.src ? "Change photo" : "Add photo"}
-          </button>
+          </AdminButton>
           {view.pendingDelete || view.canUndo
-            ? <button type="button" onClick={onUndoRemove}>Undo</button>
-            : view.src && <button type="button" onClick={onRemove} className={styles.danger}>Remove</button>}
-          {view.status === "failed" && <button type="button" onClick={onRetry}>Retry</button>}
+            ? <AdminButton type="button" onClick={onUndoRemove}>Undo</AdminButton>
+            : view.src && <AdminButton type="button" onClick={onRemove} variant="danger">Remove</AdminButton>}
+          {view.status === "failed" && <AdminButton type="button" onClick={onRetry}>Retry</AdminButton>}
         </div>
         {(view.status === "uploading" || view.status === "uploaded") && <span className={styles.badge}>Unsaved</span>}
         {message && <span className={styles.message} role="status">{message}</span>}

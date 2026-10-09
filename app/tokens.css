@@ -11,7 +11,6 @@
 
   /* Text, darkest to lightest */
   --text-body: #3a352d; /* long-form paragraphs */
-  --ink-muted: #4a443b; /* nav, hero subtitles */
   --text-muted: #6a6252; /* intros and secondary copy */
   --text-subtle: #7a715e; /* card descriptions */
   --text-faint: #8a8069; /* meta, counts, captions */

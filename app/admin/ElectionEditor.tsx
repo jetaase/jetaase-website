@@ -4,6 +4,7 @@ import { saveBarMessage, saveErrorMessage, type SaveBody } from "@/lib/editor-sa
 import { movePhoto as moveItem } from "@/lib/gallery"; // generic list move
 import { validateElection, type Election, type ElectionPosition } from "@/lib/elections";
 import { todayInEastern } from "@/lib/events";
+import AdminButton from "./AdminButton";
 import list from "./ListEditor.module.css";
 import styles from "./ElectionEditor.module.css";
 
@@ -143,9 +144,9 @@ export default function ElectionEditor({
                         <input type="checkbox" checked={p.open} onChange={(ev) => setPosition(p.id, "open", ev.target.checked)} />
                         Open this round
                       </label>
-                      <button type="button" onClick={() => setPositions((ps) => moveItem(ps, i, -1))} disabled={i === 0} aria-label="Move up">↑</button>
-                      <button type="button" onClick={() => setPositions((ps) => moveItem(ps, i, 1))} disabled={i === e.positions.length - 1} aria-label="Move down">↓</button>
-                      <button type="button" className={list.danger} onClick={() => setPositions((ps) => ps.filter((x) => x.id !== p.id))}>Remove</button>
+                      <AdminButton type="button" onClick={() => setPositions((ps) => moveItem(ps, i, -1))} disabled={i === 0} aria-label="Move up">↑</AdminButton>
+                      <AdminButton type="button" onClick={() => setPositions((ps) => moveItem(ps, i, 1))} disabled={i === e.positions.length - 1} aria-label="Move down">↓</AdminButton>
+                      <AdminButton type="button" variant="danger" onClick={() => setPositions((ps) => ps.filter((x) => x.id !== p.id))}>Remove</AdminButton>
                     </div>
                   </div>
                   <div id={`fields-${p.id}`} className={list.fields} hidden={!open}>
@@ -165,9 +166,9 @@ export default function ElectionEditor({
               );
             })}
           </ol>
-          <button type="button" className={list.secondary} onClick={addPosition}>
+          <AdminButton type="button" onClick={addPosition}>
             + Add position
-          </button>
+          </AdminButton>
 
           <div className={`${list.fields} ${styles.after}`}>
             {area("howToRun", "How to run", "How to nominate yourself, and by when. Leave a blank line between paragraphs.")}
@@ -178,9 +179,9 @@ export default function ElectionEditor({
       {barMessage && (
         <div className={`${list.saveBar} ${status.startsWith("Error") ? list.saveBarError : ""}`}>
           <span className={list.saveBarText} role="status"><strong>Elections notice</strong> · {barMessage}</span>
-          <button className={list.primary} onClick={save} disabled={!dirty || saving}>
+          <AdminButton variant="primary" size="md" onClick={save} disabled={!dirty || saving}>
             {saving ? "Saving…" : "Save changes"}
-          </button>
+          </AdminButton>
         </div>
       )}
     </section>

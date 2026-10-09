@@ -10,6 +10,7 @@ import { formatEventDate, todayInEastern } from "@/lib/events";
 import { movePhoto, newPhotoId, slotKey, type EditorPhoto } from "@/lib/gallery";
 import { sortReps } from "@/lib/reps";
 import { isUploadPath, toPublicUrl, toRepoPath, type UploadFolder } from "@/lib/uploads";
+import AdminButton from "./AdminButton";
 import styles from "./ListEditor.module.css";
 
 type Item = { id: string; order: number } & Record<string, unknown>;
@@ -380,11 +381,11 @@ export default function ListEditor<T extends Item>({
           <div className={styles.actions}>
             {!byDate && !sortByState && (
               <>
-                <button onClick={() => move(i, -1)} disabled={i === 0} aria-label="Move up">↑</button>
-                <button onClick={() => move(i, 1)} disabled={i === items.length - 1} aria-label="Move down">↓</button>
+                <AdminButton onClick={() => move(i, -1)} disabled={i === 0} aria-label="Move up">↑</AdminButton>
+                <AdminButton onClick={() => move(i, 1)} disabled={i === items.length - 1} aria-label="Move down">↓</AdminButton>
               </>
             )}
-            <button onClick={() => remove(it)} className={styles.danger}>Remove</button>
+            <AdminButton onClick={() => remove(it)} className={styles.danger}>Remove</AdminButton>
           </div>
         </div>
         <div id={`fields-${it.id}`} className={styles.fields} hidden={!open}>
@@ -431,7 +432,7 @@ export default function ListEditor<T extends Item>({
       <ol className={styles.list}>
         {current.map((it) => renderCard(it, items.indexOf(it)))}
       </ol>
-      <button className={styles.secondary} onClick={add}>+ Add {itemLabel}</button>
+      <AdminButton onClick={add}>+ Add {itemLabel}</AdminButton>
       {past.length > 0 && (
         <div className={styles.pastGroup}>
           <button
@@ -448,9 +449,9 @@ export default function ListEditor<T extends Item>({
       {barMessage && (
         <div className={`${styles.saveBar} ${status.startsWith("Error") ? styles.saveBarError : ""}`}>
           <span className={styles.saveBarText} role="status"><strong>{title}</strong> · {barMessage}</span>
-          <button className={styles.primary} onClick={save} disabled={!dirty || saving || busy}>
+          <AdminButton variant="primary" size="md" onClick={save} disabled={!dirty || saving || busy}>
             {saving ? "Saving…" : "Save changes"}
-          </button>
+          </AdminButton>
         </div>
       )}
     </section>

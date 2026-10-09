@@ -1,0 +1,43 @@
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.35rem;
+  border: 1.5px solid var(--border-strong);
+  border-radius: 999px;
+  background: #fff;
+  color: var(--ink);
+  font: inherit;
+  font-weight: 600;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: border-color 0.15s, filter 0.15s;
+}
+.btn:hover:not(:disabled) {
+  border-color: var(--ink);
+}
+.btn:disabled {
+  opacity: 0.45;
+  cursor: default;
+}
+.sm {
+  padding: 0.35rem 0.85rem;
+  font-size: 0.9rem;
+}
+.md {
+  padding: 0.6rem 1.3rem;
+  font-size: 1rem;
+  font-weight: 700;
+}
+.primary {
+  background: var(--red);
+  border-color: var(--red);
+  color: #fff;
+}
+.primary:hover:not(:disabled) {
+  border-color: var(--red);
+  filter: brightness(0.92);
+}
+.danger {
+  color: var(--red);
+}

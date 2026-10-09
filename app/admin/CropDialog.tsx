@@ -2,6 +2,7 @@
 import { useEffect, useState } from "react";
 import Cropper, { type Area } from "react-easy-crop";
 import type { PixelArea } from "@/lib/image";
+import AdminButton from "./AdminButton";
 import styles from "./CropDialog.module.css";
 
 // `src` is an object URL owned (created and revoked) by the caller.
@@ -36,10 +37,10 @@ export default function CropDialog({
           />
         </label>
         <div className={styles.actions}>
-          <button type="button" onClick={onCancel}>Cancel</button>
-          <button type="button" className={styles.primary} disabled={!area} onClick={() => area && onConfirm(area)}>
+          <AdminButton type="button" onClick={onCancel}>Cancel</AdminButton>
+          <AdminButton type="button" variant="primary" disabled={!area} onClick={() => area && onConfirm(area)}>
             Use photo
-          </button>
+          </AdminButton>
         </div>
       </div>
     </div>

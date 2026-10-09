@@ -1,4 +1,5 @@
 "use client";
+import AdminButton from "./AdminButton";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 
@@ -22,7 +23,7 @@ export default function LoginForm() {
         id="admin-password" type="password" autoComplete="current-password"
         value={password} onChange={(e) => setPassword(e.target.value)} placeholder="Admin password"
       />
-      <button type="submit">Sign in</button>
+      <AdminButton type="submit" variant="primary" size="md">Sign in</AdminButton>
       {error && <p role="alert">{error}</p>}
     </form>
   );

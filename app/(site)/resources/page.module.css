@@ -188,7 +188,7 @@
   font-weight: 700;
   border: 1.5px solid var(--border-strong);
   background: #fff;
-  color: var(--ink-muted);
+  color: var(--text-muted);
   border-radius: 999px;
   padding: 8px 16px;
   cursor: pointer;
@@ -276,7 +276,7 @@
 /* Directory filtering */
 .noResults {
   font-size: 15px;
-  color: var(--ink-muted);
+  color: var(--text-muted);
   padding: 8px 0 44px;
   margin: 0;
 }
