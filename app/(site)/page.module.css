@@ -166,4 +166,7 @@
   font-size: 15px;
   display: inline-block;
 }
+.chip:hover {
+  border-color: var(--ink);
+}
 

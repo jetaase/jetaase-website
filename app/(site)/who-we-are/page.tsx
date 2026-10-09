@@ -71,6 +71,8 @@ export default function WhoWeArePage() {
               anyone, especially those interested in applying to the{" "}
               <a
                 href={JET_PROGRAMME_URL}
+                target="_blank"
+                rel="noopener noreferrer"
                 className={styles.welcomeLink}
               >
                 JET Program
