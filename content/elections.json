@@ -7,38 +7,80 @@
     {
       "id": "pos-president",
       "title": "President",
-      "description": "Provides overall leadership and strategy, presides over board meetings, and represents JETAASE externally.",
+      "description": "The President provides overall leadership and direction for JETAASE, guiding the organization’s strategy, operations, and priorities. They work closely with the Board to ensure initiatives align with JETAASE’s mission, support alumni engagement, and move the organization forward. The President presides over board meetings, helps coordinate board efforts, and serves as a key representative of JETAASE to partners, alumni, and the broader community.",
       "open": true
     },
     {
       "id": "pos-vp",
       "title": "Vice President",
-      "description": "Supports the President, helps move projects forward, and represents JETAASE when needed.",
+      "description": "The Vice President supports the President and Board by helping move projects and initiatives forward and staying closely informed on chapter priorities. They serve as a key thought partner to the President, help coordinate efforts across roles, and step in to represent JETAASE at events, meetings, and engagements as needed. This role plays a critical part in maintaining continuity, momentum, and leadership presence.",
       "open": true
     },
     {
       "id": "pos-secretary",
       "title": "Secretary",
-      "description": "Keeps records, shares meeting notes, and supports continuity across leadership changes.",
+      "description": "The Secretary supports the Board by keeping JETAASE organized and well-documented. They record and share meeting notes, maintain chapter records, and help ensure continuity across leadership transitions. The Secretary collaborates with communications roles to support clear, consistent messaging and may represent JETAASE at events as needed.",
       "open": true
+    },
+    {
+      "id": "pos-treasurer",
+      "title": "Treasurer",
+      "description": "The Treasurer manages the organization's money, keeps accurate records, and deposits funds in banks approved by the Board. They spend money as directed by the Board, keep receipts, and report on finances at regular meetings or whenever asked. The Treasurer also reviews financial policies with the Board.",
+      "open": false
+    },
+    {
+      "id": "pos-social-events",
+      "title": "Social Events Chair",
+      "description": "The Social Chair (in possible conjunction with a Social Committee) plans approximately one event per quarter, such as Happy Hours, the Returnee Events, and Hanami parties. The Social Chair is responsible for maintaining the invite lists and determining how many members are planning to attend. The Social Chair works with the treasurer to make sure that everyone has paid for the event if there is a fee.",
+      "open": false
     },
     {
       "id": "pos-social",
       "title": "Social Media Coordinator",
-      "description": "Creates and schedules content, promotes events and alumni, and keeps an eye on engagement.",
+      "description": "The Social Media Coordinator strengthens JETAASE’s visibility and engagement by managing the chapter’s social media presence. They create and schedule content that highlights events, celebrates alumni, and promotes opportunities aligned with JETAASE’s mission. This role helps ensure timely, consistent, and authentic communication across platforms, collaborates with other board members to amplify initiatives, and monitors engagement to foster a connected and vibrant alumni community.",
       "open": true
     },
     {
       "id": "pos-newsletter",
       "title": "Newsletter Editor",
-      "description": "Gathers news and writes our email newsletter at least quarterly. No Constant Contact experience needed.",
+      "description": "The Newsletter Editor compiles information from various sources and composes email newsletters to share the details of events and other resources with our membership. The Newsletter Editor collaborates with the rest of the Board to ensure information is disseminated in a timely manner. Newsletters should be composed at least quarterly. No previous experience with Constant Contact necessary.",
       "open": true
     },
     {
       "id": "pos-discord",
       "title": "Discord Coordinator",
-      "description": "Manages and moderates our Discord server, organizes channels, and shares announcements.",
+      "description": "The Discord Coordinator shall be responsible for the management and moderation of JETAASE’s Discord server. They shall oversee the organization of channels, facilitate communication among members, and support community engagement by sharing announcements, resources, and updates as directed by the Board. The Discord Coordinator shall ensure the server remains a welcoming, respectful, and inclusive space aligned with JETAASE’s mission and activities.",
       "open": true
+    },
+    {
+      "id": "pos-webmaster",
+      "title": "Webmaster",
+      "description": "The Webmaster plays a key role in JETAASE's online presence, managing the website's technical upkeep and content. This includes updating events, news, and resources, ensuring the site is user-friendly, accessible, and effectively facilitates communication among members. We welcome all applicants, regardless of their technical background! Experience with Squarespace, WordPress, HTML, or SEO is a plus, but a desire to learn is what's most important.",
+      "open": false
+    },
+    {
+      "id": "pos-rep-al",
+      "title": "Alabama Subchapter Representative",
+      "description": "The Alabama Subchapter Representative serves as the primary point of contact for JETAASE members in Alabama. They are responsible for planning and implementing at least one activity in the specific geographic area of Alabama, communicate regularly with Alabama members and the JETAASE Board, and participate in JETAASE Board leadership activities, including monthly meetings. The Representative also submits timely requests for reimbursement of approved expenditures and provides information for required activity reports.",
+      "open": false
+    },
+    {
+      "id": "pos-rep-nc",
+      "title": "North Carolina Subchapter Representative",
+      "description": "The North Carolina Subchapter Representative serves as the primary point of contact for JETAASE members in North Carolina. They are responsible for planning and implementing at least one activity in the specific geographic area of North Carolina, communicate regularly with North Carolina members and the JETAASE Board, and participate in JETAASE Board leadership activities, including monthly meetings. The Representative also submits timely requests for reimbursement of approved expenditures and provides information for required activity reports.",
+      "open": false
+    },
+    {
+      "id": "pos-rep-sc",
+      "title": "South Carolina Subchapter Representative",
+      "description": "The South Carolina Subchapter Representative serves as the primary point of contact for JETAASE members in South Carolina. They are responsible for planning and implementing at least one activity in the specific geographic area of South Carolina, communicate regularly with South Carolina members and the JETAASE Board, and participate in JETAASE Board leadership activities, including monthly meetings. The Representative also submits timely requests for reimbursement of approved expenditures and provides information for required activity reports.",
+      "open": false
+    },
+    {
+      "id": "pos-rep-charlotte",
+      "title": "Charlotte Subchapter Representative",
+      "description": "The Charlotte Subchapter Representative serves as the primary point of contact for JETAASE members in Charlotte. They are responsible for planning and implementing at least one activity in the specific geographic area of Charlotte, communicate regularly with Charlotte members and the JETAASE Board, and participate in JETAASE Board leadership activities, including monthly meetings. The Representative also submits timely requests for reimbursement of approved expenditures and provides information for required activity reports.",
+      "open": false
     }
   ],
   "howToRun": "Email a platform of under 200 words to president@jetaase.org by the deadline. Introduce yourself (where and when you were on JET) and say what you'd like to accomplish as an officer. A headshot is optional.",
