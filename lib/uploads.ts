@@ -30,7 +30,8 @@ export function uploadPath(folder: UploadFolder, nameHint: string, now: Date, ra
   return `public/images/uploads/${folder}/${slugify(nameHint)}-${d}-${rand}.jpg`;
 }
 
-const UPLOAD_PATH_RE = /^public\/images\/uploads\/(board|reps|events)\/[a-z0-9-]+-\d{8}-[0-9a-f]{4}\.jpg$/;
+// 4-hex suffixes are older uploads; new ones get 8 (lib/admin-api.ts).
+const UPLOAD_PATH_RE = /^public\/images\/uploads\/(board|reps|events)\/[a-z0-9-]+-\d{8}-[0-9a-f]{4}(?:[0-9a-f]{4})?\.jpg$/;
 
 export function isUploadPath(path: string): boolean {
   return UPLOAD_PATH_RE.test(path);

@@ -54,6 +54,8 @@ describe("uploadPath / isUploadPath", () => {
   it("validates exact upload paths only", () => {
     expect(isUploadPath("public/images/uploads/reps/x-20261008-a1b2.jpg")).toBe(true);
     expect(isUploadPath("public/images/uploads/events/photo-20261008-ffff.jpg")).toBe(true);
+    expect(isUploadPath("public/images/uploads/events/photo-20261008-0a1b2c3d.jpg")).toBe(true);
+    expect(isUploadPath("public/images/uploads/events/photo-20261008-0a1b2c.jpg")).toBe(false);
     expect(isUploadPath("public/images/board-placeholder.png")).toBe(false);
     expect(isUploadPath("public/images/uploads/other/x-20261008-a1b2.jpg")).toBe(false);
     expect(isUploadPath("public/images/uploads/board/../../content/board.json")).toBe(false);

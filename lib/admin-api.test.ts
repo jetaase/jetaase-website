@@ -37,6 +37,11 @@ describe("handleUpload", () => {
       body: { path: "public/images/uploads/reps/oscar-garcia-20261008-a1b2.jpg", sha: "BLOB1" },
     });
   });
+  it("names files with an 8-hex suffix by default, so a gallery batch won't collide", async () => {
+    const f = vi.fn().mockResolvedValue(ok({ sha: "BLOB1" }, 201));
+    const r = await handleUpload({ fetchImpl: f, repo, authed: true }, { folder: "events", nameHint: "Picnic", dataBase64: JPEG });
+    expect(String(r.body.path)).toMatch(/^public\/images\/uploads\/events\/picnic-\d{8}-[0-9a-f]{8}\.jpg$/);
+  });
   it("never leaks the token in errors", async () => {
     const f = vi.fn().mockRejectedValue(new Error("boom SECRET_TOKEN"));
     const r = await handleUpload(deps(f), { folder: "board", nameHint: "a", dataBase64: JPEG });

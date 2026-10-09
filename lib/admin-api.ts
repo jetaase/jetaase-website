@@ -21,7 +21,8 @@ export const CONFLICT_MESSAGE =
   "Someone else saved changes, or the site is still updating from your last save. Wait a minute, reload, and try again.";
 
 const fail = (status: number, error: string): Result => ({ status, body: { error } });
-const randHex = () => Math.floor(Math.random() * 0x10000).toString(16).padStart(4, "0");
+// 8 hex digits: a gallery uploads many photos with the same name and date at once.
+const randHex = () => Math.floor(Math.random() * 0x100000000).toString(16).padStart(8, "0");
 
 export async function handleUpload(deps: Deps, body: unknown): Promise<Result> {
   if (!deps.authed) return fail(401, "unauthorized");
