@@ -26,6 +26,13 @@
   border-radius: 50%;
   object-fit: contain;
 }
+.wordmark {
+  font-family: var(--font-serif);
+  font-weight: 600;
+  font-size: 22px;
+  color: #fff;
+  letter-spacing: 0.01em;
+}
 .blurb {
   font-size: 14px;
   line-height: 1.6;
@@ -57,6 +64,10 @@
 }
 .columnLink {
   color: var(--on-dark-muted);
+}
+.columnLink:hover {
+  color: #fff;
+  text-decoration: underline;
 }
 .bottomBar {
   border-top: 1px solid var(--text-body);
