@@ -27,15 +27,17 @@ Both API routes fail closed: they return 401 without a valid session, and login 
 
 ```
 app/
-  page.tsx                 Home
-  who-we-are/              Board / officers (renders content/board.json)
-  events/  join/  subchapters/  resources/
+  (site)/layout.tsx        Header, <main> and Footer for every public page
+  (site)/page.tsx          Home
+  (site)/who-we-are/       Board / officers (renders content/board.json)
+  (site)/events/  join/  subchapters/  resources/
   admin/                   Login form + board editor
   api/auth/route.ts        Password → signed session cookie
   api/github/route.ts      Auth-guarded commit proxy
   tokens.css fonts.ts globals.css   Design system
 components/                Header, Footer, Hero, Eyebrow, Button, BoardGrid
 lib/
+  site.ts                  Contact emails and outside links
   session.ts               Sign and verify session tokens
   auth-cookie.ts           Cookie name, TTL, requireSession
   github.ts                getFileSha / commitFile (Contents API)
