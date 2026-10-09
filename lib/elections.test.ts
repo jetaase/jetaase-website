@@ -1,11 +1,11 @@
 import { describe, it, expect } from "vitest";
 import {
-  normalizeElection, isElectionLive, electionBanner, validateElection, timelineSteps, type Election,
+  normalizeElection, isElectionLive, electionBanner, validateElection, timelineSteps, openPositions, type Election,
 } from "./elections";
 
 const base: Election = {
   enabled: true, showUntil: "2027-03-02", title: "2026–2027 board elections", intro: "",
-  positions: [{ id: "a", title: "Secretary", description: "Keeps records." }],
+  positions: [{ id: "a", title: "Secretary", description: "Keeps records.", open: true }],
   howToRun: "", deadline: "2027-02-23", timeline: "",
 };
 
@@ -25,9 +25,20 @@ describe("normalizeElection", () => {
   it("drops positions without a role and fills missing ids", () => {
     const e = normalizeElection({ positions: [{ title: "President" }, { title: "  " }, "x", { id: "k", title: "VP", description: 3 }] });
     expect(e.positions).toEqual([
-      { id: "pos-0", title: "President", description: "" },
-      { id: "k", title: "VP", description: "" },
+      { id: "pos-0", title: "President", description: "", open: true },
+      { id: "k", title: "VP", description: "", open: true },
     ]);
+  });
+});
+
+describe("open positions", () => {
+  it("treats positions as open unless marked otherwise", () => {
+    const e = normalizeElection({ positions: [{ title: "President", open: false }, { title: "VP" }, { title: "Secretary", open: "no" }] });
+    expect(e.positions.map((p) => p.open)).toEqual([false, true, true]);
+  });
+  it("lists only the positions open this round, in order", () => {
+    const e = normalizeElection({ positions: [{ title: "President", open: false }, { title: "VP" }, { title: "Secretary" }] });
+    expect(openPositions(e).map((p) => p.title)).toEqual(["VP", "Secretary"]);
   });
 });
 
@@ -67,8 +78,14 @@ describe("validateElection", () => {
     expect(validateElection({ ...base, enabled: false, title: "" }, T)).toBeNull();
   });
   it("needs a role for every position", () => {
-    expect(validateElection({ ...base, positions: [...base.positions, { id: "b", title: "", description: "x" }] }, T))
+    expect(validateElection({ ...base, positions: [...base.positions, { id: "b", title: "", description: "x", open: true }] }, T))
       .toBe("Position 2: add the role.");
+  });
+  it("needs at least one position open this round to switch the notice on", () => {
+    const closed = { ...base, positions: [{ ...base.positions[0], open: false }] };
+    expect(validateElection(closed, T)).toBe("Tick “Open this round” for at least one position.");
+    expect(validateElection({ ...closed, enabled: false }, T)).toBeNull();
+    expect(validateElection({ ...base, positions: [] }, T)).toBeNull();
   });
   it("refuses to switch on a notice whose Show until date has passed", () => {
     expect(validateElection(base, "2027-03-03")).toBe("The “Show until” date has passed. Pick a later day or clear it.");

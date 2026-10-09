@@ -18,7 +18,7 @@ The old site's blog was only really used once a year, to post the call for board
 | Scope | The call for nominations only: positions, who can run, how to run, timeline. Voting stays by email/form as today; ballots and candidate statements are out of scope. New officers simply appear on Who We Are. |
 | On/off | A switch, plus a "Show until" date. Shown while `enabled` is on and today (Eastern) is on or before `showUntil`. An empty `showUntil` means "until switched off". |
 | Placement | The full notice is a section on Who We Are, above Officers, at `#elections`. A slim homepage banner links to it. |
-| Positions | A free list of role plus one-line description, typed in the admin. Covers officers and subchapter reps. It's kept after the notice is switched off, so next year starts from it. |
+| Positions | A kept list of roles (role plus description), typed in the admin. Covers officers and subchapter reps. Each role has an "Open this round" switch; only open roles show on the notice. Terms are usually 2 years, so a role skipped this season stays saved for the next. Added 2026-10-09 after the first review. |
 | Timeline | Free text, one step per line, e.g. "Feb 16–23: Self-nominations due". |
 | Old blog | `/blog` and `/blog/*` permanently redirect (308) to `/who-we-are#elections`. |
 | Initial content | `content/elections.json` is filled with the 2026–2027 post's content, switched off. |
@@ -30,6 +30,7 @@ type ElectionPosition = {
   id: string;          // stable key for the editor, e.g. "pos1700000000000-0"
   title: string;       // "Secretary"
   description: string; // one line: "Keeps records, shares meeting notes, …"
+  open: boolean;       // up for election this round; roles are kept year to year
 };
 
 type Election = {
@@ -75,8 +76,10 @@ type Election = {
   - **Show the elections notice:** a checkbox for `enabled`, with the hint "Shows on Who We Are and as a homepage banner".
   - **Show until:** a date input, with the hint "Hides itself after this day. Leave empty to show until you switch it off."
   - **Headline**, **Intro** (textarea), **Nomination deadline** (date), **How to run** (textarea) and **Timeline** (textarea, hint "One step per line").
-  - **Open positions:**
-    - one row per position, with a Role input, a Description input, ↑ ↓ and Remove;
+  - **Positions:** accordion cards like Officers.
+    - Collapsed, a card shows the role and "· not this round" when unticked, plus an **Open this round** checkbox, ↑ ↓ and Remove in its header.
+    - Expanded, it has a Role input and a Description textarea.
+    - A position missing its role is opened automatically when Save is refused.
     - "+ Add position" below the rows;
     - "No open positions yet." when the list is empty.
 - **Saving:** the editor uses the same sticky save bar markup, styles and `saveBarMessage` as `ListEditor`, and the same `/api/github` request with the per-file conflict check (`base` = the git blob SHA of `elections.json`).
@@ -86,6 +89,8 @@ type Election = {
 - **Validation before save** (shown in the bar as `Error: …`):
   - if `enabled` is on, the headline is required;
   - every position needs a role;
+  - while switched on, at least one position must be open this round (if any are listed);
+  - while switched on, "Show until" can't be in the past;
   - `showUntil` and `deadline` must be valid dates when they are filled in.
 - **Saved message:** "Saved. The site updates in about a minute."
 

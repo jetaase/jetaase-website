@@ -2,7 +2,8 @@
 // Keep this file free of Node-only imports; it ships to the browser.
 import { isValidDate } from "./events";
 
-export type ElectionPosition = { id: string; title: string; description: string };
+// Roles are kept year to year; `open` marks the ones up for election this round.
+export type ElectionPosition = { id: string; title: string; description: string; open: boolean };
 
 export type Election = {
   enabled: boolean;
@@ -24,7 +25,7 @@ export function normalizeElection(raw: unknown): Election {
   const positions = (Array.isArray(r.positions) ? r.positions : [])
     .map((p, i) => {
       const o = obj(p);
-      return { id: str(o.id) || `pos-${i}`, title: str(o.title), description: str(o.description) };
+      return { id: str(o.id) || `pos-${i}`, title: str(o.title), description: str(o.description), open: o.open !== false };
     })
     .filter((p) => p.title.trim());
   return {
@@ -32,6 +33,10 @@ export function normalizeElection(raw: unknown): Election {
     showUntil: str(r.showUntil), title: str(r.title), intro: str(r.intro), positions,
     howToRun: str(r.howToRun), deadline: str(r.deadline), timeline: str(r.timeline),
   };
+}
+
+export function openPositions(e: Election): ElectionPosition[] {
+  return e.positions.filter((p) => p.open);
 }
 
 export function isElectionLive(e: Election, today: string): boolean {
@@ -56,6 +61,9 @@ export function validateElection(e: Election, today: string): string | null {
   if (e.enabled && !e.title.trim()) return "Add a headline before switching the notice on.";
   const missing = e.positions.findIndex((p) => !p.title.trim());
   if (missing >= 0) return `Position ${missing + 1}: add the role.`;
+  if (e.enabled && e.positions.length > 0 && !e.positions.some((p) => p.open)) {
+    return "Tick “Open this round” for at least one position.";
+  }
   if (e.showUntil && !isValidDate(e.showUntil)) return "Pick a valid “Show until” date.";
   if (e.deadline && !isValidDate(e.deadline)) return "Pick a valid nomination deadline.";
   if (e.enabled && e.showUntil && e.showUntil < today) {
