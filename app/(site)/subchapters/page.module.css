@@ -92,37 +92,10 @@
   color: var(--text-muted);
 }
 .leaderRow {
-  display: flex;
-  align-items: center;
-  gap: 18px;
   padding: 16px 0;
 }
 .leaderRow + .leaderRow {
   border-top: 1px solid var(--divider);
-}
-.leaderAvatar {
-  width: 96px;
-  height: 96px;
-  border-radius: 50%;
-  object-fit: cover;
-  display: block;
-  background: repeating-linear-gradient(
-    135deg,
-    var(--stripe-a),
-    var(--stripe-a) 8px,
-    var(--stripe-b) 8px,
-    var(--stripe-b) 16px
-  );
-  flex-shrink: 0;
-}
-.leaderName {
-  font-weight: 700;
-  font-size: 17px;
-}
-.leaderMeta {
-  font-size: 13.5px;
-  color: var(--text-subtle);
-  text-wrap: balance;
 }
 .leaderLocation {
   font-family: var(--font-mono);

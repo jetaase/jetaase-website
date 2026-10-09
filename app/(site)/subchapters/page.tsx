@@ -8,8 +8,8 @@ import PhotoCredit from "@/components/PhotoCredit";
 import Highlight from "@/components/Highlight";
 import CalloutBox from "@/components/CalloutBox";
 import { FacebookIcon } from "@/components/icons";
+import RepCard from "@/components/RepCard";
 import styles from "./page.module.css";
-import { headshotSrc } from "@/lib/uploads";
 
 export const metadata: Metadata = { title: "Subchapters" };
 
@@ -22,7 +22,6 @@ type CityGroup = {
 
 type Subchapter = {
   state: State;
-  abbr: string;
   email: string;
   photo: string;
   photoAlt: string;
@@ -41,7 +40,6 @@ type Subchapter = {
 const SUBCHAPTERS: Subchapter[] = [
   {
     state: "Georgia",
-    abbr: "GA",
     email: "georgia@jetaase.org",
     photo: "/images/atlanta-skyline.jpg",
     photoAlt: "Aerial view of downtown Atlanta lit up at night",
@@ -59,7 +57,6 @@ const SUBCHAPTERS: Subchapter[] = [
   },
   {
     state: "Alabama",
-    abbr: "AL",
     email: "alabama@jetaase.org",
     photo: "/images/birmingham-skyline.jpg",
     photoAlt: "Downtown Birmingham skyline reflected in a still pond at dusk",
@@ -71,7 +68,6 @@ const SUBCHAPTERS: Subchapter[] = [
   },
   {
     state: "North Carolina",
-    abbr: "NC",
     email: "northcarolina@jetaase.org",
     photo: "/images/charlotte-skyline.jpg",
     photoAlt: "Uptown Charlotte skyline under storm clouds at sunset",
@@ -92,7 +88,6 @@ const SUBCHAPTERS: Subchapter[] = [
   },
   {
     state: "South Carolina",
-    abbr: "SC",
     email: "southcarolina@jetaase.org",
     photo: "/images/charleston-bridge.jpg",
     photoAlt: "Aerial view of the Ravenel Bridge spanning the Cooper River in Charleston",
@@ -143,7 +138,9 @@ export default function SubchaptersPage() {
                       {leaders
                         .filter((r) => !groupFor(sc, r))
                         .map((rep) => (
-                          <LeaderRow key={rep.id} rep={rep} location={rep.city && `${rep.city}, ${sc.abbr}`} />
+                          <div key={rep.id} className={styles.leaderRow}>
+                            <RepCard photo={rep.photo} name={rep.name} city={rep.city} placement={rep.placement} email={rep.email} />
+                          </div>
                         ))}
                       {sc.cityGroups?.map((g) => {
                         const members = leaders.filter((r) => groupFor(sc, r) === g);
@@ -166,7 +163,10 @@ export default function SubchaptersPage() {
                               </span>
                             </div>
                             {members.map((rep) => (
-                              <LeaderRow key={rep.id} rep={rep} />
+                              <div key={rep.id} className={styles.leaderRow}>
+                                {/* The group header already names the city. */}
+                                <RepCard photo={rep.photo} name={rep.name} placement={rep.placement} email={rep.email} />
+                              </div>
                             ))}
                           </div>
                         );
@@ -215,16 +215,4 @@ function groupFor(sc: Subchapter, rep: SubchapterRep) {
   );
 }
 
-function LeaderRow({ rep, location }: { rep: SubchapterRep; location?: string }) {
-  return (
-    <div className={styles.leaderRow}>
-      <img src={headshotSrc(rep.photo)} alt={rep.name} className={styles.leaderAvatar} />
-      <div>
-        {location && <div className={styles.leaderLocation}>{location}</div>}
-        <div className={styles.leaderName}>{rep.name}</div>
-        {rep.placement && <div className={styles.leaderMeta}>{rep.placement}</div>}
-      </div>
-    </div>
-  );
-}
 

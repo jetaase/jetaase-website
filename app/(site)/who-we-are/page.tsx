@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import Hero from "@/components/Hero";
 import BoardGrid from "@/components/BoardGrid";
-import EmailLink from "@/components/EmailLink";
 import ElectionNotice from "@/components/ElectionNotice";
 import { readBoard, readElection, readReps } from "@/lib/content";
 import { isElectionLive } from "@/lib/elections";
@@ -11,8 +10,8 @@ import { INFO_EMAIL, JET_PROGRAMME_URL } from "@/lib/site";
 import Highlight from "@/components/Highlight";
 import JoinCta from "@/components/JoinCta";
 import SectionHeading from "@/components/SectionHeading";
+import RepCard from "@/components/RepCard";
 import styles from "./page.module.css";
-import { DEFAULT_HEADSHOT, headshotSrc } from "@/lib/uploads";
 
 export const metadata: Metadata = { title: "Who We Are" };
 
@@ -98,31 +97,15 @@ export default function WhoWeArePage() {
         </div>
         <div className={styles.subchapterGrid}>
           {repSlots(reps).map(({ state, rep }) => rep ? (
-            <div key={rep.id} className={styles.subchapterCard}>
-              <img src={headshotSrc(rep.photo)} alt={rep.name} className={styles.subchapterAvatar} />
-              <div>
-                <div className={styles.subchapterRegion}>{rep.state}</div>
-                <div className={styles.subchapterName}>{rep.name}</div>
-                {rep.city && (
-                  <div className={styles.subchapterCity}>{rep.city} area</div>
-                )}
-                {rep.placement && (
-                  <div className={styles.subchapterPlacement}>{rep.placement}</div>
-                )}
-                <EmailLink email={rep.email} className={styles.subchapterEmail} />
-              </div>
-            </div>
+            <RepCard
+              key={rep.id} boxed label={rep.state} photo={rep.photo} name={rep.name}
+              city={rep.city} placement={rep.placement} email={rep.email}
+            />
           ) : (
-            <div key={state} className={styles.subchapterCard}>
-              <img src={DEFAULT_HEADSHOT} alt="" className={styles.subchapterAvatar} />
-              <div>
-                <div className={styles.subchapterRegion}>{state}</div>
-                <div className={styles.subchapterName}>Position open</div>
-                <a href={`mailto:${INFO_EMAIL}`} className={styles.subchapterOpenLink}>
-                  Interested? Get in touch →
-                </a>
-              </div>
-            </div>
+            <RepCard
+              key={state} boxed label={state} name="Position open"
+              action={<a href={`mailto:${INFO_EMAIL}`}>Interested? Get in touch →</a>}
+            />
           ))}
         </div>
       </section>
