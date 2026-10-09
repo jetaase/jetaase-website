@@ -73,16 +73,6 @@
   margin: 0 auto;
   padding: 36px var(--gutter) 20px;
 }
-.sectionTitle {
-  font-family: var(--font-serif);
-  font-weight: 500;
-  font-size: 34px;
-  margin: 0 0 22px;
-  letter-spacing: -0.01em;
-}
-.lookingBackHeader .sectionTitle {
-  margin-bottom: 0;
-}
 .upcomingGrid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -105,18 +95,6 @@
   margin: 0 auto;
   padding: 64px var(--gutter);
 }
-.lookingBackHeader {
-  display: flex;
-  align-items: baseline;
-  justify-content: space-between;
-  margin-bottom: 24px;
-  flex-wrap: wrap;
-  gap: 12px;
-}
-.instagramLink {
-  font-size: 15px;
-  font-weight: 700;
-}
 .pastGrid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
@@ -137,17 +115,6 @@
   max-width: var(--maxw);
   margin: 0 auto;
   padding: 28px var(--gutter) 8px;
-}
-.partnersTitle {
-  font-family: var(--font-serif);
-  font-weight: 500;
-  font-size: 26px;
-  margin: 0 0 4px;
-}
-.partnersIntro {
-  margin: 0 0 16px;
-  color: var(--text-muted);
-  font-size: 15px;
 }
 .partnerList {
   list-style: none;

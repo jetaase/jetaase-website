@@ -15,6 +15,7 @@ import CalloutBox from "@/components/CalloutBox";
 import IconTile from "@/components/IconTile";
 import { BriefcaseIcon, CompassIcon, FileTextIcon, GlobeIcon, LanguagesIcon, MapPinIcon, PeopleIcon } from "@/components/icons";
 import LinkCard from "@/components/LinkCard";
+import SectionHeading from "@/components/SectionHeading";
 import styles from "./page.module.css";
 
 // Re-render hourly so past events drop off without a deploy.
@@ -111,12 +112,7 @@ export default function Home() {
 
       {/* EVENTS */}
       <section id="events" className={styles.events}>
-        <div className={styles.eventsHeader}>
-          <h2 className={styles.sectionTitle}>Upcoming events</h2>
-          <Link href="/events" className={styles.seeAllLink}>
-            See all events →
-          </Link>
-        </div>
+        <SectionHeading title="Upcoming events" link={{ href: "/events", label: "See all events →" }} />
         {shown.length > 0 ? (
           <div className={styles.eventsGrid}>
             {shown.map((e) => <EventCard key={e.id} event={e} />)}
@@ -129,14 +125,10 @@ export default function Home() {
       {/* RESOURCES */}
       <section id="resources" className={styles.resourcesSection}>
         <div className={styles.resourcesInner}>
-          <div className={styles.resourcesIntro}>
-            <h2 className={styles.sectionTitle}>Your Japan toolkit</h2>
-            <p className={styles.resourcesSubtitle}>
-              Hand-picked links and guides from alumni who&apos;ve walked the
-              path, whether you&apos;re keeping up your Japanese or dreaming
-              of your first placement.
-            </p>
-          </div>
+          <SectionHeading
+            title="Your Japan toolkit"
+            intro="Hand-picked links and guides from alumni who've walked the path, whether you're keeping up your Japanese or dreaming of your first placement."
+          />
           <div className={styles.resourcesGrid}>
             <LinkCard
               href="/resources#japanese" icon={<LanguagesIcon />}

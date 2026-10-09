@@ -118,23 +118,6 @@
   margin: 0 auto;
   padding: 60px var(--gutter);
 }
-.eventsHeader {
-  display: flex;
-  align-items: baseline;
-  justify-content: space-between;
-  margin-bottom: 28px;
-}
-.sectionTitle {
-  font-family: var(--font-serif);
-  font-weight: 500;
-  font-size: 40px;
-  margin: 0;
-  letter-spacing: -0.01em;
-}
-.seeAllLink {
-  font-size: 15px;
-  font-weight: 700;
-}
 .eventsGrid {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
@@ -155,16 +138,6 @@
   max-width: var(--maxw);
   margin: 0 auto;
   padding: 80px var(--gutter);
-}
-.resourcesIntro {
-  max-width: 560px;
-  margin-bottom: 34px;
-}
-.resourcesSubtitle {
-  font-size: 17px;
-  line-height: 1.6;
-  color: var(--text-muted);
-  margin: 0;
 }
 .resourcesGrid {
   display: grid;

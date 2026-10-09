@@ -75,30 +75,10 @@
   margin: 0 auto;
   padding: 24px var(--gutter) 48px;
 }
-.officersHeader {
-  max-width: 600px;
-  margin-bottom: 34px;
-}
-.officersTitle {
-  font-family: var(--font-serif);
-  font-weight: 500;
-  font-size: 40px;
-  margin: 0 0 12px;
-  letter-spacing: -0.01em;
-}
-.officersIntro {
-  font-size: 17px;
-  line-height: 1.6;
-  color: var(--text-muted);
-  margin: 0;
-}
 
 /* SUBCHAPTER REPRESENTATIVES */
-.subchapterTitle {
-  font-family: var(--font-serif);
-  font-weight: 500;
-  font-size: 28px;
-  margin: 48px 0 20px;
+.repsHeading {
+  margin-top: 48px;
 }
 .subchapterGrid {
   display: grid;

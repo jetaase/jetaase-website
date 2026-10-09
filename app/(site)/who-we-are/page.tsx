@@ -8,9 +8,9 @@ import { isElectionLive } from "@/lib/elections";
 import { todayInEastern } from "@/lib/events";
 import { repSlots } from "@/lib/reps";
 import { INFO_EMAIL, JET_PROGRAMME_URL } from "@/lib/site";
-import Eyebrow from "@/components/Eyebrow";
 import Highlight from "@/components/Highlight";
 import JoinCta from "@/components/JoinCta";
+import SectionHeading from "@/components/SectionHeading";
 import styles from "./page.module.css";
 import { DEFAULT_HEADSHOT, headshotSrc } from "@/lib/uploads";
 
@@ -86,17 +86,16 @@ export default function WhoWeArePage() {
 
       {/* OFFICERS */}
       <section id="officers" className={styles.officers}>
-        <div className={styles.officersHeader}>
-          <Eyebrow>Meet the team</Eyebrow>
-          <h2 className={styles.officersTitle}>Officers</h2>
-          <p className={styles.officersIntro}>
-            JETAASE is led by a volunteer board of alumni from across the
-            Southeast. Reach any of us directly by email.
-          </p>
-        </div>
+        <SectionHeading
+          eyebrow="Meet the team"
+          title="Officers"
+          intro="JETAASE is led by a volunteer board of alumni from across the Southeast. Reach any of us directly by email."
+        />
         <BoardGrid members={board} />
 
-        <h3 className={styles.subchapterTitle}>Subchapter representatives</h3>
+        <div className={styles.repsHeading}>
+          <SectionHeading as="h3" size="sm" title="Subchapter representatives" />
+        </div>
         <div className={styles.subchapterGrid}>
           {repSlots(reps).map(({ state, rep }) => rep ? (
             <div key={rep.id} className={styles.subchapterCard}>

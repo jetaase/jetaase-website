@@ -9,8 +9,8 @@ import { readEvents, readPartnerEvents } from "@/lib/content";
 import { formatEventDate, splitEvents, todayInEastern, upcomingPartners } from "@/lib/events";
 import { EVENTS_EMAIL, INSTAGRAM_URL } from "@/lib/site";
 import Button from "@/components/Button";
-import Eyebrow from "@/components/Eyebrow";
 import CalloutBox from "@/components/CalloutBox";
+import SectionHeading from "@/components/SectionHeading";
 import styles from "./page.module.css";
 
 export const metadata: Metadata = { title: "Events" };
@@ -65,7 +65,7 @@ export default function EventsPage() {
       {/* MORE UPCOMING */}
       {upcoming.length > 0 && (
         <section className={styles.upcoming}>
-          <h2 className={styles.sectionTitle}>More upcoming</h2>
+          <SectionHeading title="More upcoming" />
           <div className={styles.upcomingGrid}>
             {upcoming.map((e) => <EventCard key={e.id} event={e} />)}
           </div>
@@ -75,8 +75,10 @@ export default function EventsPage() {
       {/* ALSO HAPPENING — partner events */}
       {partners.length > 0 && (
         <section className={styles.partners}>
-          <h2 className={styles.partnersTitle}>Also happening</h2>
-          <p className={styles.partnersIntro}>Events from our friends at USJETAA, the consulate, and others.</p>
+          <SectionHeading
+            size="sm" title="Also happening"
+            intro="Events from our friends at USJETAA, the consulate, and others."
+          />
           <ul className={styles.partnerList}>
             {/* If any row has a poster, every row keeps the poster column so titles line up. */}
             {partners.map((p) => {
@@ -126,15 +128,10 @@ export default function EventsPage() {
       {past.length > 0 && (
         <section className={styles.lookingBackSection}>
           <div className={styles.lookingBackInner}>
-            <div className={styles.lookingBackHeader}>
-              <div>
-                <Eyebrow>Looking back</Eyebrow>
-                <h2 className={styles.sectionTitle}>A few recent get-togethers</h2>
-              </div>
-              <a href={INSTAGRAM_URL} className={styles.instagramLink}>
-                See more on Instagram →
-              </a>
-            </div>
+            <SectionHeading
+              eyebrow="Looking back" title="A few recent get-togethers"
+              link={{ href: INSTAGRAM_URL, label: "See more on Instagram →" }}
+            />
             <div className={styles.pastGrid}>
               {past.slice(0, 6).map((e) => <EventCard key={e.id} event={e} size="small" />)}
             </div>

@@ -10,6 +10,7 @@ import CalloutBox from "@/components/CalloutBox";
 import IconTile from "@/components/IconTile";
 import { BriefcaseIcon, LanguagesIcon, MapPinIcon } from "@/components/icons";
 import LinkCard from "@/components/LinkCard";
+import SectionHeading from "@/components/SectionHeading";
 import styles from "./page.module.css";
 
 export const metadata: Metadata = { title: "Resources" };
@@ -229,16 +230,11 @@ export default function ResourcesPage() {
 
       {/* CATEGORY: JAPANESE */}
       <section id="japanese" className={styles.category}>
-        <div className={styles.categoryHeader}>
-          <IconTile tone="blue"><LanguagesIcon size={22} /></IconTile>
-          <div>
-            <h2 className={styles.categoryTitle}>Keep up your Japanese</h2>
-            <p className={styles.categorySubtitle}>
-              Apps, reading, and tests to stay sharp long after you&apos;re
-              back.
-            </p>
-          </div>
-        </div>
+        <SectionHeading
+          size="sm" icon={<IconTile tone="blue"><LanguagesIcon size={22} /></IconTile>}
+          title="Keep up your Japanese"
+          intro="Apps, reading, and tests to stay sharp long after you're back."
+        />
         <div className={styles.categoryGrid4}>
           <LinkCard href="https://www3.nhk.or.jp/news/easy/" title="NHK News Web Easy" description="Real news with furigana, built for learners." />
           <LinkCard href="https://www.wanikani.com/" title="WaniKani" description="Kanji and vocab through spaced repetition." />
@@ -249,15 +245,11 @@ export default function ResourcesPage() {
 
       {/* CATEGORY: CAREERS */}
       <section id="careers" className={`${styles.category} ${styles.categoryTight}`}>
-        <div className={styles.categoryHeader}>
-          <IconTile tone="tan"><BriefcaseIcon size={22} /></IconTile>
-          <div>
-            <h2 className={styles.categoryTitle}>Careers &amp; jobs</h2>
-            <p className={styles.categorySubtitle}>
-              Put your JET experience to work back home.
-            </p>
-          </div>
-        </div>
+        <SectionHeading
+          size="sm" icon={<IconTile tone="tan"><BriefcaseIcon size={22} /></IconTile>}
+          title="Careers & jobs"
+          intro="Put your JET experience to work back home."
+        />
         <div className={styles.categoryGrid3}>
           <LinkCard href="https://jetwit.com/" title="JETwit" description="The JET alumni network's job board and career column." />
           <LinkCard href={USJETAA_URL} title="USJETAA" description="Career webinars, grants, and alumni programming nationwide." />
@@ -267,16 +259,11 @@ export default function ResourcesPage() {
 
       {/* CULTURE BAND w/ PHOTO */}
       <section id="culture" className={`${styles.category} ${styles.categoryTight}`}>
-        <div className={styles.categoryHeader}>
-          <IconTile tone="red"><MapPinIcon size={22} /></IconTile>
-          <div>
-            <h2 className={styles.categoryTitle}>Culture near you</h2>
-            <p className={styles.categorySubtitle}>
-              Each state&apos;s Japan-America society brings Japanese culture
-              and community to the Southeast.
-            </p>
-          </div>
-        </div>
+        <SectionHeading
+          size="sm" icon={<IconTile tone="red"><MapPinIcon size={22} /></IconTile>}
+          title="Culture near you"
+          intro="Each state's Japan-America society brings Japanese culture and community to the Southeast."
+        />
         <div className={styles.categoryGrid4}>
           {CULTURE_LINKS.map((l) => (
             <LinkCard
@@ -291,15 +278,11 @@ export default function ResourcesPage() {
       <section className={styles.directorySection}>
         <div className={styles.directoryIntro}>
           <div className={styles.directoryIntroInner}>
-            <Eyebrow>The full index</Eyebrow>
-            <h2 className={styles.directoryTitle}>
-              Directory of Japan-related resources
-            </h2>
-            <p className={styles.directoryText}>
-              Dozens of listings across the Southeast, compiled by the
-              Consulate-General of Japan in Atlanta. Search by name or
-              filter by category to jump straight to what you need.
-            </p>
+            <SectionHeading
+              eyebrow="The full index"
+              title="Directory of Japan-related resources"
+              intro="Dozens of listings across the Southeast, compiled by the Consulate-General of Japan in Atlanta. Search by name or filter by category to jump straight to what you need."
+            />
           </div>
         </div>
 
