@@ -58,21 +58,27 @@ describe("electionBanner", () => {
 });
 
 describe("validateElection", () => {
+  const T = "2027-02-10";
   it("accepts a complete notice", () => {
-    expect(validateElection(base)).toBeNull();
+    expect(validateElection(base, T)).toBeNull();
   });
   it("needs a headline to switch the notice on", () => {
-    expect(validateElection({ ...base, title: " " })).toBe("Add a headline before switching the notice on.");
-    expect(validateElection({ ...base, enabled: false, title: "" })).toBeNull();
+    expect(validateElection({ ...base, title: " " }, T)).toBe("Add a headline before switching the notice on.");
+    expect(validateElection({ ...base, enabled: false, title: "" }, T)).toBeNull();
   });
   it("needs a role for every position", () => {
-    expect(validateElection({ ...base, positions: [...base.positions, { id: "b", title: "", description: "x" }] }))
+    expect(validateElection({ ...base, positions: [...base.positions, { id: "b", title: "", description: "x" }] }, T))
       .toBe("Position 2: add the role.");
   });
+  it("refuses to switch on a notice whose Show until date has passed", () => {
+    expect(validateElection(base, "2027-03-03")).toBe("The “Show until” date has passed. Pick a later day or clear it.");
+    expect(validateElection(base, "2027-03-02")).toBeNull();
+    expect(validateElection({ ...base, enabled: false }, "2027-03-03")).toBeNull();
+  });
   it("checks the dates when filled in", () => {
-    expect(validateElection({ ...base, showUntil: "2027-02-30" })).toBe("Pick a valid “Show until” date.");
-    expect(validateElection({ ...base, deadline: "soon" })).toBe("Pick a valid nomination deadline.");
-    expect(validateElection({ ...base, showUntil: "", deadline: "" })).toBeNull();
+    expect(validateElection({ ...base, showUntil: "2027-02-30" }, T)).toBe("Pick a valid “Show until” date.");
+    expect(validateElection({ ...base, deadline: "soon" }, T)).toBe("Pick a valid nomination deadline.");
+    expect(validateElection({ ...base, showUntil: "", deadline: "" }, T)).toBeNull();
   });
 });
 

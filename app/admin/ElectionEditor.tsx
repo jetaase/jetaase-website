@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { saveBarMessage, saveErrorMessage, type SaveBody } from "@/lib/editor-save";
 import { movePhoto as moveItem } from "@/lib/gallery"; // generic list move
 import { validateElection, type Election, type ElectionPosition } from "@/lib/elections";
+import { todayInEastern } from "@/lib/events";
 import list from "./ListEditor.module.css";
 import styles from "./ElectionEditor.module.css";
 
@@ -38,7 +39,7 @@ export default function ElectionEditor({
     setPositions((ps) => ps.map((x) => (x.id === id ? { ...x, [key]: value } : x)));
 
   async function save() {
-    const problem = validateElection(e);
+    const problem = validateElection(e, todayInEastern(new Date()));
     if (problem) return setStatus(`Error: ${problem}`);
     setSaving(true);
     setStatus("Saving…");

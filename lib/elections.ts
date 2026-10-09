@@ -51,12 +51,16 @@ export function electionBanner(e: Election, today: string): string {
 }
 
 // The first thing stopping a save, as a sentence for the save bar, or null.
-export function validateElection(e: Election): string | null {
+// `today` catches last year's "Show until" date, which would save fine but never show.
+export function validateElection(e: Election, today: string): string | null {
   if (e.enabled && !e.title.trim()) return "Add a headline before switching the notice on.";
   const missing = e.positions.findIndex((p) => !p.title.trim());
   if (missing >= 0) return `Position ${missing + 1}: add the role.`;
   if (e.showUntil && !isValidDate(e.showUntil)) return "Pick a valid “Show until” date.";
   if (e.deadline && !isValidDate(e.deadline)) return "Pick a valid nomination deadline.";
+  if (e.enabled && e.showUntil && e.showUntil < today) {
+    return "The “Show until” date has passed. Pick a later day or clear it.";
+  }
   return null;
 }
 
