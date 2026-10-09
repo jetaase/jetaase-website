@@ -2,7 +2,6 @@ import { describe, it, expect } from "vitest";
 import {
   readBoard, readReps, readEvents, readPartnerEvents, readElection, EDITABLE_PATHS,
 } from "./content";
-import { isElectionLive } from "./elections";
 import { isValidDate } from "./events";
 import { sortReps } from "./reps";
 
@@ -68,11 +67,13 @@ describe("EDITABLE_PATHS", () => {
 });
 
 describe("readElection", () => {
-  it("returns a valid notice that starts switched off", () => {
+  // The board edits this file from /admin, so check its shape, not whether it's switched on.
+  it("returns a valid notice", () => {
     const e = readElection();
     expect(e.title).toBeTruthy();
     expect(e.positions.length).toBeGreaterThan(0);
-    expect(isElectionLive(e, "2026-02-20")).toBe(false);
+    for (const p of e.positions) expect(p.id && p.title).toBeTruthy();
+    expect(new Set(e.positions.map((p) => p.id)).size).toBe(e.positions.length);
   });
 });
 
