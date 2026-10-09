@@ -219,7 +219,7 @@ export default function ResourcesPage() {
             className={styles.featuredCardBlue}
           >
             <div className={styles.featuredEyebrow}>The bigger network</div>
-            <div className={styles.featuredTitle}>JETAA USA</div>
+            <div className={styles.featuredTitle}>USJETAA</div>
             <p className={styles.featuredDesc}>
               All 19 alumni chapters across the country. We&apos;re chapter
               4, the Southeast.

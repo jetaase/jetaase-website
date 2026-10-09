@@ -56,7 +56,7 @@ export default function WhoWeArePage() {
             </p>
             <p className={styles.welcomeParagraph}>
               We are the 4th chapter in the 19-chapter organization that forms{" "}
-              <strong>JETAA USA</strong>. Founded in the early 1990s, our
+              <strong>USJETAA</strong>. Founded in the early 1990s, our
               organization celebrated its 20th anniversary in 2011.
             </p>
             <p className={styles.welcomeParagraphLast}>

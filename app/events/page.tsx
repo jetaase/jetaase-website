@@ -79,7 +79,7 @@ export default function EventsPage() {
       {partners.length > 0 && (
         <section className={styles.partners}>
           <h2 className={styles.partnersTitle}>Also happening</h2>
-          <p className={styles.partnersIntro}>Events from our friends at JETAA USA, the consulate, and others.</p>
+          <p className={styles.partnersIntro}>Events from our friends at USJETAA, the consulate, and others.</p>
           <ul className={styles.partnerList}>
             {/* If any row has a poster, every row keeps the poster column so titles line up. */}
             {partners.map((p) => {

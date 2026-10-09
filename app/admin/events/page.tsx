@@ -21,7 +21,7 @@ const EVENT_FIELDS: Field[] = [
 
 const PARTNER_FIELDS: Field[] = [
   { key: "title", label: "Event name", required: true },
-  { key: "host", label: "Host", required: true, placeholder: "e.g. JETAA USA" },
+  { key: "host", label: "Host", required: true, placeholder: "e.g. USJETAA" },
   { key: "date", label: "Date", type: "date", required: true },
   { key: "time", label: "Time", placeholder: "e.g. 7:00 PM" },
   { key: "location", label: "Location", placeholder: "e.g. Atlanta, GA or Online" },
