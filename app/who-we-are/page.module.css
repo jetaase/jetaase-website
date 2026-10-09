@@ -47,6 +47,12 @@
   position: sticky;
   top: 110px;
 }
+@media (max-width: 768px) {
+  /* Stacked on a phone, a sticky heading would cover the paragraphs. */
+  .welcomeHeading {
+    position: static;
+  }
+}
 .welcomeHighlight {
   border-bottom: 5px solid var(--blue);
   padding-bottom: 2px;
