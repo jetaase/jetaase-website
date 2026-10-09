@@ -57,7 +57,7 @@
 .heroImageWrap {
   position: relative;
   min-height: 540px;
-  border-radius: 0 0 0 20px;
+  border-radius: 0 0 0 var(--radius-lg);
   overflow: hidden;
 }
 .heroImage {
@@ -138,7 +138,7 @@
 .iconBox {
   width: 46px;
   height: 46px;
-  border-radius: 12px;
+  border-radius: var(--radius-md);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -236,7 +236,7 @@
   color: var(--ink);
   background: #fff;
   border: 1px solid var(--border);
-  border-radius: 14px;
+  border-radius: var(--radius);
   padding: 26px;
   display: flex;
   flex-direction: column;
@@ -264,7 +264,7 @@
 }
 .calloutBox {
   background: var(--surface-tan);
-  border-radius: 18px;
+  border-radius: var(--radius-lg);
   padding: 52px;
   display: flex;
   align-items: center;
@@ -316,7 +316,7 @@
 .subchaptersBox {
   background: #fff;
   border: 1px solid var(--border);
-  border-radius: 18px;
+  border-radius: var(--radius-lg);
   padding: 44px;
   display: flex;
   align-items: center;

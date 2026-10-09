@@ -19,7 +19,7 @@
   align-items: start;
 }
 .poster {
-  border-radius: 14px;
+  border-radius: var(--radius);
 }
 .info {
   padding-top: 8px;

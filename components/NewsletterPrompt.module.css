@@ -9,7 +9,7 @@
 }
 .empty {
   border: 1.5px dashed var(--border-strong);
-  border-radius: 14px;
+  border-radius: var(--radius);
   padding: 28px;
   text-align: center;
   font-size: 18px;

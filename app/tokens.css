@@ -26,6 +26,11 @@
   --stripe-a: #efe7d6; /* striped image placeholder */
   --stripe-b: #e8dfcb;
 
+  --radius-sm: 6px; /* badges */
+  --radius-md: 12px; /* icon tiles, small inner boxes */
+  --radius: 14px; /* cards */
+  --radius-lg: 20px; /* bands, callout boxes, big photos */
+
   --maxw: 1200px;
   --gutter: 40px; /* page side padding */
 }

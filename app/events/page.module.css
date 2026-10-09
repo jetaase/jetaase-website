@@ -12,7 +12,7 @@
   display: grid;
   grid-template-columns: minmax(0, 2fr) minmax(0, 3fr);
   border: 1px solid var(--border);
-  border-radius: 18px;
+  border-radius: var(--radius-lg);
   overflow: hidden;
   background: #fff;
 }
@@ -37,7 +37,7 @@
   font-size: 11px;
   letter-spacing: 0.1em;
   padding: 6px 12px;
-  border-radius: 6px;
+  border-radius: var(--radius-sm);
   pointer-events: none;
 }
 .featuredBody {
@@ -161,7 +161,7 @@
 }
 .suggestBox {
   border: 1.5px dashed var(--border-strong);
-  border-radius: 18px;
+  border-radius: var(--radius-lg);
   padding: 40px;
   display: flex;
   align-items: center;
@@ -269,7 +269,7 @@ a.partnerRow:hover .partnerTitle {
   position: relative;
   width: 64px;
   aspect-ratio: 4 / 5;
-  border-radius: 6px;
+  border-radius: var(--radius-sm);
   overflow: hidden;
   background: var(--surface-tan);
 }

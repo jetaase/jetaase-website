@@ -10,7 +10,7 @@
 .card {
   background: #fff;
   border: 1px solid var(--border);
-  border-radius: 16px;
+  border-radius: var(--radius);
   padding: 26px;
   text-align: center;
   display: grid;

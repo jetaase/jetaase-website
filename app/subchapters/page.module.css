@@ -27,7 +27,7 @@
 .card {
   background: #fff;
   border: 1px solid var(--border);
-  border-radius: 18px;
+  border-radius: var(--radius-lg);
   overflow: hidden;
   display: flex;
   flex-direction: column;
@@ -61,7 +61,7 @@
   font-size: 12px;
   letter-spacing: 0.1em;
   padding: 6px 12px;
-  border-radius: 6px;
+  border-radius: var(--radius-sm);
   pointer-events: none;
 }
 .cardBody {
@@ -166,7 +166,7 @@
 }
 .helpCtaBox {
   background: var(--surface-tan);
-  border-radius: 18px;
+  border-radius: var(--radius-lg);
   padding: 44px;
   display: flex;
   align-items: center;

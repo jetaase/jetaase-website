@@ -10,7 +10,7 @@
 }
 .bannerFrame {
   height: 420px;
-  border-radius: 20px;
+  border-radius: var(--radius-lg);
   overflow: hidden;
 }
 .bannerImg {
@@ -129,7 +129,7 @@
 .subchapterCard {
   background: #fff;
   border: 1px solid var(--border);
-  border-radius: 14px;
+  border-radius: var(--radius);
   padding: 22px;
   display: flex;
   align-items: center;
