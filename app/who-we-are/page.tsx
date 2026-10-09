@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import Hero from "@/components/Hero";
@@ -138,9 +139,9 @@ export default function WhoWeArePage() {
               Japan across the Southeast.
             </p>
           </div>
-          <a href="/join" className={styles.ctaBtn}>
+          <Link href="/join" className={styles.ctaBtn}>
             Join JETAASE →
-          </a>
+          </Link>
         </div>
       </section>
 
