@@ -5,6 +5,7 @@ import styles from "./AdminTabs.module.css";
 const TABS = [
   { href: "/admin/events", label: "Events" },
   { href: "/admin/people", label: "People" },
+  { href: "/admin/elections", label: "Elections" },
 ];
 
 // Plain <a>, not next/link: a full page load fires the editors'

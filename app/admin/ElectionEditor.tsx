@@ -1,0 +1,143 @@
+"use client";
+import { useEffect, useState } from "react";
+import { saveBarMessage, saveErrorMessage, type SaveBody } from "@/lib/editor-save";
+import { movePhoto as moveItem } from "@/lib/gallery"; // generic list move
+import { validateElection, type Election, type ElectionPosition } from "@/lib/elections";
+import list from "./ListEditor.module.css";
+import styles from "./ElectionEditor.module.css";
+
+const SAVED = "Saved. The site updates in about a minute.";
+const MESSAGE = "chore(admin): update elections notice";
+
+// One form for the single elections notice (content/elections.json).
+export default function ElectionEditor({
+  initial, path, base,
+}: { initial: Election; path: string; base: Record<string, string> }) {
+  const [e, setE] = useState(initial);
+  const [baseShas, setBaseShas] = useState(base);
+  const [dirty, setDirty] = useState(false);
+  const [saving, setSaving] = useState(false);
+  const [status, setStatus] = useState("");
+
+  useEffect(() => {
+    if (!dirty) return;
+    const warn = (ev: BeforeUnloadEvent) => { ev.preventDefault(); ev.returnValue = ""; };
+    window.addEventListener("beforeunload", warn);
+    return () => window.removeEventListener("beforeunload", warn);
+  }, [dirty]);
+
+  function update(fn: (prev: Election) => Election) {
+    setE(fn);
+    setDirty(true);
+    setStatus("");
+  }
+  const set = <K extends keyof Election>(key: K, value: Election[K]) => update((p) => ({ ...p, [key]: value }));
+  const setPositions = (fn: (ps: ElectionPosition[]) => ElectionPosition[]) =>
+    update((p) => ({ ...p, positions: fn(p.positions) }));
+  const setPosition = (id: string, key: "title" | "description", value: string) =>
+    setPositions((ps) => ps.map((x) => (x.id === id ? { ...x, [key]: value } : x)));
+
+  async function save() {
+    const problem = validateElection(e);
+    if (problem) return setStatus(`Error: ${problem}`);
+    setSaving(true);
+    setStatus("Saving…");
+    try {
+      const body: SaveBody = {
+        files: [{ path, content: JSON.stringify(e, null, 2) + "\n" }],
+        uploads: [], deletes: [], base: baseShas, message: MESSAGE,
+      };
+      let res: Response;
+      try {
+        res = await fetch("/api/github", {
+          method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify(body),
+        });
+      } catch {
+        return setStatus(`Error: ${saveErrorMessage(null)}`);
+      }
+      const data = await res.json().catch(() => ({}));
+      if (!res.ok) return setStatus(`Error: ${saveErrorMessage(res.status, data.error)}`);
+      setBaseShas((b) => ({ ...b, ...data.blobShas }));
+      setDirty(false);
+      setStatus(SAVED);
+    } finally {
+      setSaving(false);
+    }
+  }
+
+  const text = (key: "title" | "showUntil" | "deadline", label: string, opts: { type?: string; hint?: string; placeholder?: string } = {}) => (
+    <label className={list.field}>
+      <span>{label}</span>
+      <input type={opts.type ?? "text"} value={e[key]} placeholder={opts.placeholder} onChange={(ev) => set(key, ev.target.value)} />
+      {opts.hint && <small className={list.hint}>{opts.hint}</small>}
+    </label>
+  );
+  const area = (key: "intro" | "howToRun" | "timeline", label: string, hint: string, rows = 4) => (
+    <label className={`${list.field} ${list.wide}`}>
+      <span>{label}</span>
+      <textarea value={e[key]} rows={rows} onChange={(ev) => set(key, ev.target.value)} />
+      <small className={list.hint}>{hint}</small>
+    </label>
+  );
+  const barMessage = saveBarMessage({ dirty, saving, busy: false, status });
+
+  return (
+    <section className={list.section}>
+      <div className={list.header}>
+        <h2 className={list.title}>Elections notice</h2>
+      </div>
+      <fieldset disabled={saving} className={list.fieldset}>
+        <div className={`${list.card} ${styles.card}`}>
+          <label className={styles.toggle}>
+            <input type="checkbox" checked={e.enabled} onChange={(ev) => set("enabled", ev.target.checked)} />
+            <span>
+              <strong>Show the elections notice</strong>
+              <small className={list.hint}>Shows on Who We Are and as a homepage banner.</small>
+            </span>
+          </label>
+          <div className={list.fields}>
+            {text("showUntil", "Show until", { type: "date", hint: "Hides itself after this day. Leave empty to show until you switch it off." })}
+            {text("deadline", "Nomination deadline", { type: "date", hint: "The banner says nominations are open until this day." })}
+            {text("title", "Headline", { placeholder: "e.g. 2026–2027 board elections" })}
+            {area("intro", "Intro", "Who can run and what the role involves. Leave a blank line between paragraphs.")}
+          </div>
+
+          <h3 className={styles.subhead}>Open positions</h3>
+          {e.positions.length === 0 && <p className={list.hint}>No open positions yet.</p>}
+          <ol className={styles.positions}>
+            {e.positions.map((p, i) => (
+              <li key={p.id} className={styles.position}>
+                <input aria-label={`Role ${i + 1}`} placeholder="Role, e.g. Secretary" value={p.title} onChange={(ev) => setPosition(p.id, "title", ev.target.value)} />
+                <input aria-label={`Description ${i + 1}`} placeholder="One line about what it involves" value={p.description} onChange={(ev) => setPosition(p.id, "description", ev.target.value)} />
+                <span className={styles.posActions}>
+                  <button type="button" onClick={() => setPositions((ps) => moveItem(ps, i, -1))} disabled={i === 0} aria-label="Move up">↑</button>
+                  <button type="button" onClick={() => setPositions((ps) => moveItem(ps, i, 1))} disabled={i === e.positions.length - 1} aria-label="Move down">↓</button>
+                  <button type="button" className={list.danger} onClick={() => setPositions((ps) => ps.filter((x) => x.id !== p.id))}>Remove</button>
+                </span>
+              </li>
+            ))}
+          </ol>
+          <button
+            type="button" className={list.secondary}
+            onClick={() => setPositions((ps) => [...ps, { id: `pos${Date.now()}`, title: "", description: "" }])}
+          >
+            + Add position
+          </button>
+
+          <div className={`${list.fields} ${styles.after}`}>
+            {area("howToRun", "How to run", "How to nominate yourself, and by when. Leave a blank line between paragraphs.")}
+            {area("timeline", "Timeline", "One step per line, e.g. Feb 25–27: Voting", 3)}
+          </div>
+        </div>
+      </fieldset>
+      {barMessage && (
+        <div className={`${list.saveBar} ${status.startsWith("Error") ? list.saveBarError : ""}`}>
+          <span className={list.saveBarText} role="status"><strong>Elections notice</strong> · {barMessage}</span>
+          <button className={list.primary} onClick={save} disabled={!dirty || saving}>
+            {saving ? "Saving…" : "Save changes"}
+          </button>
+        </div>
+      )}
+    </section>
+  );
+}

@@ -1,0 +1,57 @@
+.card {
+  padding: 1rem 1.25rem 1.25rem;
+}
+.toggle {
+  display: flex;
+  gap: 0.6rem;
+  align-items: flex-start;
+  margin-bottom: 1rem;
+}
+.toggle input {
+  width: 1.1rem;
+  height: 1.1rem;
+  margin-top: 0.15rem;
+}
+.toggle span {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+}
+.subhead {
+  margin: 1.5rem 0 0.5rem;
+  font-size: 0.95rem;
+}
+.positions {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 0.75rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+.position {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 2fr) auto;
+  gap: 0.5rem;
+  align-items: center;
+}
+.position input {
+  padding: 0.45rem 0.6rem;
+  border: 1px solid #d6cdb9;
+  border-radius: 6px;
+  font: inherit;
+  font-size: 0.95rem;
+  min-width: 0;
+}
+.posActions {
+  display: flex;
+  gap: 0.3rem;
+}
+.after {
+  margin-top: 1.25rem;
+}
+@media (max-width: 640px) {
+  .position {
+    grid-template-columns: 1fr;
+  }
+}
