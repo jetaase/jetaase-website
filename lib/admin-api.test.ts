@@ -183,4 +183,21 @@ describe("handleSave", () => {
     expect(r.status).toBe(500);
     expect(JSON.stringify(r.body)).not.toContain("SECRET_TOKEN");
   });
+  it("deletes a removed gallery photo but keeps one events.json still uses", async () => {
+    const KEEP = "public/images/uploads/events/keep-20261009-a1b2.jpg";
+    const GONE = "public/images/uploads/events/gone-20261009-a1b2.jpg";
+    const events = (srcs: string[]) => JSON.stringify([{
+      id: "e1", photos: srcs.map((s, i) => ({ id: `p${i}`, src: s.replace(/^public/, ""), caption: "" })),
+    }], null, 2) + "\n";
+    const current = events([KEEP, GONE]);
+    const { f, calls } = fakeGitHub({ "content/events.json": current, [KEEP]: "x", [GONE]: "y" });
+    const r = await handleSave(deps(f), {
+      files: [{ path: "content/events.json", content: events([KEEP]) }],
+      uploads: [], deletes: [KEEP, GONE],
+      base: { "content/events.json": gitBlobSha(current) }, message: "m",
+    });
+    expect(r.status).toBe(200);
+    const paths = treeOf(calls).filter((e: { sha?: null }) => e.sha === null).map((e: { path: string }) => e.path);
+    expect(paths).toEqual([GONE]);
+  });
 });

@@ -1,6 +1,7 @@
 // Builds the /api/github save request from the admin editor's state.
 import { toPublicUrl } from "./uploads";
 import { assignSlugs, isValidDate } from "./events";
+import { cleanPhotos, type EditorPhoto } from "./gallery";
 
 export type PendingPhoto = {
   status: "uploading" | "uploaded" | "failed";
@@ -77,13 +78,17 @@ export function validate(
   return null;
 }
 
-// Final touches before saving: date order (stable) and slugs for new items.
+// Final touches before saving: date order (stable), slugs for new items,
+// and saved-form galleries (removed photos dropped, captions trimmed).
 export function prepareItems<T extends Record<string, unknown>>(
-  items: T[], opts: { byDate?: boolean; slugs?: boolean },
+  items: T[], opts: { byDate?: boolean; slugs?: boolean; galleries?: string[] },
 ): T[] {
   let out = items.slice();
   if (opts.slugs) out = assignSlugs(out);
   if (opts.byDate) out.sort((a, b) => String(a.date ?? "").localeCompare(String(b.date ?? "")));
+  for (const key of opts.galleries ?? []) {
+    out = out.map((it) => (Array.isArray(it[key]) ? { ...it, [key]: cleanPhotos(it[key] as EditorPhoto[]) } : it));
+  }
   return out;
 }
 

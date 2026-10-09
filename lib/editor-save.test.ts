@@ -51,6 +51,28 @@ describe("buildSavePayload", () => {
       })).toThrow("uploads in progress");
     }
   });
+
+  it("commits every gallery upload the content uses, keyed by slot", () => {
+    const p1 = "public/images/uploads/events/a-20261009-a1b2.jpg";
+    const p2 = "public/images/uploads/events/a-20261009-c3d4.jpg";
+    const poster = "public/images/uploads/events/b-20261009-e5f6.jpg";
+    const dropped = "public/images/uploads/events/a-20261009-ffff.jpg";
+    const items = [
+      { id: "e1", poster: "", photos: [{ id: "x", src: "/images/uploads/events/a-20261009-a1b2.jpg", caption: "" },
+        { id: "y", src: "/images/uploads/events/a-20261009-c3d4.jpg", caption: "" }] },
+      { id: "e2", poster: "/images/uploads/events/b-20261009-e5f6.jpg", photos: [] },
+    ];
+    const p = buildSavePayload({
+      path: "content/events.json", message: "m", items, base: {}, deletes: [],
+      pending: {
+        "e1:photos:x": up(p1, "S1"), "e1:photos:y": up(p2, "S2"),
+        "e1:photos:z": up(dropped, "S3"), "e2:poster": up(poster, "S4"),
+      },
+    });
+    expect(p.uploads).toEqual([
+      { path: p1, sha: "S1" }, { path: p2, sha: "S2" }, { path: poster, sha: "S4" },
+    ]);
+  });
 });
 
 describe("uploadErrorMessage", () => {
@@ -141,6 +163,17 @@ describe("prepareItems", () => {
     const out = prepareItems(items, { byDate: true, slugs: true });
     expect(out.map((i) => i.slug)).toEqual(["early-2026-01", "middle-2026-06", "late-2026-12"]);
     expect(prepareItems(items, { byDate: true })[0]).not.toHaveProperty("slug");
+  });
+  it("cleans gallery fields listed in galleries", () => {
+    const src = "/images/uploads/events/a-20261009-a1b2.jpg";
+    const gone = "/images/uploads/events/b-20261009-a1b2.jpg";
+    const withPhotos = [{
+      id: "e1", title: "T", date: "2026-01-01",
+      photos: [{ id: "p1", src, caption: " hi " }, { id: "p2", src: gone, caption: "", removed: true }],
+    }];
+    expect(prepareItems(withPhotos, { galleries: ["photos"] })[0].photos)
+      .toEqual([{ id: "p1", src, caption: "hi" }]);
+    expect(prepareItems(withPhotos, {})[0].photos).toHaveLength(2);
   });
 });
 
