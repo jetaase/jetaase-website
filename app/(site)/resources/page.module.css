@@ -1,3 +1,33 @@
+/* ON THIS PAGE */
+.jump {
+  max-width: var(--maxw);
+  margin: 0 auto;
+  padding: 8px var(--gutter) 0;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+}
+.jumpLabel {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--text-faint);
+  margin-right: 4px;
+}
+.jumpLink {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--ink);
+  border: 1.5px solid var(--border-strong);
+  border-radius: 999px;
+  padding: 7px 14px;
+}
+.jumpLink:hover {
+  border-color: var(--ink);
+}
+
 /* FEATURED */
 .featured {
   max-width: var(--maxw);

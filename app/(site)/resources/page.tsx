@@ -125,6 +125,13 @@ const SERVICES: DirEntry[] = [
   c("Printing Services", "printing.html"),
 ];
 
+const JUMP_LINKS = [
+  { href: "#japanese", label: "Japanese" },
+  { href: "#careers", label: "Careers & jobs" },
+  { href: "#culture", label: "Culture near you" },
+  { href: "#directory", label: "Full directory" },
+];
+
 const DIRECTORY: DirCategory[] = [
   {
     id: "state", chip: "State fact sheets", title: "State fact sheets", columns: 3,
@@ -179,6 +186,14 @@ export default function ResourcesPage() {
           },
         }}
       />
+
+      {/* ON THIS PAGE: the page is long, so let readers jump straight to a section. */}
+      <nav className={styles.jump} aria-label="On this page">
+        <span className={styles.jumpLabel}>On this page</span>
+        {JUMP_LINKS.map((l) => (
+          <a key={l.href} href={l.href} className={styles.jumpLink}>{l.label}</a>
+        ))}
+      </nav>
 
       {/* FEATURED */}
       <section className={styles.featured}>
@@ -266,7 +281,7 @@ export default function ResourcesPage() {
       </section>
 
       {/* FULL DIRECTORY */}
-      <section className={styles.directorySection}>
+      <section id="directory" className={styles.directorySection}>
         <div className={styles.directoryIntro}>
           <div className={styles.directoryIntroInner}>
             <SectionHeading
