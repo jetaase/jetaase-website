@@ -15,6 +15,8 @@ const EVENT_FIELDS: Field[] = [
   { key: "details", label: "Full details", type: "textarea", hint: "Leave a blank line between paragraphs" },
   { key: "poster", label: "Poster", kind: "photo" },
   { key: "rsvpUrl", label: "RSVP link (optional)", type: "url", placeholder: "e.g. a Google Form link" },
+  { key: "photos", label: "Photos", kind: "gallery" },
+  { key: "photoCredit", label: "Photo credit (optional)", placeholder: "e.g. Photos by Jane Doe" },
 ];
 
 const PARTNER_FIELDS: Field[] = [
@@ -42,7 +44,7 @@ export default async function EventsAdminPage() {
   return (
     <>
       <ListEditor
-        title="Events" itemLabel="event" idPrefix="e" byDate slugs
+        title="Events" itemLabel="event" idPrefix="e" byDate slugs galleries={["photos"]}
         base={{ [EVENTS_PATH]: gitBlobSha(readRaw("events.json")) }} uploadFolder="events"
         path={EVENTS_PATH} commitMessage="chore(admin): update events"
         fields={EVENT_FIELDS} blank={BLANK_EVENT} initial={readEvents()}

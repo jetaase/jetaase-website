@@ -1,0 +1,72 @@
+.gallery {
+  grid-column: 1 / -1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+.label {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--ink-muted);
+}
+.empty {
+  margin: 0;
+  font-size: 0.85rem;
+  color: var(--ink-muted);
+}
+.tiles {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 0.75rem;
+}
+.tile {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+.thumb {
+  width: 100%;
+  aspect-ratio: 1;
+  object-fit: cover;
+  border-radius: 8px;
+  background: #efe7d6;
+  display: block;
+}
+.faded {
+  opacity: 0.35;
+}
+.row {
+  display: flex;
+  gap: 0.3rem;
+}
+.tile input {
+  padding: 0.35rem 0.5rem;
+  border: 1px solid #d6cdb9;
+  border-radius: 6px;
+  font: inherit;
+  font-size: 0.85rem;
+  color: var(--ink);
+  background: #fff;
+  min-width: 0;
+}
+.danger {
+  color: var(--red);
+}
+.note {
+  font-size: 0.75rem;
+  color: var(--ink-muted);
+}
+.badge {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: #9a6a00;
+}
+.addRow {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}

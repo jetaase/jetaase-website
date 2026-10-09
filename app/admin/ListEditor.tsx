@@ -1,12 +1,13 @@
 "use client";
 import { useEffect, useRef, useState } from "react";
 import PhotoField, { type PhotoView } from "./PhotoField";
+import GalleryField, { type GalleryPhotoView } from "./GalleryField";
 import { blobToBase64 } from "@/lib/image";
 import {
   buildSavePayload, cardHeading, prepareItems, saveErrorMessage, uploadErrorMessage, validate, type PendingPhoto,
 } from "@/lib/editor-save";
 import { formatEventDate, todayInEastern } from "@/lib/events";
-import { slotKey } from "@/lib/gallery";
+import { movePhoto, newPhotoId, slotKey, type EditorPhoto } from "@/lib/gallery";
 import { sortReps } from "@/lib/reps";
 import { isUploadPath, toPublicUrl, toRepoPath, type UploadFolder } from "@/lib/uploads";
 import styles from "./ListEditor.module.css";
@@ -18,7 +19,7 @@ export type Field = {
   label: string;
   options?: string[]; // renders a <select> instead of a text input
   placeholder?: string;
-  kind?: "headshot" | "photo"; // renders a photo picker instead of a text input
+  kind?: "headshot" | "photo" | "gallery"; // a photo picker, or a multi-photo gallery, instead of a text input
   type?: "date" | "url" | "textarea"; // input type for plain fields
   required?: boolean; // checked on save
   hint?: string; // helper text under the input
@@ -39,6 +40,7 @@ type Props<T extends Item> = {
   slugs?: boolean; // give new items a permanent `slug` on save
   titleKey?: string; // field that titles each card (default: name/title)
   sortByState?: boolean; // subchapter reps: keep in state order (lib/reps.ts) instead of manual arrows
+  galleries?: string[]; // gallery field keys, cleaned on save (lib/gallery.ts cleanPhotos)
 };
 
 const SAVED = "Saved. New photos appear once the site finishes updating (about a minute).";
@@ -62,7 +64,7 @@ function CardHeading({ title, subtitle }: { title: string; subtitle?: string }) 
 }
 
 export default function ListEditor<T extends Item>({
-  title, path, commitMessage, itemLabel, idPrefix, fields, blank, initial, base, uploadFolder, byDate, slugs, titleKey, sortByState,
+  title, path, commitMessage, itemLabel, idPrefix, fields, blank, initial, base, uploadFolder, byDate, slugs, titleKey, sortByState, galleries,
 }: Props<T>) {
   // Sorted on load and on save, never while typing, so cards don't jump mid-edit.
   const autoSort = (list: T[]) =>
@@ -116,7 +118,10 @@ export default function ListEditor<T extends Item>({
     });
   }
   function remove(it: T) {
-    for (const f of fields) if (f.kind) markForDelete(String(originals[slotKey(it.id, f.key)] ?? it[f.key] ?? ""));
+    for (const f of fields) {
+      if (f.kind === "gallery") photosOf(it, f.key).forEach((ph) => markForDelete(ph.src));
+      else if (f.kind) markForDelete(String(originals[slotKey(it.id, f.key)] ?? it[f.key] ?? ""));
+    }
     // Ignore late results for any of this item's uploads, and forget them.
     const mine = (slot: string) => slot.startsWith(`${it.id}:`);
     Object.keys(uploadGen.current).filter(mine).forEach(bumpGen);
@@ -205,6 +210,69 @@ export default function ListEditor<T extends Item>({
     setField(it.id, key, original);
   }
 
+  // ── Galleries ──
+  // A removed published photo stays in the list with `removed: true` until save;
+  // an unsaved upload is dropped outright.
+
+  const photosOf = (it: T, key: string) => (it[key] as EditorPhoto[] | undefined) ?? [];
+  function setPhotos(id: string, key: string, fn: (photos: EditorPhoto[]) => EditorPhoto[]) {
+    update((prev) => prev.map((it) => (it.id === id ? { ...it, [key]: fn(photosOf(it, key)) } : it)));
+  }
+  function uploadGalleryPhoto(it: T, key: string, photoId: string, jpeg: Blob, previewUrl: string) {
+    return upload(slotKey(it.id, key, photoId), nameOf(it), jpeg, previewUrl, (url) =>
+      setPhotos(it.id, key, (ps) => ps.map((ph) => (ph.id === photoId ? { ...ph, src: url } : ph))),
+    );
+  }
+  function addPhotos(it: T, key: string, picked: { jpeg: Blob; previewUrl: string }[]) {
+    // eslint-disable-next-line react-hooks/purity -- runs from the file picker's change handler, not during render
+    const now = Date.now();
+    const ids = picked.map((_, i) => newPhotoId(now, i));
+    setPhotos(it.id, key, (ps) => [...ps, ...ids.map((id) => ({ id, src: "", caption: "" }))]);
+    picked.forEach((p, i) => void uploadGalleryPhoto(it, key, ids[i], p.jpeg, p.previewUrl));
+  }
+  function removeGalleryPhoto(it: T, key: string, photo: EditorPhoto) {
+    const slot = slotKey(it.id, key, photo.id);
+    if (pending[slot]) {
+      bumpGen(slot);
+      dropPending(slot);
+      setPhotos(it.id, key, (ps) => ps.filter((ph) => ph.id !== photo.id));
+      return;
+    }
+    markForDelete(photo.src);
+    setPhotos(it.id, key, (ps) => ps.map((ph) => (ph.id === photo.id ? { ...ph, removed: true } : ph)));
+  }
+  function undoGalleryRemove(it: T, key: string, photo: EditorPhoto) {
+    unmarkForDelete(photo.src);
+    setPhotos(it.id, key, (ps) => ps.map((ph) => (ph.id === photo.id ? { ...ph, removed: false } : ph)));
+  }
+  function renderGallery(it: T, f: Field) {
+    const photos = photosOf(it, f.key);
+    const find = (id: string) => photos.find((ph) => ph.id === id)!;
+    const views: GalleryPhotoView[] = photos.map((ph) => {
+      const p = pending[slotKey(it.id, f.key, ph.id)];
+      return {
+        id: ph.id, src: p?.previewUrl ?? ph.src, caption: ph.caption,
+        status: p?.status ?? "saved", removed: !!ph.removed, error: p?.error,
+      };
+    });
+    return (
+      <GalleryField
+        key={f.key} label={f.label} photos={views}
+        onAdd={(picked) => addPhotos(it, f.key, picked)}
+        onRemove={(id) => removeGalleryPhoto(it, f.key, find(id))}
+        onUndo={(id) => undoGalleryRemove(it, f.key, find(id))}
+        onRetry={(id) => {
+          const p = pending[slotKey(it.id, f.key, id)];
+          if (p) void uploadGalleryPhoto(it, f.key, id, p.jpeg, p.previewUrl);
+        }}
+        onMove={(id, delta) =>
+          setPhotos(it.id, f.key, (ps) => movePhoto(ps, ps.findIndex((ph) => ph.id === id), delta))}
+        onCaption={(id, value) =>
+          setPhotos(it.id, f.key, (ps) => ps.map((ph) => (ph.id === id ? { ...ph, caption: value } : ph)))}
+      />
+    );
+  }
+
   async function save() {
     const problem = validate(fields, items, itemLabel);
     if (problem) {
@@ -221,7 +289,7 @@ export default function ListEditor<T extends Item>({
     setSaving(true);
     setStatus("Saving…");
     try {
-      const ready = prepareItems(autoSort(items), { slugs });
+      const ready = prepareItems(autoSort(items), { slugs, galleries });
       const payload = buildSavePayload({ path, message: commitMessage, items: ready, pending, deletes, base: baseShas });
       let res: Response;
       try {
@@ -313,6 +381,7 @@ export default function ListEditor<T extends Item>({
         <div id={`fields-${it.id}`} className={styles.fields} hidden={!open}>
           {fields.map((f) => {
             if (!f.kind) return renderInput(it, f);
+            if (f.kind === "gallery") return renderGallery(it, f);
             const slot = slotKey(it.id, f.key);
             const p = pending[slot];
             const original = originals[slot];
