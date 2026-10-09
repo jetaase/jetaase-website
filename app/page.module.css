@@ -13,7 +13,7 @@
   align-items: stretch;
 }
 .heroCopy {
-  padding: 88px 40px 88px 40px;
+  padding: 88px var(--gutter);
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -84,7 +84,7 @@
     gap: 28px;
   }
   .heroCopy {
-    padding: 48px 20px;
+    padding: 48px var(--gutter);
   }
   .heroTitle {
     font-size: 46px;
@@ -99,7 +99,7 @@
 .missionInner {
   max-width: 1000px;
   margin: 0 auto;
-  padding: 64px 40px;
+  padding: 64px var(--gutter);
   text-align: center;
 }
 .missionEyebrow {
@@ -122,7 +122,7 @@
 .whatWeDo {
   max-width: var(--maxw);
   margin: 0 auto;
-  padding: 80px 40px 40px;
+  padding: 80px var(--gutter) 40px;
 }
 .whatWeDoGrid {
   display: grid;
@@ -171,7 +171,7 @@
 .events {
   max-width: var(--maxw);
   margin: 0 auto;
-  padding: 60px 40px;
+  padding: 60px var(--gutter);
 }
 .eventsHeader {
   display: flex;
@@ -209,7 +209,7 @@
 .resourcesInner {
   max-width: var(--maxw);
   margin: 0 auto;
-  padding: 80px 40px;
+  padding: 80px var(--gutter);
 }
 .resourcesIntro {
   max-width: 560px;
@@ -260,7 +260,7 @@
 .calloutSection {
   max-width: var(--maxw);
   margin: 0 auto;
-  padding: 80px 40px;
+  padding: 80px var(--gutter);
 }
 .calloutBox {
   background: var(--surface-tan);
@@ -311,7 +311,7 @@
 .subchaptersSection {
   max-width: var(--maxw);
   margin: 0 auto;
-  padding: 20px 40px 80px;
+  padding: 20px var(--gutter) 80px;
 }
 .subchaptersBox {
   background: #fff;
@@ -361,7 +361,7 @@
 .joinInner {
   max-width: var(--maxw);
   margin: 0 auto;
-  padding: 72px 40px;
+  padding: 72px var(--gutter);
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -393,4 +393,12 @@
   border-radius: 999px;
   white-space: nowrap;
   display: inline-block;
+}
+
+@media (max-width: 768px) {
+  /* Boxes inside the page gutter: keep the text column wide on phones. */
+  .calloutBox,
+  .subchaptersBox {
+    padding: 28px 24px;
+  }
 }

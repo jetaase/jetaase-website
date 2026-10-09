@@ -1,7 +1,7 @@
 .section {
   max-width: var(--maxw);
   margin: 0 auto;
-  padding: 44px 40px 12px;
+  padding: 44px var(--gutter) 12px;
 }
 .band {
   background: var(--surface-tan);

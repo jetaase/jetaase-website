@@ -1,7 +1,7 @@
 .section {
   max-width: var(--maxw);
   margin: 0 auto;
-  padding: 8px 40px 40px;
+  padding: 8px var(--gutter) 40px;
   scroll-margin-top: 96px;
 }
 .inner {

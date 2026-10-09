@@ -11,7 +11,7 @@
 .body {
   max-width: var(--maxw);
   margin: 0 auto;
-  padding: 24px 40px 72px;
+  padding: 24px var(--gutter) 72px;
 }
 .bodyGrid {
   display: grid;

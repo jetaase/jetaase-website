@@ -6,7 +6,7 @@
 .banner {
   max-width: var(--maxw);
   margin: 0 auto;
-  padding: 12px 40px 24px;
+  padding: 12px var(--gutter) 24px;
 }
 .bannerFrame {
   height: 420px;
@@ -25,7 +25,7 @@
 .welcome {
   max-width: var(--maxw);
   margin: 0 auto;
-  padding: 48px 40px;
+  padding: 48px var(--gutter);
 }
 .welcomeGrid {
   display: grid;
@@ -36,6 +36,7 @@
 @media (max-width: 768px) {
   .welcomeGrid {
     grid-template-columns: 1fr;
+    gap: 24px;
   }
 }
 .welcomeHeading {
@@ -80,7 +81,7 @@
 .officers {
   max-width: var(--maxw);
   margin: 0 auto;
-  padding: 24px 40px 48px;
+  padding: 24px var(--gutter) 48px;
 }
 .officersHeader {
   max-width: 600px;
@@ -191,7 +192,7 @@
 .ctaInner {
   max-width: var(--maxw);
   margin: 0 auto;
-  padding: 64px 40px;
+  padding: 64px var(--gutter);
   display: flex;
   align-items: center;
   justify-content: space-between;

@@ -1,7 +1,7 @@
 .hero {
   max-width: var(--maxw);
   margin: 0 auto;
-  padding: 72px 40px 28px;
+  padding: 72px var(--gutter) 28px;
 }
 .title {
   font-family: var(--font-serif);
@@ -19,7 +19,7 @@
 }
 @media (max-width: 768px) {
   .hero {
-    padding: 40px 20px 20px;
+    padding: 40px var(--gutter) 20px;
   }
   .title {
     font-size: 40px;

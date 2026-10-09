@@ -6,7 +6,7 @@
 .featured {
   max-width: var(--maxw);
   margin: 0 auto;
-  padding: 20px 40px 12px;
+  padding: 20px var(--gutter) 12px;
 }
 .featuredGrid {
   display: grid;
@@ -93,7 +93,7 @@
 .upcoming {
   max-width: var(--maxw);
   margin: 0 auto;
-  padding: 36px 40px 20px;
+  padding: 36px var(--gutter) 20px;
 }
 .sectionTitle {
   font-family: var(--font-serif);
@@ -125,7 +125,7 @@
 .lookingBackInner {
   max-width: var(--maxw);
   margin: 0 auto;
-  padding: 64px 40px;
+  padding: 64px var(--gutter);
 }
 .lookingBackHeader {
   display: flex;
@@ -157,7 +157,7 @@
 .suggest {
   max-width: var(--maxw);
   margin: 0 auto;
-  padding: 56px 40px;
+  padding: 56px var(--gutter);
 }
 .suggestBox {
   border: 1.5px dashed var(--border-strong);
@@ -208,7 +208,7 @@
 .partners {
   max-width: var(--maxw);
   margin: 0 auto;
-  padding: 28px 40px 8px;
+  padding: 28px var(--gutter) 8px;
 }
 .partnersTitle {
   font-family: var(--font-serif);
@@ -320,5 +320,13 @@ a.partnerRow:hover .partnerTitle {
 .newsletter {
   max-width: var(--maxw);
   margin: 0 auto;
-  padding: 20px 40px 8px;
+  padding: 20px var(--gutter) 8px;
+}
+
+@media (max-width: 768px) {
+  /* Boxes inside the page gutter: keep the text column wide on phones. */
+  .suggestBox,
+  .featuredBody {
+    padding: 28px 24px;
+  }
 }

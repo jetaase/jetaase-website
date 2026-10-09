@@ -6,7 +6,7 @@
 .hero {
   max-width: var(--maxw);
   margin: 0 auto;
-  padding: 72px 40px 28px;
+  padding: 72px var(--gutter) 28px;
 }
 .heroGrid {
   display: grid;
@@ -70,7 +70,7 @@
 .featured {
   max-width: var(--maxw);
   margin: 0 auto;
-  padding: 36px 40px 20px;
+  padding: 36px var(--gutter) 20px;
 }
 .featuredGrid {
   display: grid;
@@ -139,10 +139,10 @@
 .category {
   max-width: var(--maxw);
   margin: 0 auto;
-  padding: 44px 40px 12px;
+  padding: 44px var(--gutter) 12px;
 }
 .categoryTight {
-  padding: 36px 40px 12px;
+  padding: 36px var(--gutter) 12px;
 }
 .categoryHeader {
   display: flex;
@@ -233,7 +233,7 @@
 .directoryIntro {
   max-width: var(--maxw);
   margin: 0 auto;
-  padding: 56px 40px 8px;
+  padding: 56px var(--gutter) 8px;
 }
 .directoryIntroInner {
   max-width: 620px;
@@ -272,7 +272,7 @@
 .toolbarInner {
   max-width: var(--maxw);
   margin: 0 auto;
-  padding: 18px 40px;
+  padding: 18px var(--gutter);
 }
 .toolbarRow {
   display: flex;
@@ -332,7 +332,7 @@
 .directoryBody {
   max-width: var(--maxw);
   margin: 0 auto;
-  padding: 40px 40px 8px;
+  padding: 40px var(--gutter) 8px;
 }
 .dirCat {
   margin-bottom: 44px;
@@ -406,7 +406,7 @@
 .suggest {
   max-width: var(--maxw);
   margin: 0 auto;
-  padding: 44px 40px 20px;
+  padding: 44px var(--gutter) 20px;
 }
 .suggestBox {
   border: 1.5px dashed var(--border-strong);
@@ -453,7 +453,7 @@
 .joinInner {
   max-width: var(--maxw);
   margin: 0 auto;
-  padding: 72px 40px;
+  padding: 72px var(--gutter);
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -511,5 +511,12 @@
      so a sticky toolbar would cover too much of the screen. */
   .toolbar {
     position: static;
+  }
+}
+
+@media (max-width: 768px) {
+  /* Boxes inside the page gutter: keep the text column wide on phones. */
+  .suggestBox {
+    padding: 28px 24px;
   }
 }

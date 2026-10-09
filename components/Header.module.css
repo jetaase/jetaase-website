@@ -11,7 +11,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 18px 40px;
+  padding: 18px var(--gutter);
 }
 .brand {
   display: flex;
@@ -68,7 +68,7 @@
 }
 @media (max-width: 768px) {
   .inner {
-    padding: 14px 20px;
+    padding: 14px var(--gutter);
   }
   .nav {
     gap: 16px;

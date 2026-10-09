@@ -27,4 +27,10 @@
   --stripe-b: #e8dfcb;
 
   --maxw: 1200px;
+  --gutter: 40px; /* page side padding */
+}
+@media (max-width: 768px) {
+  :root {
+    --gutter: 20px;
+  }
 }

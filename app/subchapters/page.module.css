@@ -11,7 +11,7 @@
 .cards {
   max-width: var(--maxw);
   margin: 0 auto;
-  padding: 20px 40px 40px;
+  padding: 20px var(--gutter) 40px;
 }
 .cardsGrid {
   display: grid;
@@ -162,7 +162,7 @@
 .helpCta {
   max-width: var(--maxw);
   margin: 0 auto;
-  padding: 20px 40px 80px;
+  padding: 20px var(--gutter) 80px;
 }
 .helpCtaBox {
   background: var(--surface-tan);
@@ -244,4 +244,11 @@
   font-weight: 700;
   color: var(--red);
   white-space: nowrap;
+}
+
+@media (max-width: 768px) {
+  /* Boxes inside the page gutter: keep the text column wide on phones. */
+  .helpCtaBox {
+    padding: 28px 24px;
+  }
 }

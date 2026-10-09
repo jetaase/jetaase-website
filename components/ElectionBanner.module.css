@@ -4,7 +4,7 @@
 .inner {
   max-width: var(--maxw);
   margin: 0 auto;
-  padding: 12px 40px;
+  padding: 12px var(--gutter);
   font-size: 16px;
   font-weight: 600;
   color: var(--navy);
@@ -18,7 +18,7 @@
 }
 @media (max-width: 768px) {
   .inner {
-    padding: 12px 16px;
+    padding: 12px var(--gutter);
     font-size: 15px;
   }
 }

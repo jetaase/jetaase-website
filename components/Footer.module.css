@@ -5,7 +5,7 @@
 .inner {
   max-width: var(--maxw);
   margin: 0 auto;
-  padding: 56px 40px;
+  padding: 56px var(--gutter);
   display: flex;
   justify-content: space-between;
   gap: 40px;
@@ -64,13 +64,13 @@
 .bottomInner {
   max-width: var(--maxw);
   margin: 0 auto;
-  padding: 20px 40px;
+  padding: 20px var(--gutter);
   font-size: 13px;
   color: var(--text-faint);
 }
 @media (max-width: 768px) {
   .inner {
-    padding: 40px 20px;
+    padding: 40px var(--gutter);
     flex-direction: column;
     gap: 32px;
   }
@@ -78,6 +78,6 @@
     gap: 32px;
   }
   .bottomInner {
-    padding: 16px 20px;
+    padding: 16px var(--gutter);
   }
 }
