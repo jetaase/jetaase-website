@@ -17,7 +17,11 @@ export default function LoginForm() {
   }
   return (
     <form onSubmit={submit}>
-      <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} placeholder="Admin password" />
+      <label htmlFor="admin-password" className="visually-hidden">Admin password</label>
+      <input
+        id="admin-password" type="password" autoComplete="current-password"
+        value={password} onChange={(e) => setPassword(e.target.value)} placeholder="Admin password"
+      />
       <button type="submit">Sign in</button>
       {error && <p role="alert">{error}</p>}
     </form>
