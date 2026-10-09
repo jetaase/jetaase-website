@@ -64,8 +64,7 @@ export default function WhoWeArePage() {
             </p>
             <p className={styles.welcomeParagraph}>
               We are the 4th chapter in the 19-chapter organization that forms{" "}
-              <strong>USJETAA</strong>. Founded in the early 1990s, our
-              organization celebrated its 20th anniversary in 2011.
+              <strong>USJETAA</strong>, and were founded in the early 1990s.
             </p>
             <p className={styles.welcomeParagraphLast}>
               We&apos;re an active group run entirely by volunteers, and
