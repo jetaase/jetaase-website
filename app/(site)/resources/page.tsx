@@ -4,6 +4,7 @@ import Directory, { type DirCategory, type DirEntry } from "./Directory";
 import { INFO_EMAIL, JET_PROGRAMME_URL, USJETAA_URL } from "@/lib/site";
 import Button from "@/components/Button";
 import Eyebrow from "@/components/Eyebrow";
+import PhotoCredit from "@/components/PhotoCredit";
 import styles from "./page.module.css";
 
 export const metadata: Metadata = { title: "Resources" };
@@ -177,14 +178,7 @@ export default function ResourcesPage() {
               alt="Shelves of Japanese paperbacks in a Kyoto bookshop"
               className={styles.heroImage}
             />
-            <a
-              href="https://unsplash.com/photos/a-book-shelf-filled-with-lots-of-books-cB70SPAS0eo"
-              target="_blank"
-              rel="noopener noreferrer"
-              className={styles.photoCredit}
-            >
-              Photo: Hendrik Schuette / Unsplash
-            </a>
+            <PhotoCredit name="Hendrik Schuette" href="https://unsplash.com/photos/a-book-shelf-filled-with-lots-of-books-cB70SPAS0eo" />
           </div>
         </div>
       </section>

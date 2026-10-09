@@ -8,6 +8,7 @@ import { readElection, readEvents } from "@/lib/content";
 import { electionBanner, isElectionLive } from "@/lib/elections";
 import { splitEvents, todayInEastern } from "@/lib/events";
 import { JET_PROGRAMME_URL } from "@/lib/site";
+import PhotoCredit from "@/components/PhotoCredit";
 import styles from "./page.module.css";
 
 // Re-render hourly so past events drop off without a deploy.
@@ -55,14 +56,7 @@ export default function Home() {
               alt="Vermilion bridge in front of Ryūan-ji temple in the green hills of Minoo, Osaka"
               className={styles.heroImage}
             />
-            <a
-              href="https://unsplash.com/photos/a-red-bridge-crosses-over-a-river-in-front-of-a-building-tuqFwFEM3Io"
-              target="_blank"
-              rel="noopener noreferrer"
-              className={styles.photoCredit}
-            >
-              Photo: Pourya Gohari / Unsplash
-            </a>
+            <PhotoCredit name="Pourya Gohari" href="https://unsplash.com/photos/a-red-bridge-crosses-over-a-river-in-front-of-a-building-tuqFwFEM3Io" />
           </div>
         </div>
       </section>

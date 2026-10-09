@@ -1,3 +1,4 @@
+import PhotoCredit from "./PhotoCredit";
 import styles from "./CultureBand.module.css";
 
 // Each state's Japan-America society. The Events page links to their event
@@ -83,14 +84,7 @@ export default function CultureBand() {
             alt="Rows of glowing paper lanterns above a crowd at a bon odori summer festival"
             className={styles.photo}
           />
-          <a
-            href="https://unsplash.com/photos/many-illuminated-lanterns-at-an-outdoor-festival-at-night-jd6EupgO8yc"
-            target="_blank"
-            rel="noopener noreferrer"
-            className={styles.credit}
-          >
-            Photo: Tsuyoshi Kozu / Unsplash
-          </a>
+          <PhotoCredit name="Tsuyoshi Kozu" href="https://unsplash.com/photos/many-illuminated-lanterns-at-an-outdoor-festival-at-night-jd6EupgO8yc" />
         </div>
       </div>
     </section>

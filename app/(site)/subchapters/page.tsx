@@ -4,6 +4,7 @@ import EmailLink from "@/components/EmailLink";
 import { readReps, type State, type SubchapterRep } from "@/lib/content";
 import { FACEBOOK_URL, INFO_EMAIL } from "@/lib/site";
 import Button from "@/components/Button";
+import PhotoCredit from "@/components/PhotoCredit";
 import styles from "./page.module.css";
 import { headshotSrc } from "@/lib/uploads";
 
@@ -128,14 +129,7 @@ export default function SubchaptersPage() {
                   <img src={sc.photo} alt={sc.photoAlt} className={styles.cardPhoto} />
                   {sc.badge && <span className={styles.cardBadge}>{sc.badge}</span>}
                   {sc.photoCredit && (
-                    <a
-                      href={sc.photoCredit.href}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className={styles.photoCredit}
-                    >
-                      Photo: {sc.photoCredit.name} / Unsplash
-                    </a>
+                    <PhotoCredit name={sc.photoCredit.name} href={sc.photoCredit.href} />
                   )}
                 </div>
                 <div className={styles.cardBody}>
