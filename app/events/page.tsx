@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
@@ -20,6 +21,7 @@ export default function EventsPage() {
   const today = todayInEastern(new Date());
   const { next, upcoming, past } = splitEvents(readEvents(), today);
   const partners = upcomingPartners(readPartnerEvents(), today);
+  const hasPosters = partners.some((p) => p.poster);
 
   return (
     <div className={styles.pageRoot}>
@@ -79,25 +81,35 @@ export default function EventsPage() {
           <h2 className={styles.partnersTitle}>Also happening</h2>
           <p className={styles.partnersIntro}>Events from our friends at JETAA USA, the consulate, and others.</p>
           <ul className={styles.partnerList}>
+            {/* If any row has a poster, every row keeps the poster column so titles line up. */}
             {partners.map((p) => {
               const row = (
                 <>
+                  {p.poster ? (
+                    <span className={styles.partnerPoster}>
+                      <Image src={p.poster} alt={`Poster for ${p.title}`} fill sizes="64px" className={styles.partnerPosterImg} />
+                    </span>
+                  ) : (
+                    hasPosters && <span className={styles.partnerNoPoster} aria-hidden="true" />
+                  )}
                   <span className={styles.partnerDate}>{formatEventDate(p.date, "day")}</span>
                   <span className={styles.partnerMain}>
                     <span className={styles.partnerTitle}>{p.title}</span>
                     <span className={styles.partnerMeta}>
                       {[p.time, p.location].filter(Boolean).join(" · ")}
                     </span>
+                    {p.summary && <span className={styles.partnerSummary}>{p.summary}</span>}
                   </span>
                   <span className={styles.hostTag}>{p.host}</span>
                 </>
               );
+              const rowClass = `${styles.partnerRow} ${hasPosters ? styles.withPoster : ""}`;
               return (
                 <li key={p.id}>
                   {p.link ? (
-                    <a href={p.link} target="_blank" rel="noopener noreferrer" className={styles.partnerRow}>{row}</a>
+                    <a href={p.link} target="_blank" rel="noopener noreferrer" className={rowClass}>{row}</a>
                   ) : (
-                    <div className={styles.partnerRow}>{row}</div>
+                    <div className={rowClass}>{row}</div>
                   )}
                 </li>
               );

@@ -25,6 +25,8 @@ const PARTNER_FIELDS: Field[] = [
   { key: "date", label: "Date", type: "date", required: true },
   { key: "time", label: "Time", placeholder: "e.g. 7:00 PM" },
   { key: "location", label: "Location", placeholder: "e.g. Atlanta, GA or Online" },
+  { key: "summary", label: "Short description", type: "textarea", rows: 3, placeholder: "A sentence or two about what it is" },
+  { key: "poster", label: "Poster", kind: "photo" },
   { key: "link", label: "Event link (optional)", type: "url", placeholder: "The host's page for this event" },
 ];
 
@@ -35,7 +37,7 @@ const BLANK_EVENT: Omit<JetaaseEvent, "id" | "order"> = {
 };
 
 const BLANK_PARTNER: Omit<PartnerEvent, "id" | "order"> = {
-  title: "", host: "", date: "", time: "", location: "", link: "",
+  title: "", host: "", date: "", time: "", location: "", link: "", poster: "", summary: "",
 };
 
 export default async function EventsAdminPage() {

@@ -23,6 +23,7 @@ export type Field = {
   type?: "date" | "url" | "textarea"; // input type for plain fields
   required?: boolean; // checked on save
   hint?: string; // helper text under the input
+  rows?: number; // textarea height in lines (default 6)
 };
 
 type Props<T extends Item> = {
@@ -343,7 +344,7 @@ export default function ListEditor<T extends Item>({
         </select>
       );
     } else if (f.type === "textarea") {
-      input = <textarea id={id} value={value} placeholder={f.placeholder} rows={6} onChange={onChange} />;
+      input = <textarea id={id} value={value} placeholder={f.placeholder} rows={f.rows ?? 6} onChange={onChange} />;
     } else {
       input = (
         <input

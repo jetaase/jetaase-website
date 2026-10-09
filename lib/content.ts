@@ -1,6 +1,6 @@
 import { readFileSync } from "node:fs";
 import { join } from "node:path";
-import { normalizeEvent, type JetaaseEvent, type PartnerEvent } from "./events";
+import { normalizeEvent, normalizePartner, type JetaaseEvent, type PartnerEvent } from "./events";
 import { sortReps } from "./reps";
 
 export type Chapter = "AL" | "GA" | "NC" | "SC";
@@ -49,5 +49,5 @@ export function readEvents(): JetaaseEvent[] {
 }
 
 export function readPartnerEvents(): PartnerEvent[] {
-  return JSON.parse(readRaw("partner-events.json")) as PartnerEvent[];
+  return (JSON.parse(readRaw("partner-events.json")) as Partial<PartnerEvent>[]).map(normalizePartner);
 }

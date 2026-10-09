@@ -53,6 +53,8 @@ describe("readPartnerEvents", () => {
   it("returns partner events with a host and a valid date", () => {
     for (const p of readPartnerEvents()) {
       expect(p.id && p.title && p.host).toBeTruthy();
+      expect(typeof p.poster).toBe("string");
+      expect(typeof p.summary).toBe("string");
       expect(isValidDate(p.date)).toBe(true);
     }
   });

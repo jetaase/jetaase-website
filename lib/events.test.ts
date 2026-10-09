@@ -1,7 +1,7 @@
 import { describe, it, expect, vi, afterEach } from "vitest";
 import {
   isValidDate, todayInEastern, splitEvents, upcomingPartners,
-  makeSlug, assignSlugs, formatEventDate, dateParts, toParagraphs, normalizeEvent, photoCountLabel,
+  makeSlug, assignSlugs, formatEventDate, dateParts, toParagraphs, normalizeEvent, normalizePartner, photoCountLabel,
 } from "./events";
 
 describe("isValidDate", () => {
@@ -165,5 +165,18 @@ describe("photoCountLabel", () => {
   });
   it("is plural otherwise", () => {
     expect(photoCountLabel(12)).toBe("12 photos");
+  });
+});
+
+describe("normalizePartner", () => {
+  it("fills a missing poster and summary", () => {
+    const p = normalizePartner({ id: "p1", title: "T", host: "H", date: "2026-11-01" });
+    expect(p.poster).toBe("");
+    expect(p.summary).toBe("");
+  });
+  it("keeps an existing poster and summary", () => {
+    const p = normalizePartner({ id: "p1", poster: "/images/uploads/events/x-20261009-0a1b2c3d.jpg", summary: "Taiko!" });
+    expect(p.poster).toBe("/images/uploads/events/x-20261009-0a1b2c3d.jpg");
+    expect(p.summary).toBe("Taiko!");
   });
 });

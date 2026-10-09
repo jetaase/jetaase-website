@@ -27,6 +27,8 @@ export type PartnerEvent = {
   title: string; host: string;
   date: string; time: string; location: string;
   link: string; // "" or an http(s) URL
+  poster: string; // public URL, or "" for none
+  summary: string; // a sentence or two about the event, or ""
 };
 
 const DATE_RE = /^(\d{4})-(\d{2})-(\d{2})$/;
@@ -117,6 +119,11 @@ export function normalizeEvent(raw: Partial<JetaaseEvent>): JetaaseEvent {
     photos: Array.isArray(raw.photos) ? raw.photos : [],
     photoCredit: raw.photoCredit ?? "",
   } as JetaaseEvent;
+}
+
+// Older partner events predate the poster and summary fields.
+export function normalizePartner(raw: Partial<PartnerEvent>): PartnerEvent {
+  return { ...raw, poster: raw.poster ?? "", summary: raw.summary ?? "" } as PartnerEvent;
 }
 
 export function photoCountLabel(n: number): string {
