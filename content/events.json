@@ -53,9 +53,20 @@
     "location": "Piedmont Park, Atlanta, GA",
     "summary": "Food, games, and reunions in the park.",
     "details": "Our biggest reunion of the year. Grills going, games on the lawn, and the whole Southeast JET family in one place.\n\nBring the family. Kids and non-members are welcome.",
-    "poster": "",
+    "poster": "/images/uploads/events/natsumatsuri-summer-picnic-20261009-3a209094.jpg",
     "rsvpUrl": "",
-    "photos": [],
+    "photos": [
+      {
+        "id": "ph1791553645127-0",
+        "src": "/images/uploads/events/natsumatsuri-summer-picnic-20261009-6434a207.jpg",
+        "caption": ""
+      },
+      {
+        "id": "ph1791553645127-1",
+        "src": "/images/uploads/events/natsumatsuri-summer-picnic-20261009-d9aac360.jpg",
+        "caption": ""
+      }
+    ],
     "photoCredit": "",
     "order": 4
   },
@@ -68,7 +79,7 @@
     "location": "Online",
     "summary": "For prospective applicants, from alumni.",
     "details": "Thinking about applying to JET? Alumni walk through the application, the interview, and what life on the program is really like.\n\nBring your questions.",
-    "poster": "",
+    "poster": "/images/uploads/events/applying-to-jet-info-night-20261009-87989db1.jpg",
     "rsvpUrl": "",
     "photos": [],
     "photoCredit": "",
