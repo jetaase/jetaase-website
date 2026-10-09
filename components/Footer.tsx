@@ -33,14 +33,17 @@ export default function Footer() {
             <Link href="/resources" className={styles.columnLink}>
               Japan resources
             </Link>
-            <a href="#" className={styles.columnLink}>
+            <Link href="/resources#careers" className={styles.columnLink}>
               Job listings
-            </a>
+            </Link>
           </div>
           <div className={styles.column}>
             <div className={styles.columnHeading}>Connect</div>
             <Link href="/events" className={styles.columnLink}>
               Events
+            </Link>
+            <Link href="/subchapters" className={styles.columnLink}>
+              Subchapters
             </Link>
             <Link href="/join" className={styles.columnLink}>
               Join
@@ -57,18 +60,12 @@ export default function Footer() {
             >
               Instagram
             </a>
-            <a
-              href="https://www.jetaase.org/blog"
-              className={styles.columnLink}
-            >
-              Blog
-            </a>
           </div>
         </div>
       </div>
       <div className={styles.bottomBar}>
         <div className={styles.bottomInner}>
-          © 2026 JETAASE · Connect. Remember. Engage.
+          © {new Date().getFullYear()} JETAASE · Connect. Remember. Engage.
         </div>
       </div>
     </footer>
