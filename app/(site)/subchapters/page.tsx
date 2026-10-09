@@ -112,7 +112,7 @@ export default function SubchaptersPage() {
             <Highlight>subchapter</Highlight>
           </>
         }
-        subtitle="JETAASE spans the Southeast, and each subchapter has its own Facebook group and a local leader who keeps things running. Find your region below and say hello."
+        subtitle="JETAASE spans the Southeast, and each subchapter has its own Facebook group, most with a local leader who keeps things running. Find your region below and say hello."
       />
 
       {/* SUBCHAPTER CARDS */}

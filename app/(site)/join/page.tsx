@@ -19,7 +19,7 @@ export default function JoinPage() {
             Join <Highlight>JETAASE</Highlight>
           </>
         }
-        subtitle="Whether you just landed back stateside or came home decades ago, there's a seat for you. Fill out the form below and we'll welcome you into the Southeast JET community."
+        subtitle="Whether you just landed back stateside or came home decades ago, there's a seat for you. Fill out the membership form and we'll welcome you into the Southeast JET community."
       />
 
       {/* BODY */}

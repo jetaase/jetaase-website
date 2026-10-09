@@ -132,7 +132,7 @@ export default function Home() {
           <div className={styles.resourcesGrid}>
             <LinkCard
               href="/resources#japanese" icon={<LanguagesIcon />}
-              title="Keep up your Japanese" description="Apps, meetups, and reading to stay sharp."
+              title="Keep up your Japanese" description="Apps, reading, and tests to stay sharp."
             />
             <LinkCard
               href={JET_PROGRAMME_URL} icon={<FileTextIcon />}
@@ -140,7 +140,7 @@ export default function Home() {
             />
             <LinkCard
               href="/resources#careers" icon={<BriefcaseIcon />}
-              title="Careers & jobs" description="Japan-related roles and the JETAA job board."
+              title="Careers & jobs" description="Job boards and Japan-tied employers."
             />
             <LinkCard
               href="/resources#culture" icon={<MapPinIcon />}

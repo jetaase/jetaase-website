@@ -230,7 +230,7 @@ export default function ResourcesPage() {
           <LinkCard href="https://www3.nhk.or.jp/news/easy/" title="NHK News Web Easy" description="Real news with furigana, built for learners." />
           <LinkCard href="https://www.wanikani.com/" title="WaniKani" description="Kanji and vocab through spaced repetition." />
           <LinkCard href="https://www.tofugu.com/" title="Tofugu" description="Guides on language, culture, and study habits." />
-          <LinkCard href="https://www.jlpt.jp/e/" title="JLPT, official" description="Proficiency test levels, dates, and US sites." />
+          <LinkCard href="https://www.jlpt.jp/e/" title="JLPT (official site)" description="Proficiency test levels, dates, and US sites." />
         </div>
       </section>
 
@@ -244,7 +244,7 @@ export default function ResourcesPage() {
         <div className={styles.categoryGrid3}>
           <LinkCard href="https://jetwit.com/" title="JETwit" description="The JET alumni network's job board and career column." />
           <LinkCard href={USJETAA_URL} title="USJETAA" description="Career webinars, grants, and alumni programming nationwide." />
-          <LinkCard href="https://www.jasgeorgia.org/Job-Bank" title="Japan-America Society of GA" description="Business networking and Japan-tied employers in the region." />
+          <LinkCard href="https://www.jasgeorgia.org/Job-Bank" title="Japan-America Society of Georgia" description="Business networking and Japan-tied employers in the region." />
         </div>
       </section>
 
