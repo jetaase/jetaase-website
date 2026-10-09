@@ -10,6 +10,7 @@ import { readBoard, readElection, readReps } from "@/lib/content";
 import { isElectionLive } from "@/lib/elections";
 import { todayInEastern } from "@/lib/events";
 import { repSlots } from "@/lib/reps";
+import { INFO_EMAIL, JET_PROGRAMME_URL } from "@/lib/site";
 import styles from "./page.module.css";
 import { DEFAULT_HEADSHOT, headshotSrc } from "@/lib/uploads";
 
@@ -72,7 +73,7 @@ export default function WhoWeArePage() {
               we&apos;re always looking to share our JET experience with
               anyone, especially those interested in applying to the{" "}
               <a
-                href="https://jetprogramme.org/en/"
+                href={JET_PROGRAMME_URL}
                 className={styles.welcomeLink}
               >
                 JET Program
@@ -120,7 +121,7 @@ export default function WhoWeArePage() {
               <div>
                 <div className={styles.subchapterRegion}>{state}</div>
                 <div className={styles.subchapterName}>Position open</div>
-                <a href="mailto:info@jetaase.org" className={styles.subchapterOpenLink}>
+                <a href={`mailto:${INFO_EMAIL}`} className={styles.subchapterOpenLink}>
                   Interested? Get in touch →
                 </a>
               </div>

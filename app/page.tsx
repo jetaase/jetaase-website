@@ -9,6 +9,7 @@ import NewsletterPrompt from "@/components/NewsletterPrompt";
 import { readElection, readEvents } from "@/lib/content";
 import { electionBanner, isElectionLive } from "@/lib/elections";
 import { splitEvents, todayInEastern } from "@/lib/events";
+import { JET_PROGRAMME_URL } from "@/lib/site";
 import styles from "./page.module.css";
 
 // Re-render hourly so past events drop off without a deploy.
@@ -211,7 +212,7 @@ export default function Home() {
               </span>
             </Link>
             <a
-              href="https://jetprogramme.org/en/"
+              href={JET_PROGRAMME_URL}
               target="_blank"
               rel="noopener noreferrer"
               className={styles.resourceCard}

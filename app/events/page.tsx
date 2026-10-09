@@ -10,6 +10,7 @@ import EventCard from "@/components/EventCard";
 import NewsletterPrompt from "@/components/NewsletterPrompt";
 import { readEvents, readPartnerEvents } from "@/lib/content";
 import { formatEventDate, splitEvents, todayInEastern, upcomingPartners } from "@/lib/events";
+import { EVENTS_EMAIL, INSTAGRAM_URL } from "@/lib/site";
 import styles from "./page.module.css";
 
 export const metadata: Metadata = { title: "Events" };
@@ -134,7 +135,7 @@ export default function EventsPage() {
                 <div className={styles.lookingBackEyebrow}>Looking back</div>
                 <h2 className={styles.sectionTitle}>A few recent get-togethers</h2>
               </div>
-              <a href="https://instagram.com/jetaase" className={styles.instagramLink}>
+              <a href={INSTAGRAM_URL} className={styles.instagramLink}>
                 See more on Instagram →
               </a>
             </div>
@@ -157,7 +158,7 @@ export default function EventsPage() {
               suggest something in your area, we&apos;ll help make it happen.
             </p>
           </div>
-          <a href="mailto:events@jetaase.org" className={styles.suggestBtn}>
+          <a href={`mailto:${EVENTS_EMAIL}`} className={styles.suggestBtn}>
             Suggest an event →
           </a>
         </div>

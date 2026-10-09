@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import Hero from "@/components/Hero";
+import { INFO_EMAIL } from "@/lib/site";
 import styles from "./page.module.css";
 
 export const metadata: Metadata = { title: "Join" };
@@ -112,7 +113,7 @@ export default function JoinPage() {
             </div>
             <div className={styles.questionsBox}>
               Questions? Email us at{" "}
-              <a href="mailto:info@jetaase.org">info@jetaase.org</a>.
+              <a href={`mailto:${INFO_EMAIL}`}>{INFO_EMAIL}</a>.
               We&apos;re happy to help.
             </div>
           </div>

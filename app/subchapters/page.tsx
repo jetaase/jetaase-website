@@ -4,6 +4,7 @@ import Footer from "@/components/Footer";
 import Hero from "@/components/Hero";
 import EmailLink from "@/components/EmailLink";
 import { readReps, type State, type SubchapterRep } from "@/lib/content";
+import { FACEBOOK_URL, INFO_EMAIL } from "@/lib/site";
 import styles from "./page.module.css";
 import { headshotSrc } from "@/lib/uploads";
 
@@ -34,9 +35,6 @@ type Subchapter = {
   noLeaders?: { label: string; text: string };
 };
 
-// Where volunteers for an open rep spot write in.
-const OPEN_SPOT_EMAIL = "info@jetaase.org";
-
 const SUBCHAPTERS: Subchapter[] = [
   {
     state: "Georgia",
@@ -49,7 +47,7 @@ const SUBCHAPTERS: Subchapter[] = [
       href: "https://unsplash.com/photos/an-aerial-view-of-a-city-at-night-F2PrSHG2nEk",
     },
     badge: "MAIN CHAPTER",
-    facebook: "https://www.facebook.com/jetaase",
+    facebook: FACEBOOK_URL,
     facebookLabel: "Follow JETAASE on Facebook →",
     noLeaders: {
       label: "Atlanta, GA",
@@ -190,7 +188,7 @@ export default function SubchaptersPage() {
                       <div className={styles.cardDetailsLabel}>Local rep · open</div>
                       <div className={styles.cardDetailsText}>
                         We&apos;re looking for {sc.state === "Alabama" ? "an" : "a"} {sc.state} rep. Interested?{" "}
-                        <a href={`mailto:${OPEN_SPOT_EMAIL}`} className={styles.openSpotLink}>Get in touch →</a>
+                        <a href={`mailto:${INFO_EMAIL}`} className={styles.openSpotLink}>Get in touch →</a>
                       </div>
                     </div>
                   )}
@@ -215,7 +213,7 @@ export default function SubchaptersPage() {
               group, we&apos;d love to hear from you.
             </p>
           </div>
-          <a href="mailto:info@jetaase.org" className={styles.helpCtaBtn}>
+          <a href={`mailto:${INFO_EMAIL}`} className={styles.helpCtaBtn}>
             Get in touch →
           </a>
         </div>

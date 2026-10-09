@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { FACEBOOK_URL, INFO_EMAIL, INSTAGRAM_URL } from "@/lib/site";
 import styles from "./Footer.module.css";
 
 export default function Footer() {
@@ -17,8 +18,8 @@ export default function Footer() {
             The JET Program Alumni Association of the Southeast. Chapter 4 of
             USJETAA, serving AL, GA, NC &amp; SC since the early 1990s.
           </p>
-          <a href="mailto:info@jetaase.org" className={styles.email}>
-            info@jetaase.org
+          <a href={`mailto:${INFO_EMAIL}`} className={styles.email}>
+            {INFO_EMAIL}
           </a>
         </div>
         <div className={styles.columns}>
@@ -49,13 +50,13 @@ export default function Footer() {
               Join
             </Link>
             <a
-              href="https://facebook.com/jetaase"
+              href={FACEBOOK_URL}
               className={styles.columnLink}
             >
               Facebook
             </a>
             <a
-              href="https://instagram.com/jetaase"
+              href={INSTAGRAM_URL}
               className={styles.columnLink}
             >
               Instagram

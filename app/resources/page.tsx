@@ -4,6 +4,7 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { CULTURE_LINKS, CultureIcon } from "@/components/CultureBand";
 import Directory, { type DirCategory, type DirEntry } from "./Directory";
+import { INFO_EMAIL, JET_PROGRAMME_URL, USJETAA_URL } from "@/lib/site";
 import styles from "./page.module.css";
 
 export const metadata: Metadata = { title: "Resources" };
@@ -195,7 +196,7 @@ export default function ResourcesPage() {
       <section className={styles.featured}>
         <div className={styles.featuredGrid}>
           <a
-            href="https://jetprogramme.org/en/"
+            href={JET_PROGRAMME_URL}
             target="_blank"
             rel="noopener"
             className={styles.featuredCardRed}
@@ -213,7 +214,7 @@ export default function ResourcesPage() {
             </span>
           </a>
           <a
-            href="https://usjetaa.org/"
+            href={USJETAA_URL}
             target="_blank"
             rel="noopener"
             className={styles.featuredCardBlue}
@@ -351,7 +352,7 @@ export default function ResourcesPage() {
             <span className={styles.linkCardArrow}>↗</span>
           </a>
           <a
-            href="https://usjetaa.org/"
+            href={USJETAA_URL}
             target="_blank"
             rel="noopener"
             className={styles.linkCard}
@@ -444,7 +445,7 @@ export default function ResourcesPage() {
             </p>
           </div>
           <a
-            href="mailto:info@jetaase.org?subject=Resource%20suggestion"
+            href={`mailto:${INFO_EMAIL}?subject=Resource%20suggestion`}
             className={styles.suggestBtn}
           >
             Suggest a resource
