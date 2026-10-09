@@ -1,13 +1,6 @@
 import Link from "next/link";
-import Button from "./Button";
+import HeaderNav from "./HeaderNav";
 import styles from "./Header.module.css";
-
-const NAV = [
-  { href: "/who-we-are", label: "Who we are" },
-  { href: "/events", label: "Events" },
-  { href: "/subchapters", label: "Subchapters" },
-  { href: "/resources", label: "Resources" },
-];
 
 export default function Header() {
   return (
@@ -26,16 +19,7 @@ export default function Header() {
             </span>
           </span>
         </Link>
-        <nav className={styles.nav}>
-          {NAV.map((n) => (
-            <Link key={n.href} href={n.href} className={styles.link}>
-              {n.label}
-            </Link>
-          ))}
-          <Button href="/join" size="sm">
-            Join us
-          </Button>
-        </nav>
+        <HeaderNav />
       </div>
     </header>
   );

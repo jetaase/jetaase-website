@@ -17,6 +17,7 @@
 .sm {
   padding: 10px 22px;
   font-size: 15px;
+  white-space: nowrap;
 }
 .md {
   padding: 15px 30px;
