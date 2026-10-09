@@ -15,11 +15,18 @@ export default function ElectionNotice({ election: e }: { election: Election }) 
         {positions.length > 0 && (
           <>
             <h3 className={styles.subhead}>Open positions</h3>
+            {/* Native <details>: roles scan at a glance, descriptions open on click, no JS. */}
             <ul className={styles.positions}>
               {positions.map((p) => (
                 <li key={p.id}>
-                  <strong>{p.title}</strong>
-                  {p.description && <span> — {p.description}</span>}
+                  {p.description ? (
+                    <details className={styles.position}>
+                      <summary className={styles.positionTitle}>{p.title}</summary>
+                      <p className={styles.positionText}>{p.description}</p>
+                    </details>
+                  ) : (
+                    <div className={`${styles.position} ${styles.positionTitle}`}>{p.title}</div>
+                  )}
                 </li>
               ))}
             </ul>
