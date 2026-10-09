@@ -177,29 +177,6 @@
     gap: 28px;
   }
 }
-.resourceCard {
-  color: var(--ink);
-  background: #fff;
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  padding: 26px;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
-.resourceIcon {
-  font-family: var(--font-serif);
-  color: var(--red);
-  font-size: 26px;
-}
-.resourceTitle {
-  font-weight: 700;
-  font-size: 17px;
-}
-.resourceDesc {
-  font-size: 14px;
-  color: var(--text-subtle);
-}
 
 /* SUBCHAPTER CHIPS */
 .chips {

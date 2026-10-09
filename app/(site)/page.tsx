@@ -14,6 +14,7 @@ import JoinCta from "@/components/JoinCta";
 import CalloutBox from "@/components/CalloutBox";
 import IconTile from "@/components/IconTile";
 import { BriefcaseIcon, CompassIcon, FileTextIcon, GlobeIcon, LanguagesIcon, MapPinIcon, PeopleIcon } from "@/components/icons";
+import LinkCard from "@/components/LinkCard";
 import styles from "./page.module.css";
 
 // Re-render hourly so past events drop off without a deploy.
@@ -137,39 +138,22 @@ export default function Home() {
             </p>
           </div>
           <div className={styles.resourcesGrid}>
-            <Link href="/resources#japanese" className={styles.resourceCard}>
-              <span className={styles.resourceIcon}><LanguagesIcon size={24} /></span>
-              <span className={styles.resourceTitle}>Keep up your Japanese</span>
-              <span className={styles.resourceDesc}>
-                Apps, meetups, and reading to stay sharp.
-              </span>
-            </Link>
-            <a
-              href={JET_PROGRAMME_URL}
-              target="_blank"
-              rel="noopener noreferrer"
-              className={styles.resourceCard}
-            >
-              <span className={styles.resourceIcon}><FileTextIcon size={24} /></span>
-              <span className={styles.resourceTitle}>Applying to JET</span>
-              <span className={styles.resourceDesc}>
-                Eligibility, timelines, and how to apply.
-              </span>
-            </a>
-            <Link href="/resources#careers" className={styles.resourceCard}>
-              <span className={styles.resourceIcon}><BriefcaseIcon size={24} /></span>
-              <span className={styles.resourceTitle}>Careers &amp; jobs</span>
-              <span className={styles.resourceDesc}>
-                Japan-related roles and the JETAA job board.
-              </span>
-            </Link>
-            <Link href="/resources#culture" className={styles.resourceCard}>
-              <span className={styles.resourceIcon}><MapPinIcon size={24} /></span>
-              <span className={styles.resourceTitle}>Culture near you</span>
-              <span className={styles.resourceDesc}>
-                Festivals, cultural events, and matsuri.
-              </span>
-            </Link>
+            <LinkCard
+              href="/resources#japanese" icon={<LanguagesIcon />}
+              title="Keep up your Japanese" description="Apps, meetups, and reading to stay sharp."
+            />
+            <LinkCard
+              href={JET_PROGRAMME_URL} icon={<FileTextIcon />}
+              title="Applying to JET" description="Eligibility, timelines, and how to apply."
+            />
+            <LinkCard
+              href="/resources#careers" icon={<BriefcaseIcon />}
+              title="Careers & jobs" description="Japan-related roles and the JETAA job board."
+            />
+            <LinkCard
+              href="/resources#culture" icon={<MapPinIcon />}
+              title="Culture near you" description="Festivals, cultural events, and matsuri."
+            />
           </div>
         </div>
       </section>

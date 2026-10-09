@@ -9,6 +9,7 @@ import JoinCta from "@/components/JoinCta";
 import CalloutBox from "@/components/CalloutBox";
 import IconTile from "@/components/IconTile";
 import { BriefcaseIcon, LanguagesIcon, MapPinIcon } from "@/components/icons";
+import LinkCard from "@/components/LinkCard";
 import styles from "./page.module.css";
 
 export const metadata: Metadata = { title: "Resources" };
@@ -193,7 +194,7 @@ export default function ResourcesPage() {
           <a
             href={JET_PROGRAMME_URL}
             target="_blank"
-            rel="noopener"
+            rel="noopener noreferrer"
             className={styles.featuredCardRed}
           >
             <Eyebrow tone="inherit">Start here</Eyebrow>
@@ -211,7 +212,7 @@ export default function ResourcesPage() {
           <a
             href={USJETAA_URL}
             target="_blank"
-            rel="noopener"
+            rel="noopener noreferrer"
             className={styles.featuredCardBlue}
           >
             <Eyebrow tone="inherit">The bigger network</Eyebrow>
@@ -239,54 +240,10 @@ export default function ResourcesPage() {
           </div>
         </div>
         <div className={styles.categoryGrid4}>
-          <a
-            href="https://www3.nhk.or.jp/news/easy/"
-            target="_blank"
-            rel="noopener"
-            className={styles.linkCard}
-          >
-            <span className={styles.linkCardTitle}>NHK News Web Easy</span>
-            <span className={styles.linkCardDesc}>
-              Real news with furigana, built for learners.
-            </span>
-            <span className={styles.linkCardArrow}>↗</span>
-          </a>
-          <a
-            href="https://www.wanikani.com/"
-            target="_blank"
-            rel="noopener"
-            className={styles.linkCard}
-          >
-            <span className={styles.linkCardTitle}>WaniKani</span>
-            <span className={styles.linkCardDesc}>
-              Kanji and vocab through spaced repetition.
-            </span>
-            <span className={styles.linkCardArrow}>↗</span>
-          </a>
-          <a
-            href="https://www.tofugu.com/"
-            target="_blank"
-            rel="noopener"
-            className={styles.linkCard}
-          >
-            <span className={styles.linkCardTitle}>Tofugu</span>
-            <span className={styles.linkCardDesc}>
-              Guides on language, culture, and study habits.
-            </span>
-            <span className={styles.linkCardArrow}>↗</span>
-          </a>
-          <a
-            href="https://www.jlpt.jp/e/"
-            target="_blank"
-            rel="noopener"
-            className={styles.linkCard}
-          >
-            <span className={styles.linkCardTitle}>JLPT, official</span>
-            <span className={styles.linkCardDesc}>
-              Proficiency test levels, dates, and US sites.
-            </span>
-            <span className={styles.linkCardArrow}>↗</span>
-          </a>
+          <LinkCard href="https://www3.nhk.or.jp/news/easy/" title="NHK News Web Easy" description="Real news with furigana, built for learners." />
+          <LinkCard href="https://www.wanikani.com/" title="WaniKani" description="Kanji and vocab through spaced repetition." />
+          <LinkCard href="https://www.tofugu.com/" title="Tofugu" description="Guides on language, culture, and study habits." />
+          <LinkCard href="https://www.jlpt.jp/e/" title="JLPT, official" description="Proficiency test levels, dates, and US sites." />
         </div>
       </section>
 
@@ -302,44 +259,9 @@ export default function ResourcesPage() {
           </div>
         </div>
         <div className={styles.categoryGrid3}>
-          <a
-            href="https://jetwit.com/"
-            target="_blank"
-            rel="noopener"
-            className={styles.linkCard}
-          >
-            <span className={styles.linkCardTitle}>JETwit</span>
-            <span className={styles.linkCardDesc}>
-              The JET alumni network&apos;s job board and career column.
-            </span>
-            <span className={styles.linkCardArrow}>↗</span>
-          </a>
-          <a
-            href={USJETAA_URL}
-            target="_blank"
-            rel="noopener"
-            className={styles.linkCard}
-          >
-            <span className={styles.linkCardTitle}>USJETAA</span>
-            <span className={styles.linkCardDesc}>
-              Career webinars, grants, and alumni programming nationwide.
-            </span>
-            <span className={styles.linkCardArrow}>↗</span>
-          </a>
-          <a
-            href="https://www.jasgeorgia.org/Job-Bank"
-            target="_blank"
-            rel="noopener"
-            className={styles.linkCard}
-          >
-            <span className={styles.linkCardTitle}>
-              Japan-America Society of GA
-            </span>
-            <span className={styles.linkCardDesc}>
-              Business networking and Japan-tied employers in the region.
-            </span>
-            <span className={styles.linkCardArrow}>↗</span>
-          </a>
+          <LinkCard href="https://jetwit.com/" title="JETwit" description="The JET alumni network's job board and career column." />
+          <LinkCard href={USJETAA_URL} title="USJETAA" description="Career webinars, grants, and alumni programming nationwide." />
+          <LinkCard href="https://www.jasgeorgia.org/Job-Bank" title="Japan-America Society of GA" description="Business networking and Japan-tied employers in the region." />
         </div>
       </section>
 
@@ -357,19 +279,10 @@ export default function ResourcesPage() {
         </div>
         <div className={styles.categoryGrid4}>
           {CULTURE_LINKS.map((l) => (
-            <a
-              key={l.homepage}
-              href={l.homepage}
-              target="_blank"
-              rel="noopener noreferrer"
-              className={styles.linkCard}
-            >
-              <span className={styles.linkCardTitle}>{l.name}</span>
-              <span className={styles.linkCardDesc}>
-                Programs, events, and community in {l.state}.
-              </span>
-              <span className={styles.linkCardArrow}>↗</span>
-            </a>
+            <LinkCard
+              key={l.homepage} href={l.homepage}
+              title={l.name} description={`Programs, events, and community in ${l.state}.`}
+            />
           ))}
         </div>
       </section>

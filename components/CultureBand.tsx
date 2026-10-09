@@ -1,6 +1,7 @@
 import PhotoCredit from "./PhotoCredit";
 import IconTile from "./IconTile";
 import { MapPinIcon } from "./icons";
+import LinkCard from "./LinkCard";
 import styles from "./CultureBand.module.css";
 
 // Each state's Japan-America society. The Events page links to their event
@@ -48,16 +49,7 @@ export default function CultureBand() {
           </p>
           <div className={styles.links}>
             {CULTURE_LINKS.map((l) => (
-              <a
-                key={l.events}
-                href={l.events}
-                target="_blank"
-                rel="noopener noreferrer"
-                className={styles.linkCard}
-              >
-                <span className={styles.linkTitle}>{l.name}</span>
-                <span className={styles.arrow}>↗</span>
-              </a>
+              <LinkCard key={l.events} href={l.events} title={l.name} compact />
             ))}
           </div>
         </div>

@@ -36,25 +36,6 @@
   flex-direction: column;
   gap: 12px;
 }
-.linkCard {
-  color: var(--ink);
-  background: #fff;
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  padding: 16px 20px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 12px;
-}
-.linkTitle {
-  font-weight: 700;
-  font-size: 15px;
-}
-.arrow {
-  color: var(--red);
-  font-weight: 700;
-}
 .photoWrap {
   position: relative;
   min-height: 420px;
