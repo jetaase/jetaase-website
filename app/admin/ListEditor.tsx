@@ -4,7 +4,7 @@ import PhotoField, { type PhotoView } from "./PhotoField";
 import GalleryField, { type GalleryPhotoView } from "./GalleryField";
 import { blobToBase64 } from "@/lib/image";
 import {
-  buildSavePayload, cardHeading, prepareItems, saveBarMessage, saveErrorMessage, uploadErrorMessage, validate, type PendingPhoto,
+  buildSavePayload, cardHeading, prepareItems, savedPreviews, saveBarMessage, saveErrorMessage, uploadErrorMessage, validate, type PendingPhoto,
 } from "@/lib/editor-save";
 import { formatEventDate, todayInEastern } from "@/lib/events";
 import { movePhoto, newPhotoId, slotKey, type EditorPhoto } from "@/lib/gallery";
@@ -82,6 +82,10 @@ export default function ListEditor<T extends Item>({
   const [status, setStatus] = useState("");
   // Photos picked this session, keyed by slot (lib/gallery.ts slotKey).
   const [pending, setPending] = useState<Record<string, PendingPhoto>>({});
+  // Photos saved this session: site URL → local preview, shown until a reload
+  // because the files aren't live until the redeploy finishes.
+  const [localCopies, setLocalCopies] = useState<Record<string, string>>({});
+  const shown = (url: string) => localCopies[url] ?? url;
   // Published upload files to delete on the next save.
   const [deletes, setDeletes] = useState<string[]>([]);
   // Each single-photo slot's value as published, recorded the first time it changes.
@@ -253,7 +257,7 @@ export default function ListEditor<T extends Item>({
     const views: GalleryPhotoView[] = photos.map((ph) => {
       const p = pending[slotKey(it.id, f.key, ph.id)];
       return {
-        id: ph.id, src: p?.previewUrl ?? ph.src, caption: ph.caption,
+        id: ph.id, src: p?.previewUrl ?? shown(ph.src), caption: ph.caption,
         status: p?.status ?? "saved", removed: !!ph.removed, error: p?.error,
       };
     });
@@ -313,6 +317,7 @@ export default function ListEditor<T extends Item>({
       // The fieldset is disabled while saving, so `ready` has every edit.
       setItems(ready.map((it, i) => ({ ...it, order: i + 1 })));
       if (byDate) setPastIds(pastIdsOf(ready));
+      setLocalCopies((c) => ({ ...c, ...savedPreviews(pending, payload.uploads) }));
       setPending({});
       setDeletes([]);
       setOriginals({});
@@ -389,7 +394,7 @@ export default function ListEditor<T extends Item>({
             const p = pending[slot];
             const original = originals[slot];
             const view: PhotoView = {
-              src: p?.previewUrl ?? String(it[f.key] ?? ""),
+              src: p?.previewUrl ?? shown(String(it[f.key] ?? "")),
               status: p?.status ?? "saved",
               pendingDelete: !p && original !== undefined && deletes.includes(toRepoPath(original)),
               canUndo: !p && original !== undefined && String(it[f.key] ?? "") !== original,

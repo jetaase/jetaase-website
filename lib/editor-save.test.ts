@@ -1,6 +1,6 @@
 import { describe, it, expect } from "vitest";
 import {
-  buildSavePayload, saveBarMessage, uploadErrorMessage, saveErrorMessage, validate, prepareItems, cardHeading, type PendingPhoto,
+  buildSavePayload, savedPreviews, saveBarMessage, uploadErrorMessage, saveErrorMessage, validate, prepareItems, cardHeading, type PendingPhoto,
 } from "./editor-save";
 
 const blob = new Blob(["x"]);
@@ -207,5 +207,19 @@ describe("saveBarMessage", () => {
     expect(saveBarMessage({ ...idle, dirty: true, saving: true, status: "Saving…" })).toBe("Saving…");
     expect(saveBarMessage({ ...idle, status: "Saved. New photos appear soon." })).toBe("Saved. New photos appear soon.");
     expect(saveBarMessage({ ...idle, dirty: true, status: "Error: add the date." })).toBe("Error: add the date.");
+  });
+});
+
+describe("savedPreviews", () => {
+  it("maps each committed photo's site URL to its local preview", () => {
+    const a = "public/images/uploads/events/a-20261009-0a1b2c3d.jpg";
+    const b = "public/images/uploads/events/b-20261009-0a1b2c3d.jpg";
+    const pending = {
+      "e1:poster": { ...up(a, "S1"), previewUrl: "blob:a" },
+      "e1:photos:x": { ...up(b, "S2"), previewUrl: "blob:b" },
+    };
+    expect(savedPreviews(pending, [{ path: a, sha: "S1" }])).toEqual({
+      "/images/uploads/events/a-20261009-0a1b2c3d.jpg": "blob:a",
+    });
   });
 });

@@ -34,6 +34,19 @@ export function buildSavePayload(args: {
   return { files: [{ path: args.path, content }], uploads, deletes: args.deletes, base: args.base, message: args.message };
 }
 
+// After a save, new photos aren't on the site until the redeploy finishes;
+// the editor keeps showing these local previews (site URL → preview) meanwhile.
+export function savedPreviews(
+  pending: Record<string, PendingPhoto>, committed: SaveBody["uploads"],
+): Record<string, string> {
+  const paths = new Set(committed.map((u) => u.path));
+  return Object.fromEntries(
+    Object.values(pending)
+      .filter((p) => p.upload && paths.has(p.upload.path))
+      .map((p) => [toPublicUrl(p.upload!.path), p.previewUrl]),
+  );
+}
+
 const UPLOAD_FAILED = "Upload failed — try again";
 
 // What to show under a photo whose upload failed. `status` is null when the
