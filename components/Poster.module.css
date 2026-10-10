@@ -1,4 +1,5 @@
 .frame {
+  position: relative;
   aspect-ratio: 4 / 5;
   background: var(--surface-tan);
   display: flex;
@@ -7,10 +8,7 @@
   overflow: hidden;
 }
 .img {
-  width: 100%;
-  height: 100%;
   object-fit: contain;
-  display: block;
 }
 .blank {
   display: flex;

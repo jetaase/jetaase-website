@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Hero from "@/components/Hero";
 import EmailLink from "@/components/EmailLink";
 import { readReps, type State, type SubchapterRep } from "@/lib/content";
@@ -124,7 +125,7 @@ export default function SubchaptersPage() {
               // The id lets other pages link straight to a state, e.g. /subchapters#north-carolina.
               <div key={sc.state} id={stateAnchor(sc.state)} className={styles.card}>
                 <div className={styles.cardPhotoWrap}>
-                  <img src={sc.photo} alt={sc.photoAlt} className={styles.cardPhoto} />
+                  <Image src={sc.photo} alt={sc.photoAlt} fill sizes="(max-width: 768px) 100vw, 560px" className={styles.cardPhoto} />
                   {sc.badge && <span className={styles.cardBadge}>{sc.badge}</span>}
                   {sc.photoCredit && (
                     <PhotoCredit name={sc.photoCredit.name} href={sc.photoCredit.href} />

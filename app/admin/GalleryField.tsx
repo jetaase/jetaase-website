@@ -58,6 +58,8 @@ export default function GalleryField({
         <ol className={styles.tiles}>
           {photos.map((ph, i) => (
             <li key={ph.id} className={styles.tile}>
+              {/* Plain <img>: new picks are local blob: URLs that next/image can't load. */}
+              {/* eslint-disable-next-line @next/next/no-img-element */}
               <img src={ph.src} alt="" className={`${styles.thumb} ${ph.removed ? styles.faded : ""}`} />
               <div className={styles.row}>
                 <AdminButton type="button" onClick={() => onMove(ph.id, -1)} disabled={i === 0} aria-label="Move earlier">‹</AdminButton>

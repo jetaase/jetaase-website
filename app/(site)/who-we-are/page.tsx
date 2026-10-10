@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Hero from "@/components/Hero";
 import BoardGrid from "@/components/BoardGrid";
 import ElectionNotice from "@/components/ElectionNotice";
@@ -35,8 +36,11 @@ export default function WhoWeArePage() {
       {/* BANNER */}
       <section className={styles.banner}>
         <div className={styles.bannerFrame}>
-          <img
+          <Image
             src="/images/consulate-group-photo.jpg"
+            fill
+            preload
+            sizes="(max-width: 1200px) 100vw, 1120px"
             alt="JETAASE members at the Consulate General of Japan in Atlanta"
             className={styles.bannerImg}
           />

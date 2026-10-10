@@ -1,3 +1,4 @@
+import Image from "next/image";
 import EmailLink from "./EmailLink";
 import { headshotSrc } from "@/lib/uploads";
 import styles from "./RepCard.module.css";
@@ -25,7 +26,7 @@ export default function RepCard({
 }) {
   return (
     <div className={`${styles.rep} ${boxed ? styles.boxed : ""}`}>
-      <img src={headshotSrc(photo)} alt={photo ? name : ""} className={styles.avatar} />
+      <Image src={headshotSrc(photo)} alt={photo ? name : ""} width={88} height={88} className={styles.avatar} />
       <div>
         {label && <div className={styles.label}>{label}</div>}
         <div className={styles.name}>{name}</div>

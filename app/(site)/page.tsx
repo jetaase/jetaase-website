@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import Eyebrow from "@/components/Eyebrow";
 import Button from "@/components/Button";
@@ -58,8 +59,11 @@ export default function Home() {
             </div>
           </div>
           <div className={styles.heroImageWrap}>
-            <img
+            <Image
               src="/images/minoo-bridge.jpg"
+              fill
+              preload
+              sizes="(max-width: 768px) 100vw, 560px"
               alt="Vermilion bridge in front of Ryūan-ji temple in the green hills of Minoo, Osaka"
               className={styles.heroImage}
             />

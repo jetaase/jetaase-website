@@ -63,6 +63,8 @@ export default function PhotoField({
   return (
     <div className={styles.field}>
       {view.src || kind === "headshot" ? (
+        // Plain <img>: previews are often local blob: URLs that next/image can't load.
+        // eslint-disable-next-line @next/next/no-img-element
         <img
           src={kind === "headshot" ? headshotSrc(view.src) : view.src}
           alt=""

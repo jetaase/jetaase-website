@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Eyebrow from "./Eyebrow";
 import PhotoCredit from "./PhotoCredit";
 import styles from "./Hero.module.css";
@@ -29,7 +30,7 @@ export default function Hero({
         <div className={styles.withImage}>
           {copy}
           <div className={styles.imageWrap}>
-            <img src={image.src} alt={image.alt} className={styles.image} />
+            <Image src={image.src} alt={image.alt} fill preload sizes="(max-width: 768px) 100vw, 420px" className={styles.image} />
             {image.credit && <PhotoCredit {...image.credit} />}
           </div>
         </div>

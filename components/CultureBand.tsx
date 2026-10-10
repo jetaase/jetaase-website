@@ -1,3 +1,4 @@
+import Image from "next/image";
 import PhotoCredit from "./PhotoCredit";
 import IconTile from "./IconTile";
 import { MapPinIcon } from "./icons";
@@ -54,8 +55,10 @@ export default function CultureBand() {
           </div>
         </div>
         <div className={styles.photoWrap}>
-          <img
+          <Image
             src="/images/bon-odori-lanterns.jpg"
+            fill
+            sizes="(max-width: 768px) 100vw, 600px"
             alt="Rows of glowing paper lanterns above a crowd at a bon odori summer festival"
             className={styles.photo}
           />

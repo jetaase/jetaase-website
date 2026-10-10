@@ -1,10 +1,13 @@
 "use client";
+import NextImage, { getImageProps } from "next/image";
 import { useEffect, useRef } from "react";
 import styles from "./Lightbox.module.css";
 
 export type LightboxPhoto = { src: string; alt: string; caption: string };
 
 const SWIPE_PX = 50;
+// Shared by the <NextImage> below and the neighbor preload, so both fetch the same resized file.
+const SIZING = { width: 1600, height: 1200, sizes: "(max-width: 768px) 100vw, 80vw" };
 
 // Full-screen photo viewer on a native <dialog>: modal, focus-trapped, Esc closes.
 export default function Lightbox({
@@ -39,7 +42,13 @@ export default function Lightbox({
   // Preload the neighbors so next/previous feel instant.
   useEffect(() => {
     if (index === null || n < 2) return;
-    for (const i of [(index + 1) % n, (index - 1 + n) % n]) new Image().src = photos[i].src;
+    for (const i of [(index + 1) % n, (index - 1 + n) % n]) {
+      const { props } = getImageProps({ src: photos[i].src, alt: "", ...SIZING });
+      const img = new Image();
+      img.sizes = props.sizes ?? "";
+      img.srcset = props.srcSet ?? "";
+      img.src = props.src;
+    }
   }, [index, n, photos]);
 
   function closed() {
@@ -83,7 +92,11 @@ export default function Lightbox({
       {photo && (
         <>
           <figure className={styles.figure}>
-            <img src={photo.src} alt={photo.alt} className={styles.img} draggable={false} />
+            {/* width/height only reserve space; CSS shows the photo at its own shape. */}
+            <NextImage
+              src={photo.src} alt={photo.alt} className={styles.img} draggable={false}
+              {...SIZING}
+            />
             <figcaption className={styles.caption}>
               {photo.caption && <span>{photo.caption}</span>}
               <span className={styles.count}>{index! + 1} / {n}</span>

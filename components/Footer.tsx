@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import { FACEBOOK_URL, INFO_EMAIL, INSTAGRAM_URL } from "@/lib/site";
 import styles from "./Footer.module.css";
@@ -28,9 +29,11 @@ export default function Footer() {
       <div className={styles.inner}>
         <div className={styles.about}>
           <div className={styles.brandRow}>
-            <img
+            <Image
               src="/images/b92ef44c-b122-4564-a847-083e7705cc55.png"
               alt=""
+              width={44}
+              height={44}
               className={styles.logo}
             />
             <span className={styles.wordmark}>JETAASE</span>

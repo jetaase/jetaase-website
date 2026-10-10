@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { dateParts, type JetaaseEvent } from "@/lib/events";
 import styles from "./Poster.module.css";
 
@@ -13,9 +14,9 @@ export default function Poster({
   return (
     <div className={`${styles.frame} ${className ?? ""}`}>
       {event.poster ? (
-        <img
+        <Image
           src={event.poster} alt={`Poster for ${event.title}`} className={styles.img}
-          loading={priority ? "eager" : "lazy"}
+          fill preload={priority} sizes="(max-width: 768px) 100vw, 460px"
         />
       ) : (
         <div className={styles.blank} aria-hidden="true">
