@@ -7,6 +7,8 @@
   display: grid;
   grid-template-columns: 1.05fr 0.95fr;
   align-items: stretch;
+  /* Keeps the photo inside the same right edge as the header. */
+  padding-right: var(--gutter);
 }
 .heroCopy {
   padding: 88px var(--gutter);
@@ -40,7 +42,7 @@
 .heroImageWrap {
   position: relative;
   min-height: 540px;
-  border-radius: 0 0 0 var(--radius-lg);
+  border-radius: 0 0 var(--radius-lg) var(--radius-lg);
   overflow: hidden;
 }
 .heroImage {
@@ -54,6 +56,7 @@
   .heroGrid {
     grid-template-columns: 1fr;
     gap: 28px;
+    padding-right: 0;
   }
   .heroCopy {
     padding: 48px var(--gutter);
